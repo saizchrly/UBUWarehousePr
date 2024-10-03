@@ -9,7 +9,7 @@ namespace UBULibPr
 {
     public class Utilidades
     {
-        public string Encriptar(string cadena)
+        public static string Encriptar(string cadena)
         {
             string result = string.Empty;
             byte[] encryted = System.Text.Encoding.UTF8.GetBytes(cadena);

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UBULibPr", "UBULibPr\UBULib
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UBULibPrTests", "UBULibPrTests\UBULibPrTests.csproj", "{15F7221D-67B2-4A0D-AFFC-337FC733EAE8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "ClassLib\ClassLib.csproj", "{1671B438-7858-42F5-BA5D-3FAEFD38CD7A}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{15F7221D-67B2-4A0D-AFFC-337FC733EAE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15F7221D-67B2-4A0D-AFFC-337FC733EAE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{15F7221D-67B2-4A0D-AFFC-337FC733EAE8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1671B438-7858-42F5-BA5D-3FAEFD38CD7A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1671B438-7858-42F5-BA5D-3FAEFD38CD7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1671B438-7858-42F5-BA5D-3FAEFD38CD7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1671B438-7858-42F5-BA5D-3FAEFD38CD7A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
