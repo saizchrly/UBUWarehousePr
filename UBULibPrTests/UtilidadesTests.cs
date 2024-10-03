@@ -68,5 +68,36 @@ namespace UBULibPr.Tests
             string cadena10 = "Esto es una contraseña de 8 caracteres ?";
             Assert.AreEqual(utilidades.CompruebaContrasena(cadena10), 0);
         }
+
+        [TestMethod]
+        public void EscribirEnArchivo_CreaArchivoSiNoExiste()
+        {
+            string rutaArchivo = "testfile.log";
+            string texto = "Texto de prueba";
+
+            Utilidades.EscribirEnArchivo(rutaArchivo, texto);
+
+            Assert.IsTrue(File.Exists(rutaArchivo));
+
+            File.Delete(rutaArchivo);
+        }
+
+        [TestMethod]
+        public void EscribirEnArchivo_AgregaTextoAlFinal()
+        {
+            string rutaArchivo = "testfile.log";
+            string texto1 = "Primera línea";
+            string texto2 = "Segunda línea";
+
+            Utilidades.EscribirEnArchivo(rutaArchivo, texto1);
+            Utilidades.EscribirEnArchivo(rutaArchivo, texto2);
+
+            string[] lineas = File.ReadAllLines(rutaArchivo);
+            Assert.AreEqual(2, lineas.Length);
+            Assert.AreEqual(texto1, lineas[0]);
+            Assert.AreEqual(texto2, lineas[1]);
+
+            File.Delete(rutaArchivo);
+        }
     }
 }

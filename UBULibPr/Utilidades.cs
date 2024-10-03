@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -56,6 +57,19 @@ namespace UBULibPr
             }
             if (codBancos.Contains(codEnt) == false) return 3;
             return 4;
+        }
+
+        /// <summary>
+        /// Escribe un texto en un archivo .txt.
+        /// </summary>
+        /// <param name="rutaArchivo">La ruta del archivo donde se escribirá el texto.</param>
+        /// <param name="texto">El texto a escribir en el archivo.</param>
+        public static void EscribirEnArchivo(string rutaArchivo, string texto)
+        {
+            using (StreamWriter escritor = new StreamWriter(rutaArchivo, true))
+            {
+                escritor.WriteLine(texto);
+            }
         }
     }
 }
