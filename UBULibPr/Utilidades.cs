@@ -18,7 +18,7 @@ namespace UBULibPr
             result = System.Text.Encoding.ASCII.GetString(encryted);
             return result;
         }
-        public int CompruebaContrasena(string cadena)
+        public static int CompruebaContrasena(string cadena)
         {
             string caracteresPermitdos = "abcdefghijklmnopqrstuvwxyz";
             string numerosPermitidos = "0123456789";
