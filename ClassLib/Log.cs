@@ -9,11 +9,13 @@ namespace ClassLib
 {
     public class Log
     {
+        private const string path = @".\ClassLib\Logs\";
+
         public static void escribirLog(string usuario, string Accion)
         {
             DateTime fecha = DateTime.Now;
             string texto =" Fecha: " + fecha + " Accion: " + Accion;
-            Utilidades.EscribirEnArchivo(usuario + ".log", texto);
+            Utilidades.EscribirEnArchivo(path + usuario + ".log", texto);
         } 
     }
 }
