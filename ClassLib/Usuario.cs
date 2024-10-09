@@ -9,7 +9,7 @@ namespace ClassLib
     public class Usuario
     {
         private string EmailUsuario;
-        private string privilegios;
+        private bool privilegios;
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
         private int idUsuario;
@@ -18,24 +18,36 @@ namespace ClassLib
 
         /// <summary>
         /// Constructor de la clase Usuario
-        /// WIP; privilegios a bool
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <param name="contrasena">Contrasena del usuario</param>
         /// <param name="idUsuario">ID del usuario creado por la BBDD
-        /// <param name="privilegios">Privilegios del usuario, si al construir el objeto no se hace referencia a este parametro
+        /// <param name="privilegios"> Si True es administrador, si False no lo es
         /// <param name="tipoUsuario"> Tipo del usuario
-        /// se dará un privilegio de "Usuario" por defecto</param>
-        public Usuario(string email, string contrasena, int idUsuario, string privilegios = "Usuario", string tipoUsuario)
+        public Usuario(string email, string contrasena, string tipoUsuario, bool privilegios = false)
         {
             EmailUsuario = email;
             contrasenaActual = Utilidades.Encriptar(contrasena);
             listaContrasenasAntiguas = new List<string>();
-            this.idUsuario = idUsuario;
+            //se actualiiza en la BD
+            this.idUsuario = 0 ;
             elementosR = new List<Elemento>();
             this.tipoUsuario = tipoUsuario;
             //añadir la lista de Elemento que contiene el usuario
         }
+
+        /// <summary>
+        /// Metodo para Implementar el id de usuario
+        /// </summary>
+        /// <param name="id"></param>
+        public void setIdUsuario(int id) => this.idUsuario = id;
+
+        /// <summary>
+        /// Metodo para obtener el id de usuario
+        /// </summary>
+        /// <returns>Id de usuario</returns>
+        public int getIdUsuario() => idUsuario;
+
         /// <summary>
         /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
         /// Si no se ha superado, lo crea y lo añade a la lista.
@@ -82,9 +94,6 @@ namespace ClassLib
         /// </summary>
         /// <returns>Nombre de usuario</returns>
         public string getEmailUsuario() => EmailUsuario;
-
-
-        public string getEmUsuario() => idUsuario;
 
         /// <summary>
         /// Metodo para introducir la contrasena actual, nunca se guardara en texto plano
