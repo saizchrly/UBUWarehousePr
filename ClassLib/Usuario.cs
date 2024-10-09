@@ -12,20 +12,63 @@ namespace ClassLib
         private string privilegios;
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
+        private int idUsuario;
+        private List<Elemento> elementosR;
+        private string tipoUsuario;
 
         /// <summary>
         /// Constructor de la clase Usuario
+        /// WIP; privilegios a bool
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <param name="contrasena">Contrasena del usuario</param>
+        /// <param name="idUsuario">ID del usuario creado por la BBDD
         /// <param name="privilegios">Privilegios del usuario, si al construir el objeto no se hace referencia a este parametro
+        /// <param name="tipoUsuario"> Tipo del usuario
         /// se dará un privilegio de "Usuario" por defecto</param>
-        public Usuario(string email, string contrasena, string privilegios = "Usuario")
+        public Usuario(string email, string contrasena, int idUsuario, string privilegios = "Usuario", string tipoUsuario)
         {
             EmailUsuario = email;
             contrasenaActual = Utilidades.Encriptar(contrasena);
             listaContrasenasAntiguas = new List<string>();
+            this.idUsuario = idUsuario;
+            elementosR = new List<Elemento>();
+            this.tipoUsuario = tipoUsuario;
             //añadir la lista de Elemento que contiene el usuario
+        }
+        /// <summary>
+        /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
+        /// Si no se ha superado, lo crea y lo añade a la lista.
+        /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
+        /// </summary>
+        /// <returns></returns>
+        private bool añadirRaiz()
+        {
+            int limite = 10000;
+            if (tipoUsuario == "Pago") limite = 3;
+            else if (tipoUsuario == "noPago") limite = 1;
+            if (elementosR.Count >= limite)
+            {
+                string id = "raiz" + (elementosR.Count + 1);
+                Elemento raiz = new Elemento(id);
+                elementosR.Add(raiz);
+                return true;
+            }
+            return false;
+        }
+
+        private bool añadirElemento(string padre, string tipo)
+        {
+
+        }
+        /// <summary>
+        /// TODO:Método para buscar un elemento a partir de su id
+        /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
+        /// <param name="id"></param> id del elemento que queremos encontrar
+        /// <returns></returns> Elemento encontrado, null si no existe
+        private Elemento buscarElemento(string id)
+        {
+
         }
 
         /// <summary>
@@ -39,6 +82,9 @@ namespace ClassLib
         /// </summary>
         /// <returns>Nombre de usuario</returns>
         public string getEmailUsuario() => EmailUsuario;
+
+
+        public string getEmUsuario() => idUsuario;
 
         /// <summary>
         /// Metodo para introducir la contrasena actual, nunca se guardara en texto plano
