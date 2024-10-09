@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ClassLib
 {
+    /// <summary>
+    /// Clase Elemento que modela los 4 tipos de elementos que puede tener un usuario
+    /// </summary>
     public class Elemento
     {
         private string tipo;
@@ -14,17 +17,25 @@ namespace ClassLib
         private List<String> tiposPosibles = new List<string>{ "Raiz", "Espacio", "Contenedor", "Articulo" };
         private String id;
         List<Elemento> ubicacion;
-
+        /// <summary>
+        /// Constructor para crear raíces
+        /// </summary>
+        /// <param name="id"> id del elemento raíz a crear
         public Elemento(string id)
         {
             tipo = "Raiz";
             hijos = new List<Elemento>();
             this.id = id;
         }
-
+        /// <summary>
+        /// Constructor para el resto de elementos
+        /// </summary>
+        /// <param name="tipo"></param>
+        /// <param name="padre"></param>
+        /// <param name="id"></param>
         public Elemento(string tipo, Elemento padre, string id)
         {
-            if (!tiposPosibles.Contains(t))
+            if (!tiposPosibles.Contains(tipo) || tipo.Equals("Raiz"))
             {
                 return;
             }
