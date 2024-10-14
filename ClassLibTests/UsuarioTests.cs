@@ -3,13 +3,90 @@ using System;
 using System.IO;
 using ClassLib;
 
-namespace ClassLibTests
+namespace ClassLib.Tests
 {
-    [TestClass]
+    [TestClass()]
     public class UsuarioTests
     {
+        [TestMethod()]
+        public void UsuarioTest()
+        {
+            Usuario usuarioBasico = new Usuario("correo1@gmail.com", "123456");
+            Assert.AreEqual("correo1@gmail.com", usuarioBasico.getEmailUsuario());
+            Assert.AreEqual("noPago", usuarioBasico.getTipoUsuario());
+            Assert.IsFalse(usuarioBasico.getPrivilegios());
+
+
+            Usuario usuarioAdmin = new Usuario("correoAdmin@gmail.com", "123456", "Admin", true);
+            Assert.AreEqual("correoAdmin@gmail.com", usuarioAdmin.getEmailUsuario());
+            Assert.AreEqual("Admin", usuarioAdmin.getTipoUsuario());
+            Assert.IsTrue(usuarioAdmin.getPrivilegios());
+
+            Usuario usuarioPago = new Usuario("correoPago@gmail.com", "123456", "Pago", false);
+            Assert.AreEqual("correoPago@gmail.com", usuarioPago.getEmailUsuario());
+            Assert.AreEqual("Pago", usuarioPago.getTipoUsuario());
+            Assert.IsFalse(usuarioPago.getPrivilegios());
+
+            Usuario usuarioNoPago = new Usuario("correoNoPago@gmail.com", "123456", "noPago", false);
+            Assert.AreEqual("correoNoPago@gmail.com", usuarioNoPago.getEmailUsuario());
+            Assert.AreEqual("noPago", usuarioNoPago.getTipoUsuario());
+            Assert.IsFalse(usuarioNoPago.getPrivilegios());
+        }
+
+        [TestMethod()]
+        public void setIdUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setIdUsuario(1);
+            Assert.AreEqual(1, usuario.getIdUsuario());
+        }
+
+        [TestMethod()]
+        public void setTipoUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual("noPago", usuario.getTipoUsuario());
+            usuario.setTipoUsuario("Admin");
+            Assert.AreEqual("Admin", usuario.getTipoUsuario());
+            usuario.setTipoUsuario("Pago");
+            Assert.AreEqual("Pago", usuario.getTipoUsuario());
+            usuario.setTipoUsuario("noPago");
+            Assert.AreEqual("noPago", usuario.getTipoUsuario());
+
+        }
+
+        [TestMethod()]
+        public void getTipoUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual("noPago", usuario.getTipoUsuario());
+        }
+
+        [TestMethod()]
+        public void getIdUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setIdUsuario(1);
+            Assert.AreEqual(1, usuario.getIdUsuario());
+        }
+
+        [TestMethod()]
+        public void setEmailUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setEmailUsuario("correoNuevo");
+            Assert.AreEqual("correoNuevo", usuario.getEmailUsuario());
+        }
+
+        [TestMethod()]
+        public void getEmailUsuarioTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual("correo", usuario.getEmailUsuario());
+        }
+
         [TestMethod]
-        public void CambiarEmail_CambiaElEmailCorrectamente()
+        public void CambiarEmailTest()
         {
             string emailInicial = "usuario@ejemplo.com";
             string emailNuevo = "nuevo@ejemplo.com";
@@ -18,9 +95,6 @@ namespace ClassLibTests
             usuario.CambiarEmail(emailNuevo);
 
             Assert.AreEqual(emailNuevo, usuario.getEmailUsuario());
-
-            File.Delete(emailInicial + ".log");
-            File.Delete(emailNuevo + ".log");
         }
 
         [TestMethod]
@@ -31,6 +105,7 @@ namespace ClassLibTests
             Usuario usuario = new Usuario(emailInicial, "Contrasena123");
 
             usuario.CambiarEmail(null);
+            Assert.ThrowsException<Exception>(() => usuario.CambiarEmail(null));
         }
 
         [TestMethod]
@@ -41,6 +116,7 @@ namespace ClassLibTests
             Usuario usuario = new Usuario(emailInicial, "Contrasena123");
 
             usuario.CambiarEmail(emailInicial);
+            Assert.ThrowsException<Exception>(() => usuario.CambiarEmail(emailInicial));
         }
 
         [TestMethod]
@@ -48,7 +124,7 @@ namespace ClassLibTests
         {
             string email = "usuario@ejemplo.com";
             string contrasenaInicial = "Contrasena123";
-            string contrasenaNueva = "NuevaContrasena123";
+            string contrasenaNueva = "NuevaContrasena123?";
             Usuario usuario = new Usuario(email, contrasenaInicial);
 
             usuario.cambiarContrasena(contrasenaNueva);
@@ -70,6 +146,7 @@ namespace ClassLibTests
             Usuario usuario = new Usuario(email, contrasenaInicial);
 
             usuario.cambiarContrasena(contrasenaNueva);
+            Assert.ThrowsException<Exception>(() => usuario.cambiarContrasena(contrasenaNueva));
         }
 
         [TestMethod]
@@ -81,6 +158,7 @@ namespace ClassLibTests
             Usuario usuario = new Usuario(email, contrasenaInicial);
 
             usuario.cambiarContrasena(contrasenaInicial);
+            Assert.ThrowsException<Exception>(() => usuario.cambiarContrasena(contrasenaInicial));
         }
     }
 }

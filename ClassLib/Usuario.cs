@@ -22,9 +22,9 @@ namespace ClassLib
         /// <param name="email">Email del usuario</param>
         /// <param name="contrasena">Contrasena del usuario</param>
         /// <param name="idUsuario">ID del usuario creado por la BBDD
+        /// <param name="tipoUsuario"> Tipo del usuario, los consideramos como "Pago", "noPago" o "Admin"
         /// <param name="privilegios"> Si True es administrador, si False no lo es
-        /// <param name="tipoUsuario"> Tipo del usuario
-        public Usuario(string email, string contrasena, string tipoUsuario, bool privilegios = false)
+        public Usuario(string email, string contrasena, string tipoUsuario = "noPago", bool privilegios = false)
         {
             EmailUsuario = email;
             contrasenaActual = Utilidades.Encriptar(contrasena);
@@ -33,14 +33,39 @@ namespace ClassLib
             this.idUsuario = 0 ;
             elementosR = new List<Elemento>();
             this.tipoUsuario = tipoUsuario;
+            this.privilegios = privilegios;
             //añadir la lista de Elemento que contiene el usuario
         }
+
+        /// <summary>
+        /// Setter de los privilegios del usuario
+        /// </summary>
+        /// <param name="privilegios"></param>
+        public void setPrivilegios(bool privilegios) => this.privilegios = privilegios;
+
+        /// <summary>
+        /// Getter de los privilejos del usuario
+        /// </summary>
+        /// <returns></returns>
+        public bool getPrivilegios() => privilegios;
 
         /// <summary>
         /// Metodo para Implementar el id de usuario
         /// </summary>
         /// <param name="id"></param>
         public void setIdUsuario(int id) => this.idUsuario = id;
+
+        /// <summary>
+        /// Funcion para modificar el tipo de usuario
+        /// </summary>
+        /// <param name="tipo"></param>
+        public void setTipoUsuario(string tipo) => this.tipoUsuario = tipo;
+
+        /// <summary>
+        /// Funcion para obtener el tip de usuario
+        /// </summary>
+        /// <returns></returns>
+        public string getTipoUsuario() => tipoUsuario;
 
         /// <summary>
         /// Metodo para obtener el id de usuario
@@ -71,7 +96,8 @@ namespace ClassLib
 
         private bool añadirElemento(string padre, string tipo)
         {
-
+            return true;
+            //WIP
         }
         /// <summary>
         /// TODO:Método para buscar un elemento a partir de su id
@@ -80,7 +106,8 @@ namespace ClassLib
         /// <returns></returns> Elemento encontrado, null si no existe
         private Elemento buscarElemento(string id)
         {
-
+            return null;
+            //WIP
         }
 
         /// <summary>
