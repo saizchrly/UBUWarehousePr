@@ -9,7 +9,7 @@ namespace ClassLib
 {
     public class Log
     {
-        private const string path = @".\ClassLib\Logs\";
+        private const string path = @"..\UBUWarehousePr\ClassLib\Logs\";
 
         public static void escribirLog(string usuario, string Accion)
         {
