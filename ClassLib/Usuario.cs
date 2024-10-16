@@ -76,6 +76,7 @@ namespace ClassLib
         /// <returns></returns>
         public string getTipoUsuario() => tipoUsuario;
 
+
         /// <summary>
         /// Metodo para obtener el id de usuario
         /// </summary>
@@ -132,6 +133,7 @@ namespace ClassLib
             }
             return id;
         }
+
 
         /// <summary>
         /// Método que añade un elemento al árbol de elementos del usuario
