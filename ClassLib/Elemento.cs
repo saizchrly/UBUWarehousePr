@@ -89,6 +89,15 @@ namespace ClassLib
         }
 
         /// <summary>
+        /// Getter para obtener los hijos del elemento actual
+        /// </summary>
+        /// <returns></returns> lista de hijos del elemento actual
+        public List<Elemento> obtenerHijos()
+        {
+            return hijos;
+        }
+
+        /// <summary>
         /// Método que elimina un elemento a partir de su id
         /// </summary>
         /// <param name="id"></param> id del elemento a borrar

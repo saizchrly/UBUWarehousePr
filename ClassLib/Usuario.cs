@@ -15,6 +15,7 @@ namespace ClassLib
         private int idUsuario;
         private List<Elemento> elementosR;
         private string tipoUsuario;
+        private int raicesCreadas;
 
         /// <summary>
         /// Constructor de la clase Usuario
@@ -57,7 +58,7 @@ namespace ClassLib
             return false;
         }
 
-        private bool añadirElemento(string padre, string tipo)
+        private bool añadirElemento(string idpadre, string tipo)
         {
 
         }
@@ -66,10 +67,35 @@ namespace ClassLib
         /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
         /// <param name="id"></param> id del elemento que queremos encontrar
         /// <returns></returns> Elemento encontrado, null si no existe
-        private Elemento buscarElemento(string id)
+        public Elemento buscarElemento(string id)
         {
-
+            foreach (Elemento e in elementosR)
+            {
+                while (e != null)
+                {
+                    if (e.obtenerID().Equals(id)) return e;
+                    buscarElementoRecursivo(e.obtenerHijos(), id);
+                }
+            }
+            return null;
         }
+        
+        /// <summary>
+        /// Método auxiliar para buscar un elemento a partir de su id
+        /// </summary>
+        /// <param name="hijos"></param> hijos del elemento actual
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private Elemento buscarElementoRecursivo(List<Elemento> hijos, string id)
+        {
+                foreach (Elemento e in hijos)
+                {
+                    if(e==null) return null;
+                    if (e.obtenerID().Equals(id)) return e;
+                    buscarElementoRecursivo(e.obtenerHijos(), id);
+                }
+                return null;
+        } 
 
         /// <summary>
         /// Metodo para introducir el nombre de usuario
