@@ -29,10 +29,10 @@ namespace ClassLib
         }
         /// <summary>
         /// Constructor para el resto de elementos
-        /// </summary>
-        /// <param name="tipo"></param>
-        /// <param name="padre"></param>
-        /// <param name="id"></param>
+        /// </summary> 
+        /// <param name="tipo"></param> tipo del elemento a crear
+        /// <param name="padre"></param> padre del elemento a crear
+        /// <param name="id"></param> id del elemento a crear
         public Elemento(string tipo, Elemento padre, string id)
         {
             if (!tiposPosibles.Contains(tipo) || tipo.Equals("Raiz"))
@@ -47,38 +47,61 @@ namespace ClassLib
             ubicacion = ObtenerLocalizacion();
         }
 
-        public Elemento AnadirHijo(string tipo, string id)
+        /// <summary>
+        /// Método que añade un elemento hijo al elemento actual
+        /// </summary>
+        /// <param name="tipo"></param> tipo del elemento a añadir
+        /// <param name="id"></param> id del elemento a añadir
+        /// <returns></returns>
+        public bool AnadirHijo(string tipo, string id)
         {
             Elemento e;
-            if (!tiposPosibles.Contains(tipo)) return null;
+            if (!tiposPosibles.Contains(tipo)) return false;
             switch (tipo)
             {
                 case "Raiz":
-                    if (tipo.Equals("Raiz")) return null;
+                    if (tipo.Equals("Raiz")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
-                case "esp":
-                    if (tipo.Equals("Raiz")) return null;
+                    return true;
+                case "Espacio":
+                    if (tipo.Equals("Raiz")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
-                case "cont":
-                    if (!tipo.Equals("Articulo")) return null;
+                    return true;
+                case "Contenedor":
+                    if (!tipo.Equals("Articulo")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
+                    return true;
                 default:
-                    return null;
+                    return false;
             }
         }
 
+        /// <summary>
+        /// Getter para el id del elemento
+        /// </summary>
+        /// <returns></returns> id del elemento
         public string obtenerID()
         {
             return id;
         }
 
+        /// <summary>
+        /// Getter para obtener los hijos del elemento actual
+        /// </summary>
+        /// <returns></returns> lista de hijos del elemento actual
+        public List<Elemento> obtenerHijos()
+        {
+            return hijos;
+        }
 
+        /// <summary>
+        /// Método que elimina un elemento a partir de su id
+        /// </summary>
+        /// <param name="id"></param> id del elemento a borrar
+        /// <returns></returns>
         public Elemento Eliminar(string id)
         {
             if (this.hijos == null) return null;
@@ -93,6 +116,10 @@ namespace ClassLib
             return null;
         }
 
+        /// <summary>
+        /// Método que devuelve la localización de un elemento
+        /// </summary>
+        /// <returns></returns> lista de elementos desde la raíz hasta el elemento
         public List<Elemento> ObtenerLocalizacion()
         {
             List<Elemento> camino = new List<Elemento>();
