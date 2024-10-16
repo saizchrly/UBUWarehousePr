@@ -13,34 +13,34 @@ namespace WHDatabase
 
         public WHdb()
         {
-            Usuario u  = new Usuario("prueba1@ubu.es", "prueba1", "Admin")
+            Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin")
         }
-        public bool GuardaComponente(Componente e)
+        public bool GuardaComponente(Elemento e)
         {
             throw new NotImplementedException();
         }
 
         public bool GuardaUsuario(Usuario u)
         {
-           if(u.idUsuario < 0)
+            if (u.getIdUsuario() < 0)
             {
-                u.idUsuario = proximoIDUsuario;
+                u.setIdUsuario(proximoIDUsuario);
                 proximoIDUsuario++;
             }
-           tblUsuarios[u.idUsuario] = u;
-           return true;
+            tblUsuarios[u.getIdUsuario()] = u;
+            return true;
         }
 
-        public Componente LeeComponente(int idElemento)
+        public Elemento LeeComponente(int idElemento)
         {
             throw new NotImplementedException();
         }
 
         public Usuario? LeeUsuario(string email)
         {
-            Usuario utemp;
-            foreach (utemp in tblUsuarios.Values()){
-                if (utemp.email.Equals(email)) return utemp;
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                if (utemp.getEmailUsuario().Equals(email)) return utemp;
             }
             return null;
         }

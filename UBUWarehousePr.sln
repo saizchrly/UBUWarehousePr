@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLib", "ClassLib\ClassL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibTests", "ClassLibTests\ClassLibTests.csproj", "{C6B54271-4359-4E1B-A3D4-E9DFFBE2B14A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WHDatabase", "..\UBUWarehousePv1\WHDatabase\WHDatabase.csproj", "{2444547A-9E46-40C5-8967-CDA1B5DEBBB0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHDatabase", "WHDatabase\WHDatabase.csproj", "{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{C6B54271-4359-4E1B-A3D4-E9DFFBE2B14A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C6B54271-4359-4E1B-A3D4-E9DFFBE2B14A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C6B54271-4359-4E1B-A3D4-E9DFFBE2B14A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2444547A-9E46-40C5-8967-CDA1B5DEBBB0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2444547A-9E46-40C5-8967-CDA1B5DEBBB0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2444547A-9E46-40C5-8967-CDA1B5DEBBB0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2444547A-9E46-40C5-8967-CDA1B5DEBBB0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

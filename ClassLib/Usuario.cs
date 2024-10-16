@@ -10,7 +10,7 @@ namespace ClassLib
     public class Usuario
     {
         private string EmailUsuario;
-        private string privilegios;
+        private bool privilegios;
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
         private int idUsuario;
@@ -23,30 +23,65 @@ namespace ClassLib
 
         /// <summary>
         /// Constructor de la clase Usuario
-        /// WIP; privilegios a bool
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <param name="contrasena">Contrasena del usuario</param>
         /// <param name="idUsuario">ID del usuario creado por la BBDD
-        /// <param name="privilegios">Privilegios del usuario, si al construir el objeto no se hace referencia a este parametro
-        /// <param name="tipoUsuario"> Tipo del usuario
-        /// se dará un privilegio de "Usuario" por defecto</param>
-        public Usuario(string email, string contrasena, int idUsuario, string privilegios = "Usuario", string tipoUsuario)
+        /// <param name="tipoUsuario"> Tipo del usuario, los consideramos como "Pago", "noPago" o "Admin"
+        /// <param name="privilegios"> Si True es administrador, si False no lo es
+        public Usuario(string email, string contrasena, string tipoUsuario = "noPago", bool privilegios = false)
         {
             EmailUsuario = email;
             contrasenaActual = Utilidades.Encriptar(contrasena);
             listaContrasenasAntiguas = new List<string>();
-            this.idUsuario = idUsuario;
+            //se actualiiza en la BD
+            this.idUsuario = 0 ;
             elementosR = new List<Elemento>();
             this.tipoUsuario = tipoUsuario;
             raicesCreadas = 0;
             espaciosCreados = 0;
             contCreados = 0;
-            artCreados = 0;
-
-        
+            artCreados = 0;    
+            this.privilegios = privilegios;
             //añadir la lista de Elemento que contiene el usuario
         }
+
+        /// <summary>
+        /// Setter de los privilegios del usuario
+        /// </summary>
+        /// <param name="privilegios"></param>
+        public void setPrivilegios(bool privilegios) => this.privilegios = privilegios;
+
+        /// <summary>
+        /// Getter de los privilejos del usuario
+        /// </summary>
+        /// <returns></returns>
+        public bool getPrivilegios() => privilegios;
+
+        /// <summary>
+        /// Metodo para Implementar el id de usuario
+        /// </summary>
+        /// <param name="id"></param>
+        public void setIdUsuario(int id) => this.idUsuario = id;
+
+        /// <summary>
+        /// Funcion para modificar el tipo de usuario
+        /// </summary>
+        /// <param name="tipo"></param>
+        public void setTipoUsuario(string tipo) => this.tipoUsuario = tipo;
+
+        /// <summary>
+        /// Funcion para obtener el tip de usuario
+        /// </summary>
+        /// <returns></returns>
+        public string getTipoUsuario() => tipoUsuario;
+
+        /// <summary>
+        /// Metodo para obtener el id de usuario
+        /// </summary>
+        /// <returns>Id de usuario</returns>
+        public int getIdUsuario() => idUsuario;
+
         /// <summary>
         /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
         /// Si no se ha superado, lo crea y lo añade a la lista.
@@ -172,9 +207,6 @@ namespace ClassLib
         /// </summary>
         /// <returns>Nombre de usuario</returns>
         public string getEmailUsuario() => EmailUsuario;
-
-
-        public string getEmUsuario() => idUsuario;
 
         /// <summary>
         /// Metodo para introducir la contrasena actual, nunca se guardara en texto plano

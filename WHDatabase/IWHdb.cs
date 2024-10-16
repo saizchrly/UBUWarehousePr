@@ -1,4 +1,5 @@
 ﻿using ClassLib;
+using System;
 
 namespace WHDatabase
 {
@@ -48,14 +49,14 @@ namespace WHDatabase
         /// </summary>
         /// <param name="e">Objeto de la clase Componente que se quiere almacenar.</param>
         /// <returns>Verdadero o falso en función de si ha conseguido insertar/ actualizar la información.</returns>
-        bool GuardaComponente(Componente e);
+        bool GuardaComponente(Elemento e);
 
         /// <summary>
         /// Lee los datos del elemento referenciado por su ID.
         /// </summary>
         /// <param name="idElemento">Identificador del Componente que se quiere consultar.</param>
         /// <returns>Retorna el objeto con la infromación del conponente buscado o NULL si no se localiza.</returns>
-        Componente LeeComponente(int idElemento);
+        Elemento LeeComponente(int idElemento);
 
         /// <summary>
         /// Retorna el número de componentes registrados.
