@@ -53,29 +53,29 @@ namespace ClassLib
         /// <param name="tipo"></param> tipo del elemento a añadir
         /// <param name="id"></param> id del elemento a añadir
         /// <returns></returns>
-        public Elemento AnadirHijo(string tipo, string id)
+        public bool AnadirHijo(string tipo, string id)
         {
             Elemento e;
-            if (!tiposPosibles.Contains(tipo)) return null;
+            if (!tiposPosibles.Contains(tipo)) return false;
             switch (tipo)
             {
                 case "Raiz":
-                    if (tipo.Equals("Raiz")) return null;
+                    if (tipo.Equals("Raiz")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
-                case "esp":
-                    if (tipo.Equals("Raiz")) return null;
+                    return true;
+                case "Espacio":
+                    if (tipo.Equals("Raiz")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
-                case "cont":
-                    if (!tipo.Equals("Articulo")) return null;
+                    return true;
+                case "Contenedor":
+                    if (!tipo.Equals("Articulo")) return false;
                     e = new Elemento(tipo, this, id);
                     this.hijos.Add(e);
-                    return e;
+                    return true;
                 default:
-                    return null;
+                    return false;
             }
         }
 

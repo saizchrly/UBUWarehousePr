@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Data;
 using UBULibPr;
 
 namespace ClassLib
@@ -16,6 +17,9 @@ namespace ClassLib
         private List<Elemento> elementosR;
         private string tipoUsuario;
         private int raicesCreadas;
+        private int espaciosCreados;
+        private int contCreados;
+        private int artCreados;
 
         /// <summary>
         /// Constructor de la clase Usuario
@@ -35,6 +39,12 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             elementosR = new List<Elemento>();
             this.tipoUsuario = tipoUsuario;
+            raicesCreadas = 0;
+            espaciosCreados = 0;
+            contCreados = 0;
+            artCreados = 0;
+
+        
             //añadir la lista de Elemento que contiene el usuario
         }
         /// <summary>
@@ -58,9 +68,63 @@ namespace ClassLib
             return false;
         }
 
+        /// <summary>
+        /// Método que genera el correspondiente id para un nuevo elemento
+        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
+        /// </summary>
+        /// <param name="tipo"></param> tipo del elemento a crear
+        /// <returns></returns>
+        private string generarId(string tipo)
+        {
+            string id = $"{idUsuario}_";
+
+            switch (tipo)
+            {
+                case "Raiz":
+                    id += $"R{raicesCreadas + 1}";
+                    break;
+                case "Espacio":
+                    id += $"E{espaciosCreados + 1}";
+                    break;
+                case "Contenedor":
+                    id += $"C{contCreados + 1}";
+                    break;
+                case "Articulo":
+                    id += $"A{artCreados + 1}";
+                    break;
+                default:
+                    return null;
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// Método que añade un elemento al árbol de elementos del usuario
+        /// </summary>
+        /// <param name="idpadre"></param> padre del nuevo elemento
+        /// <param name="tipo"></param> tipo del nuevo elemento
+        /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
         private bool añadirElemento(string idpadre, string tipo)
         {
-
+            Elemento padre = buscarElemento(idpadre);
+            string id = generarId(tipo);
+            if (padre == null || id == null) return false;
+            switch (tipo)
+            {
+                case "Raiz":
+                    raicesCreadas++;
+                    break;
+                case "Espacio":
+                    espaciosCreados++;
+                    break;
+                case "Contenedor":
+                    contCreados++;
+                    break;
+                case "Articulo":
+                    artCreados++;
+                    break;
+            }
+            return padre.AnadirHijo(tipo, id);
         }
         /// <summary>
         /// TODO:Método para buscar un elemento a partir de su id
@@ -90,7 +154,7 @@ namespace ClassLib
         {
                 foreach (Elemento e in hijos)
                 {
-                    if(e==null) return null;
+                    if (e==null) return null;
                     if (e.obtenerID().Equals(id)) return e;
                     buscarElementoRecursivo(e.obtenerHijos(), id);
                 }
