@@ -29,10 +29,10 @@ namespace ClassLib
         }
         /// <summary>
         /// Constructor para el resto de elementos
-        /// </summary>
-        /// <param name="tipo"></param>
-        /// <param name="padre"></param>
-        /// <param name="id"></param>
+        /// </summary> 
+        /// <param name="tipo"></param> tipo del elemento a crear
+        /// <param name="padre"></param> padre del elemento a crear
+        /// <param name="id"></param> id del elemento a crear
         public Elemento(string tipo, Elemento padre, string id)
         {
             if (!tiposPosibles.Contains(tipo) || tipo.Equals("Raiz"))
@@ -47,6 +47,12 @@ namespace ClassLib
             ubicacion = ObtenerLocalizacion();
         }
 
+        /// <summary>
+        /// Método que añade un elemento hijo al elemento actual
+        /// </summary>
+        /// <param name="tipo"></param> tipo del elemento a añadir
+        /// <param name="id"></param> id del elemento a añadir
+        /// <returns></returns>
         public Elemento AnadirHijo(string tipo, string id)
         {
             Elemento e;
@@ -73,12 +79,20 @@ namespace ClassLib
             }
         }
 
+        /// <summary>
+        /// Getter para el id del elemento
+        /// </summary>
+        /// <returns></returns> id del elemento
         public string obtenerID()
         {
             return id;
         }
 
-
+        /// <summary>
+        /// Método que elimina un elemento a partir de su id
+        /// </summary>
+        /// <param name="id"></param> id del elemento a borrar
+        /// <returns></returns>
         public Elemento Eliminar(string id)
         {
             if (this.hijos == null) return null;
@@ -93,6 +107,10 @@ namespace ClassLib
             return null;
         }
 
+        /// <summary>
+        /// Método que devuelve la localización de un elemento
+        /// </summary>
+        /// <returns></returns> lista de elementos desde la raíz hasta el elemento
         public List<Elemento> ObtenerLocalizacion()
         {
             List<Elemento> camino = new List<Elemento>();
@@ -111,4 +129,3 @@ namespace ClassLib
         }
     }
 }
-3
