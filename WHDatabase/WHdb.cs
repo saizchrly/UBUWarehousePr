@@ -22,7 +22,7 @@ namespace WHDatabase
 
         public bool GuardaUsuario(Usuario u)
         {
-            if (u.getIdUsuario() < 0)
+            if (u.getIdUsuario() <= 0)
             {
                 u.setIdUsuario(proximoIDUsuario);
                 proximoIDUsuario++;

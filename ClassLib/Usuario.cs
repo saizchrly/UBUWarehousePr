@@ -26,7 +26,6 @@ namespace ClassLib
         /// </summary>
         /// <param name="email">Email del usuario</param>
         /// <param name="contrasena">Contrasena del usuario</param>
-        /// <param name="idUsuario">ID del usuario creado por la BBDD
         /// <param name="tipoUsuario"> Tipo del usuario, los consideramos como "Pago", "noPago" o "Admin"
         /// <param name="privilegios"> Si True es administrador, si False no lo es
         public Usuario(string email, string contrasena, string tipoUsuario = "noPago", bool privilegios = false)
@@ -83,120 +82,6 @@ namespace ClassLib
         public int getIdUsuario() => idUsuario;
 
         /// <summary>
-        /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
-        /// Si no se ha superado, lo crea y lo añade a la lista.
-        /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
-        /// </summary>
-        /// <returns></returns>
-        private bool añadirRaiz()
-        {
-            int limite = 10000;
-            if (tipoUsuario == "Pago") limite = 3;
-            else if (tipoUsuario == "noPago") limite = 1;
-            if (elementosR.Count >= limite)
-            {
-                string id = "raiz" + (elementosR.Count + 1);
-                Elemento raiz = new Elemento(id);
-                elementosR.Add(raiz);
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Método que genera el correspondiente id para un nuevo elemento
-        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
-        /// </summary>
-        /// <param name="tipo"></param> tipo del elemento a crear
-        /// <returns></returns>
-        private string generarId(string tipo)
-        {
-            string id = $"{idUsuario}_";
-
-            switch (tipo)
-            {
-                case "Raiz":
-                    id += $"R{raicesCreadas + 1}";
-                    break;
-                case "Espacio":
-                    id += $"E{espaciosCreados + 1}";
-                    break;
-                case "Contenedor":
-                    id += $"C{contCreados + 1}";
-                    break;
-                case "Articulo":
-                    id += $"A{artCreados + 1}";
-                    break;
-                default:
-                    return null;
-            }
-            return id;
-        }
-
-        /// <summary>
-        /// Método que añade un elemento al árbol de elementos del usuario
-        /// </summary>
-        /// <param name="idpadre"></param> padre del nuevo elemento
-        /// <param name="tipo"></param> tipo del nuevo elemento
-        /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
-        private bool añadirElemento(string idpadre, string tipo)
-        {
-            Elemento padre = buscarElemento(idpadre);
-            string id = generarId(tipo);
-            if (padre == null || id == null) return false;
-            switch (tipo)
-            {
-                case "Raiz":
-                    raicesCreadas++;
-                    break;
-                case "Espacio":
-                    espaciosCreados++;
-                    break;
-                case "Contenedor":
-                    contCreados++;
-                    break;
-                case "Articulo":
-                    artCreados++;
-                    break;
-            }
-            return padre.AnadirHijo(tipo, id);
-        }
-        /// <summary>
-        /// TODO:Método para buscar un elemento a partir de su id
-        /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
-        /// <param name="id"></param> id del elemento que queremos encontrar
-        /// <returns></returns> Elemento encontrado, null si no existe
-        public Elemento buscarElemento(string id)
-        {
-            foreach (Elemento e in elementosR)
-            {
-                while (e != null)
-                {
-                    if (e.obtenerID().Equals(id)) return e;
-                    buscarElementoRecursivo(e.obtenerHijos(), id);
-                }
-            }
-            return null;
-        }
-        
-        /// <summary>
-        /// Método auxiliar para buscar un elemento a partir de su id
-        /// </summary>
-        /// <param name="hijos"></param> hijos del elemento actual
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private Elemento buscarElementoRecursivo(List<Elemento> hijos, string id)
-        {
-                foreach (Elemento e in hijos)
-                {
-                    if (e==null) return null;
-                    if (e.obtenerID().Equals(id)) return e;
-                    buscarElementoRecursivo(e.obtenerHijos(), id);
-                }
-                return null;
-        } 
-
-        /// <summary>
         /// Metodo para introducir el nombre de usuario
         /// </summary>
         /// <param name="nombreUsuario">Nombre de usuario a introducir</param>
@@ -243,14 +128,20 @@ namespace ClassLib
         /// Metodo para cambiar el email del usuario
         /// </summary>
         /// <param name="emailNuevo">Email nuevo a introducir</param>
-        public void CambiarEmail(string emailNuevo)
+        public bool CambiarEmail(string emailNuevo)
         {
             string emailAntiguo = EmailUsuario;
             if (emailNuevo != null && emailNuevo != EmailUsuario)
+            {
                 setEmailUsuario(emailNuevo);
-            else throw new System.Exception("El email no puede ser nulo o igual al anterior");
-            Log.escribirLog(emailAntiguo, "Cambio de email a: " + emailNuevo);
-            Log.escribirLog(emailNuevo, "Cambio de email desde: " + emailAntiguo);
+                Log.escribirLog(emailAntiguo, "Cambio de email a: " + emailNuevo);
+                Log.escribirLog(emailNuevo, "Cambio de email desde: " + emailAntiguo);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         /// <summary>
@@ -258,7 +149,7 @@ namespace ClassLib
         /// y que no es igual a ninguna de las 10 anteriores
         /// </summary>
         /// <param name="contrasenaNueva">Contrasena nueva a introducir</param>
-        public void cambiarContrasena (string contrasenaNueva)
+        public bool cambiarContrasena (string contrasenaNueva)
         {
             // Comprobamos que la contrasena cumple con los requisitos minimos
             if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) == 5 && contrasenaNueva != contrasenaActual)
@@ -269,10 +160,133 @@ namespace ClassLib
                     setContrasenaActual(contrasenaNueva);
                     guardarContrasenaAntigua();
                     Log.escribirLog(EmailUsuario, "Cambio de contraseña");
+                    return true;
                 }
-                else throw new System.Exception("La contrasena no puede ser igual a una de las 10 anteriores");
+                else
+                {
+                    return false;
+                }
             }
-            else throw new System.Exception("La contrasena no cumple con los requisitos minimos");
+            else
+            {
+                return false;
+            }
+        }
+
+        /// <summary>
+        /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
+        /// Si no se ha superado, lo crea y lo añade a la lista.
+        /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
+        /// </summary>
+        /// <returns></returns>
+        private bool añadirRaiz()
+        {
+            int limite = 10000;
+            if (tipoUsuario == "Pago") limite = 3;
+            else if (tipoUsuario == "noPago") limite = 1;
+            if (elementosR.Count >= limite)
+            {
+                string id = "raiz" + (elementosR.Count + 1);
+                Elemento raiz = new Elemento(id);
+                elementosR.Add(raiz);
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Método que genera el correspondiente id para un nuevo elemento
+        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
+        /// </summary>
+        /// <param name="tipo"></param> tipo del elemento a crear
+        /// <returns></returns>
+        private string generarIdElemento(string tipo)
+        {
+            string id = $"{idUsuario}_";
+            if (idUsuario == 0) return null;
+
+            switch (tipo)
+            {
+                case "Raiz":
+                    id += $"R{raicesCreadas + 1}";
+                    break;
+                case "Espacio":
+                    id += $"E{espaciosCreados + 1}";
+                    break;
+                case "Contenedor":
+                    id += $"C{contCreados + 1}";
+                    break;
+                case "Articulo":
+                    id += $"A{artCreados + 1}";
+                    break;
+                default:
+                    return null;
+            }
+            return id;
+        }
+
+        /// <summary>
+        /// Método que añade un elemento al árbol de elementos del usuario
+        /// </summary>
+        /// <param name="idpadre"></param> padre del nuevo elemento
+        /// <param name="tipo"></param> tipo del nuevo elemento
+        /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
+        public bool añadirElemento(string idpadre, string tipo)
+        {
+            Elemento padre = buscarElemento(idpadre);
+            string id = generarIdElemento(tipo);
+            if (padre == null || id == null) return false;
+            switch (tipo)
+            {
+                case "Raiz":
+                    raicesCreadas++;
+                    break;
+                case "Espacio":
+                    espaciosCreados++;
+                    break;
+                case "Contenedor":
+                    contCreados++;
+                    break;
+                case "Articulo":
+                    artCreados++;
+                    break;
+            }
+            return padre.AnadirHijo(tipo, id);
+        }
+
+        /// <summary>
+        /// TODO:Método para buscar un elemento a partir de su id
+        /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
+        /// <param name="id"></param> id del elemento que queremos encontrar
+        /// <returns></returns> Elemento encontrado, null si no existe
+        public Elemento buscarElemento(string id)
+        {
+            foreach (Elemento e in elementosR)
+            {
+                while (e != null)
+                {
+                    if (e.obtenerID().Equals(id)) return e;
+                    buscarElementoRecursivo(e.obtenerHijos(), id);
+                }
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Método auxiliar para buscar un elemento a partir de su id
+        /// </summary>
+        /// <param name="hijos"></param> hijos del elemento actual
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private Elemento buscarElementoRecursivo(List<Elemento> hijos, string id)
+        {
+            foreach (Elemento e in hijos)
+            {
+                if (e == null) return null;
+                if (e.obtenerID().Equals(id)) return e;
+                buscarElementoRecursivo(e.obtenerHijos(), id);
+            }
+            return null;
         }
     }
 }
