@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -14,9 +15,8 @@ namespace ClassLib
         private string tipo;
         private List<Elemento> hijos;
         private Elemento padre;
-        private List<String> tiposPosibles = new List<string>{ "Raiz", "Espacio", "Contenedor", "Articulo" };
-        private String id;
-        List<Elemento> ubicacion;
+        private List<String> tiposPosibles = new List<string> { "Raiz", "Espacio", "Contenedor", "Articulo" };
+        private string id;
         /// <summary>
         /// Constructor para crear raíces
         /// </summary>
@@ -35,16 +35,19 @@ namespace ClassLib
         /// <param name="id"></param> id del elemento a crear
         public Elemento(string tipo, Elemento padre, string id)
         {
-            if (!tiposPosibles.Contains(tipo) || tipo.Equals("Raiz"))
+            if (!tiposPosibles.Contains(tipo))
             {
-                return;
+                throw new System.Exception("Tipos incompatibles");
+            }
+            if (tipo.Equals("Raiz"))
+            {
+                throw new System.Exception("Utilice el otro constructor para crear elementos raíz");
             }
             this.tipo = tipo;
             this.padre = padre;
             this.id = id;
             if (tipo.Equals("Articulo")) hijos = null;
             else hijos = new List<Elemento>();
-            ubicacion = ObtenerLocalizacion();
         }
 
         /// <summary>
@@ -98,22 +101,22 @@ namespace ClassLib
         }
 
         /// <summary>
-        /// Método que elimina un elemento a partir de su id
+        /// Método que elimina un elemento pasado por parámetro
         /// </summary>
         /// <param name="id"></param> id del elemento a borrar
         /// <returns></returns>
-        public Elemento Eliminar(string id)
+        public bool Eliminar(Elemento hijo)
         {
-            if (this.hijos == null) return null;
+            if (this.hijos == null) return false;
             foreach (Elemento i in hijos)
             {
-                if (i.obtenerID().Equals(id))
+                if (i.Equals(hijo))
                 {
-                    hijos.Remove(i);
-                    return i;
+                    hijos.Remove(hijo);
+                    return true;
                 }
             }
-            return null;
+            return false;
         }
 
         /// <summary>
@@ -130,11 +133,15 @@ namespace ClassLib
                 stack.Push(e);
                 e = e.padre;
             }
-            while(stack.Count > 0)
+            while (stack.Count > 0)
             {
                 camino.Add(stack.Pop());
             }
             return camino;
         }
+
+        public Elemento obtenerPadre() => padre;
+
+        public string obtenerTipo() => tipo;
     }
 }

@@ -56,7 +56,7 @@ namespace WHDatabase
         /// </summary>
         /// <param name="idElemento">Identificador del Componente que se quiere consultar.</param>
         /// <returns>Retorna el objeto con la infromación del conponente buscado o NULL si no se localiza.</returns>
-        Elemento LeeComponente(int idElemento);
+        Elemento LeeComponente(string idElemento);
 
         /// <summary>
         /// Retorna el número de componentes registrados.
