@@ -204,12 +204,12 @@ namespace ClassLib.Tests
         {
             Usuario usuario = new Usuario("correo", "123");
             //añadimos raiz
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
-            //añadimos espacio
-            Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio", "2"));
+            bool result = usuario.añadirElemento("raiz1", "Espacio");
+            Assert.IsTrue(result);
+            List<Elemento> elementos = usuario.getElementosLista();
+            Assert.AreEqual(1, elementos.Count);
+            Assert.AreEqual(2, usuario.getNumElem());
+
         }
 
         [TestMethod()]
@@ -251,8 +251,9 @@ namespace ClassLib.Tests
             List<Elemento> elementos = new List<Elemento> { elemento1 };
             usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
-            Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio", "2"));
+
+            Elemento elemento2 = new Elemento("Espacio", );
+            Assert.IsTrue(usuario.);
             Assert.AreEqual(1, usuario.getEspaciosCreados());
         }
 
@@ -266,10 +267,10 @@ namespace ClassLib.Tests
             usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
             Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio", "2"));
+            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
             Assert.AreEqual(1, usuario.getEspaciosCreados());
             Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor", "3"));
+            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
             Assert.AreEqual(1, usuario.getContCreados());
         }
 
@@ -283,13 +284,13 @@ namespace ClassLib.Tests
             usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
             Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio", "2"));
+            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
             Assert.AreEqual(1, usuario.getEspaciosCreados());
             Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor", "3"));
+            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
             Assert.AreEqual(1, usuario.getContCreados());
             Elemento elemento4 = new Elemento("4");
-            Assert.IsTrue(usuario.añadirElemento("3", "Articulo", "4"));
+            Assert.IsTrue(usuario.añadirElemento("3", "Articulo"));
             Assert.AreEqual(1, usuario.getArtCreados());
         }
 
@@ -303,15 +304,15 @@ namespace ClassLib.Tests
             usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
             Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio", "2"));
+            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
             Assert.AreEqual(1, usuario.getEspaciosCreados());
             Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor", "3"));
+            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
             Assert.AreEqual(1, usuario.getContCreados());
             Elemento elemento4 = new Elemento("4");
-            Assert.IsTrue(usuario.añadirElemento("3", "Articulo", "4"));
+            Assert.IsTrue(usuario.añadirElemento("3", "Articulo"));
             Assert.AreEqual(1, usuario.getArtCreados());
             Assert.AreEqual(4, usuario.getNumElem());
-=======
+        }
     }
 }

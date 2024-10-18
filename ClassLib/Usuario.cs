@@ -191,6 +191,8 @@ namespace ClassLib
             else return false;
         }
 
+        
+
         /// <summary>
         /// Método que genera el correspondiente id para un nuevo elemento
         /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
@@ -222,104 +224,95 @@ namespace ClassLib
             return id;
         }
 
+        private Elemento crearUnElemento(string tipo)
+        {
+
+            if (tipo == "Raiz")
+            {
+                int limite = 10000;
+                if (tipoUsuario == "Pago") limite = 3;
+                else if (tipoUsuario == "noPago") limite = 1;
+                if (elementosLista.Count > limite)
+                {
+                    raicesCreadas++;
+                    Elemento e = new Elemento(tipo, generarIdElemento(tipo));
+                    return e;
+                }
+                return null;
+            }
+            if (tipo == "Espacio")
+            {
+               espaciosCreados++;
+                Elemento e = new Elemento(tipo, generarIdElemento(tipo));
+                return e;
+                
+            }
+            if (tipo == "Contenedor")
+            {
+                contCreados++;
+                Elemento e = new Elemento(tipo, generarIdElemento(tipo));
+                return e;
+            }
+            if (tipo == "Articulo")
+            {
+                artCreados++;
+                Elemento e = new Elemento(tipo, generarIdElemento(tipo));
+                return e;
+            }
+            return null;
+        }
+
 
         /// <summary>
-        /// Método que añade un elemento al árbol de elementos del usuario
+        /// Método que añade un elemento a uno de los elementos del usuario
         /// </summary>
         /// <param name="idpadre"></param> padre del nuevo elemento
         /// <param name="tipo"></param> tipo del nuevo elemento
-        /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
-        public bool añadirElemento(string idpadre, string tipo)
+        /// <returns>bool - true si se ha podido crear el elemento, false si no</returns> 
+        public bool añadirElemento(string tipoElementoAñadir, Elemento elementoBuscar = null)
         {
-            string id;
-            Elemento padre = buscarElemento(idpadre);
-            id = generarIdElemento(tipo);
-            if (padre == null) return false;
-            if (tipo == "Raiz")
+            Elemento elementoAñadir = crearUnElemento(tipoElementoAñadir);
+            if (elementoAñadir == null) return false;
+            if (elementoBuscar == null) return false;
+            if (elementoAñadir.getPadre() != null) return false;
+            if (elementoAñadir.getTipo().Equals("Raiz"))
             {
-                if (añadirRaiz())
-                {
-                    raicesCreadas++;
-                    numElem++;
-                    return true;
-                }
+                elementosLista.Add(elementoAñadir);
+                return true;
             }
-            else if (tipo == "Espacio")
-            {
-                if (padre.AnadirHijo(tipo, id))
-                {
-                    espaciosCreados++;
-                    numElem++;
-                    return true;
-                }
-            }
-            else if (tipo == "Contenedor")
-            {
-                if (padre.AnadirHijo(tipo, id))
-                {
-                    contCreados++;
-                    numElem++;
-                    return true;
-                }
-                
-            }
-            else if (tipo == "Articulo")
-            {
-                if (padre.AnadirHijo(tipo, id))
-                {
-                    artCreados++;
-                    numElem++;
-                    return true;
-                }
-
-            }
+            if (elementoBuscar.AnadirHijo(elementoAñadir)) return true;
             return false;
         }
 
-        /// <summary>
-        /// TODO:Método para buscar un elemento a partir de su id
-        /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
-        /// <param name="id"></param> id del elemento que queremos encontrar
-        /// <returns></returns> Elemento encontrado, null si no existe
-        public Elemento buscarElemento(string id)
-        {
-            foreach (Elemento e in elementosLista)
-            {
-                while (e != null)
-                {
-                    if (e.obtenerID().Equals(id)) return e;
-                    buscarElementoRecursivo(e.obtenerHijos(), id);
-                }
-            }
-            return null;
-        }
+
 
         /// <summary>
-        /// Método auxiliar para buscar un elemento a partir de su id
+        /// Elimina un elemento del árbol de elementos del usuario
         /// </summary>
-        /// <param name="hijos"></param> hijos del elemento actual
         /// <param name="id"></param>
         /// <returns></returns>
-        private Elemento buscarElementoRecursivo(List<Elemento> hijos, string id)
-        {
-            foreach (Elemento e in hijos)
-              
-            {
-                if (e == null) return null;
-                if (e.obtenerID().Equals(id)) return e;
-                buscarElementoRecursivo(e.obtenerHijos(), id);
-            }
-            return null;
-        }
-
+        /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
-            Elemento e = buscarElemento(id);
+            Elemento e = Elemento.buscarElemento(id, elementosLista);
             if (e == null) throw new System.Exception("El elemento no existe");
 
-            Elemento padre = e.obtenerPadre();
-            return padre.Eliminar(e);
+            if (e.getTipo().Equals("Raiz")) throw new System.Exception("No se puede eliminar la raiz");
+
+            Elemento padre = e.getPadre();
+            if (padre != null)
+            {
+                if (padre.Eliminar(e))
+                {
+                    elementosLista.Remove(e);
+                    Log.escribirLog(EmailUsuario, "Eliminacion de elemento " + id);
+
+                    return true;
+                }
+            }
+            
         }
+
 
         /// <summary>
         /// Metodo para mover un elemento de un padre a otro
@@ -330,14 +323,14 @@ namespace ClassLib
         /// <exception cref="System.Exception"></exception>
         public bool moverElemento(string idMovido, string idNuevoPadre)
         {
-            Elemento e = buscarElemento(idMovido); //Buscamos elemento a mover
+            Elemento e = Elemento.buscarElemento(idMovido, elementosLista); //Buscamos elemento a mover
             if (e == null) throw new System.Exception("El elemento a mover no existe");
 
-            Elemento nuevoPadre = buscarElemento(idNuevoPadre); //Buscamos nuevo padre
+            Elemento nuevoPadre = Elemento.buscarElemento(idNuevoPadre, elementosLista); //Buscamos nuevo padre
             if (nuevoPadre == null) throw new System.Exception("El nuevo elemento padre no existe");
 
-            Elemento padreAntiguo = e.obtenerPadre(); //Obtenemos padre del elemento a mover
-            if (!nuevoPadre.AnadirHijo(e.obtenerTipo(), idMovido))
+            Elemento padreAntiguo = e.getPadre(); //Obtenemos padre del elemento a mover
+            if (!nuevoPadre.AnadirHijo(e.getTipo(), idMovido))
             {
                 throw new System.Exception("No se ha podido mover el elemento, tipos incompatibles");
             }
@@ -348,33 +341,6 @@ namespace ClassLib
                 throw new System.Exception("No se ha podido eliminar el elemento de su padre antiguo");
             }
             return true;
-        }
-
-        /// <summary>
-        /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
-        /// Si no se ha superado, lo crea y lo añade a la lista.
-        /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
-        /// </summary>
-        /// <returns>
-        /// 
-        /// </returns>
-        private bool añadirRaiz()
-        {
-            int limite = 10000;
-
-            if (tipoUsuario == "Pago") limite = 3;
-            else if (tipoUsuario == "noPago") limite = 1;
-
-            if (elementosLista.Count >= limite)
-            {
-                string id = "raiz" + (elementosLista.Count + 1);
-                Elemento raiz = new Elemento(id);
-                elementosLista.Add(raiz);
-                numElem++;
-                return true; 
-            }
-
-            return false;
-        }
+        }        
     }
 }
