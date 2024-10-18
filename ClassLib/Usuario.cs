@@ -17,7 +17,8 @@ namespace ClassLib
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
         private List<Elemento> elementosLista;
-        Elemento raiz;
+        private Elemento raiz;
+
         private string tipoUsuario;
         private int raicesCreadas;
         private int espaciosCreados;
@@ -43,8 +44,7 @@ namespace ClassLib
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
             elementosLista = new List<Elemento>();
-            raiz = new Elemento("1");
-            elementosLista.Add(raiz);
+            añadirRaiz();
 
             //?
             raicesCreadas = 1;
@@ -52,7 +52,7 @@ namespace ClassLib
             contCreados = 0;
             artCreados = 0;
             numElem = 1;
-            Log.escribirLog(email, "Creacion de usuario");
+            Log.escribirLog(EmailUsuario, "Creacion de usuario");
         }
 
         public int getRaicesCreadas() => raicesCreadas;
@@ -67,7 +67,7 @@ namespace ClassLib
 
         public List<Elemento> getElementosLista() => elementosLista;
 
-        public List<Elemento> setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
+        public void setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
 
         /// <summary>
         /// Setter de los privilegios del usuario
@@ -192,28 +192,6 @@ namespace ClassLib
         }
 
         /// <summary>
-        /// Método que añade un elemento raiz. Comprueba que no se ha superado el limite de elementos raiz.
-        /// Si no se ha superado, lo crea y lo añade a la lista.
-        /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
-        /// </summary>
-        /// <returns></returns>
-        private bool añadirRaiz()
-        {
-            int limite = 10000;
-            if (tipoUsuario == "Pago") limite = 3;
-            else if (tipoUsuario == "noPago") limite = 1;
-            if (elementosLista.Count >= limite)
-            {
-                string id = "raiz" + (elementosLista.Count + 1);
-                Elemento raiz = new Elemento(id);
-                elementosLista.Add(raiz);
-                numElem++;
-                return true;
-            }
-            return false;
-        }
-
-        /// <summary>
         /// Método que genera el correspondiente id para un nuevo elemento
         /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
         /// </summary>
@@ -251,31 +229,51 @@ namespace ClassLib
         /// <param name="idpadre"></param> padre del nuevo elemento
         /// <param name="tipo"></param> tipo del nuevo elemento
         /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
-        public bool añadirElemento(string idpadre, string tipo, string id = null)
-
-
+        public bool añadirElemento(string idpadre, string tipo)
         {
+            string id;
             Elemento padre = buscarElemento(idpadre);
-            if (id == null) id = generarId(tipo);
-            else id = $"{idUsuario}_{id}";
-            if (padre == null || id == null) return false;
-            switch (tipo)
+            id = generarIdElemento(tipo);
+            if (padre == null) return false;
+            if (tipo == "Raiz")
             {
-                case "Raiz":
+                if (añadirRaiz())
+                {
                     raicesCreadas++;
-                    break;
-                case "Espacio":
-                    espaciosCreados++;
-                    break;
-                case "Contenedor":
-                    contCreados++;
-                    break;
-                case "Articulo":
-                    artCreados++;
-                    break;
+                    numElem++;
+                    return true;
+                }
             }
-            numElem++;
-            return padre.AnadirHijo(tipo, id);
+            else if (tipo == "Espacio")
+            {
+                if (padre.AnadirHijo(tipo, id))
+                {
+                    espaciosCreados++;
+                    numElem++;
+                    return true;
+                }
+            }
+            else if (tipo == "Contenedor")
+            {
+                if (padre.AnadirHijo(tipo, id))
+                {
+                    contCreados++;
+                    numElem++;
+                    return true;
+                }
+                
+            }
+            else if (tipo == "Articulo")
+            {
+                if (padre.AnadirHijo(tipo, id))
+                {
+                    artCreados++;
+                    numElem++;
+                    return true;
+                }
+
+            }
+            return false;
         }
 
         /// <summary>
@@ -357,7 +355,9 @@ namespace ClassLib
         /// Si no se ha superado, lo crea y lo añade a la lista.
         /// TODO: generar IDs con estructura(idUsuario_tipo_numTipoCreados)
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// 
+        /// </returns>
         private bool añadirRaiz()
         {
             int limite = 10000;
@@ -365,79 +365,16 @@ namespace ClassLib
             if (tipoUsuario == "Pago") limite = 3;
             else if (tipoUsuario == "noPago") limite = 1;
 
-            if (elementosR.Count >= limite)
+            if (elementosLista.Count >= limite)
             {
-                string id = "raiz" + (elementosR.Count + 1);
+                string id = "raiz" + (elementosLista.Count + 1);
                 Elemento raiz = new Elemento(id);
-                elementosR.Add(raiz);
+                elementosLista.Add(raiz);
                 numElem++;
-                return true;
+                return true; 
             }
 
             return false;
         }
-
-        /// <summary>
-        /// Método que genera el correspondiente id para un nuevo elemento
-        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
-        /// </summary>
-        /// <param name="tipo"></param> tipo del elemento a crear
-        /// <returns></returns>
-        private string generarId(string tipo)
-        {
-            string id = $"{idUsuario}_";
-
-            switch (tipo)
-            {
-                case "Raiz":
-                    id += $"R{raicesCreadas + 1}";
-                    break;
-                case "Espacio":
-                    id += $"E{espaciosCreados + 1}";
-                    break;
-                case "Contenedor":
-                    id += $"C{contCreados + 1}";
-                    break;
-                case "Articulo":
-                    id += $"A{artCreados + 1}";
-                    break;
-                default:
-                    return null;
-            }
-            return id;
-        }
-
-
-        /// <summary>
-        /// Método que añade un elemento al árbol de elementos del usuario
-        /// </summary>
-        /// <param name="idpadre"></param> padre del nuevo elemento
-        /// <param name="tipo"></param> tipo del nuevo elemento
-        /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
-        public bool añadirElemento(string idpadre, string tipo, string id = null)
-        {
-            Elemento padre = buscarElemento(idpadre);
-            if (id == null) id = generarId(tipo);
-            else id = $"{idUsuario}_{id}";
-            if (padre == null || id == null) return false;
-            switch (tipo)
-            {
-                case "Raiz":
-                    raicesCreadas++;
-                    break;
-                case "Espacio":
-                    espaciosCreados++;
-                    break;
-                case "Contenedor":
-                    contCreados++;
-                    break;
-                case "Articulo":
-                    artCreados++;
-                    break;
-            }
-            numElem++;
-            return padre.AnadirHijo(tipo, id);
-        }
-
     }
 }
