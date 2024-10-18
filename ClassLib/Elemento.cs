@@ -45,6 +45,7 @@ namespace ClassLib
             }
             this.tipo = tipo;
             this.padre = padre;
+            padre.AnadirHijo(tipo, id);
             this.id = id;
             if (tipo.Equals("Articulo")) hijos = null;
             else hijos = new List<Elemento>();
