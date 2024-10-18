@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using ClassLib;
 
 namespace WHDatabase
@@ -10,10 +12,9 @@ namespace WHDatabase
     {
         Dictionary<int, Usuario> tblUsuarios = new Dictionary<int, Usuario>();
         int proximoIDUsuario = 1;
-
         public WHdb()
         {
-            Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin")
+            Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin");
         }
         public bool GuardaComponente(Elemento e)
         {
@@ -31,10 +32,28 @@ namespace WHDatabase
             return true;
         }
 
-        public Elemento LeeComponente(int idElemento)
+        public Elemento LeeComponente(string idElemento)
         {
-            throw new NotImplementedException();
+            Match match = Regex.Match(idElemento, @"^\d+");
+            int idUsuario;
+            if (match.Success)
+            {
+                idUsuario = Convert.ToInt32(match.Value);
+            }
+            else
+            {
+                return null;
+            }
+            foreach (Usuario u in tblUsuarios.Values)
+            {
+                if (u.getIdUsuario().Equals(idUsuario))
+                {
+                    return u.buscarElemento(idElemento);
+                }
+            }
+            return null;
         }
+
 
         public Usuario? LeeUsuario(string email)
         {
@@ -57,7 +76,12 @@ namespace WHDatabase
 
         public int NumUsuariosActivos()
         {
-            throw new NotImplementedException();
+            int cont = 0;
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                cont += utemp.numElem;
+            }
+            return cont;
         }
 
         public bool ValidaUsuario(string email, string password)
