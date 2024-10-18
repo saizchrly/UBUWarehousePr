@@ -91,74 +91,46 @@ namespace ClassLib.Tests
             string emailInicial = "usuario@ejemplo.com";
             string emailNuevo = "nuevo@ejemplo.com";
             Usuario usuario = new Usuario(emailInicial, "Contrasena123");
+            Assert.IsTrue(usuario.CambiarEmail(emailNuevo));
+            Assert.AreEqual("nuevo@ejemplo.com", usuario.getEmailUsuario());
 
-            usuario.CambiarEmail(emailNuevo);
+            Usuario usuarioNuevoCorreo = new Usuario(emailNuevo, "Contrasena123");
+            Assert.IsFalse(usuario.CambiarEmail(null));
 
-            Assert.AreEqual(emailNuevo, usuario.getEmailUsuario());
+            Usuario usuarioMismoCorreo = new Usuario(emailInicial, "Contrasena123");
+            Assert.IsFalse(usuarioMismoCorreo.CambiarEmail(emailInicial));
         }
 
         [TestMethod]
-        [ExpectedException(typeof(Exception), "El email no puede ser nulo o igual al anterior")]
-        public void CambiarEmail_LanzaExcepcionSiEmailEsNulo()
-        {
-            string emailInicial = "usuario@ejemplo.com";
-            Usuario usuario = new Usuario(emailInicial, "Contrasena123");
-
-            usuario.CambiarEmail(null);
-            Assert.ThrowsException<Exception>(() => usuario.CambiarEmail(null));
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "El email no puede ser nulo o igual al anterior")]
-        public void CambiarEmail_LanzaExcepcionSiEmailEsIgualAlAnterior()
-        {
-            string emailInicial = "usuario@ejemplo.com";
-            Usuario usuario = new Usuario(emailInicial, "Contrasena123");
-
-            usuario.CambiarEmail(emailInicial);
-            Assert.ThrowsException<Exception>(() => usuario.CambiarEmail(emailInicial));
-        }
-
-        [TestMethod]
-        public void CambiarContrasena_CambiaLaContrasenaCorrectamente()
+        public void CambiarContrasenaTest()
         {
             string email = "usuario@ejemplo.com";
             string contrasenaInicial = "Contrasena123";
             string contrasenaNueva = "NuevaContrasena123?";
             Usuario usuario = new Usuario(email, contrasenaInicial);
-
-            usuario.cambiarContrasena(contrasenaNueva);
-
             // PREGUNTAR COMO HACERLO
             // No hay un método público para obtener la contraseña, así que verificamos que no lanza excepción
-            Assert.IsTrue(true);
+            Assert.IsTrue(usuario.cambiarContrasena(contrasenaNueva));
 
-            File.Delete(email + ".log");
+            // No cumple con los requisitos mínimos
+            contrasenaNueva = "123";
+            Assert.IsFalse(usuario.cambiarContrasena(contrasenaNueva));
+
+            // contraseña es igual a una antigua
+            Assert.IsFalse(usuario.cambiarContrasena(contrasenaInicial));
+
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "La contrasena no cumple con los requisitos minimos")]
-        public void CambiarContrasena_LanzaExcepcionSiContrasenaNoCumpleRequisitos()
+        [TestMethod()]
+        public void añadirElementoTest()
         {
-            string email = "usuario@ejemplo.com";
-            string contrasenaInicial = "Contrasena123";
-            string contrasenaNueva = "123";
-            Usuario usuario = new Usuario(email, contrasenaInicial);
-
-            usuario.cambiarContrasena(contrasenaNueva);
-            Assert.ThrowsException<Exception>(() => usuario.cambiarContrasena(contrasenaNueva));
+            Assert.Fail();
         }
 
-        [TestMethod]
-        [ExpectedException(typeof(Exception), "La contrasena no puede ser igual a una de las 10 anteriores")]
-        public void CambiarContrasena_LanzaExcepcionSiContrasenaEsIgualAUnaAnterior()
+        [TestMethod()]
+        public void buscarElementoTest()
         {
-            string email = "usuario@ejemplo.com";
-            string contrasenaInicial = "Contrasena123";
-            Usuario usuario = new Usuario(email, contrasenaInicial);
-
-            usuario.cambiarContrasena(contrasenaInicial);
-            Assert.ThrowsException<Exception>(() => usuario.cambiarContrasena(contrasenaInicial));
+            Assert.Fail();
         }
     }
 }
