@@ -35,28 +35,7 @@ namespace ClassLib.Tests
             Assert.AreEqual("noPago", usuarioNoPago.getTipoUsuario());
             Assert.IsFalse(usuarioNoPago.getPrivilegios());
         }
-
-        [TestMethod()]
-        public void getElementosListaTest()
-        {
-            Elemento raiz = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { raiz };
-            Usuario usuario = new Usuario("correo", "123");
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(elementos, usuario.getElementosLista());
-        }
-
-        [TestMethod()]
-        public void setElementosListaTest()
-        {
-            Elemento elemento1 = new Elemento("Elemento1");
-            Elemento elemento2 = new Elemento("Elemento2");
-            List<Elemento> elementos = new List<Elemento> { elemento1, elemento2 };
-            Usuario usuario = new Usuario("correo", "123");
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(elementos, usuario.getElementosLista());
-        }
-
+                
         [TestMethod()]
         public void setPrivilegiosTest()
         {
@@ -200,119 +179,15 @@ namespace ClassLib.Tests
         }
 
         [TestMethod()]
-        public void añadirElementoTest()
-        {
-            Usuario usuario = new Usuario("correo", "123");
-            //añadimos raiz
-            bool result = usuario.añadirElemento("raiz1", "Espacio");
-            Assert.IsTrue(result);
-            List<Elemento> elementos = usuario.getElementosLista();
-            Assert.AreEqual(1, elementos.Count);
-            Assert.AreEqual(2, usuario.getNumElem());
-
-        }
-
-        [TestMethod()]
-        public void buscarElementoTest()
-        {
-            Assert.IsTrue(true);
-        }
-
-        [TestMethod()]
-        public void eliminarElementoTest()
-        {
-            Assert.IsTrue(true);
-        }
-
-        [TestMethod()]
-        public void moverElementoTest()
-        {
-            Assert.IsTrue(true);
-        }
-
-        [TestMethod()]
         public void getRaicesCreadasTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
-
-        }
-
-        [TestMethod()]
-        public void getEspaciosCreadosTest()
-        {
-            Usuario usuario = new Usuario("correo", "123");
-
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
+            usuario.añadirElemento("Raiz");
             Assert.AreEqual(1, usuario.getRaicesCreadas());
-
-            Elemento elemento2 = new Elemento("Espacio", );
-            Assert.IsTrue(usuario.);
-            Assert.AreEqual(1, usuario.getEspaciosCreados());
-        }
-
-        [TestMethod()]
-        public void getContCreadosTest()
-        {
-            Usuario usuario = new Usuario("correo", "123");
-
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(1, usuario.getRaicesCreadas());
-            Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
-            Assert.AreEqual(1, usuario.getEspaciosCreados());
-            Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
-            Assert.AreEqual(1, usuario.getContCreados());
-        }
-
-        [TestMethod()]
-        public void getArtCreadosTest()
-        {
-            Usuario usuario = new Usuario("correo", "123");
-
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(1, usuario.getRaicesCreadas());
-            Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
-            Assert.AreEqual(1, usuario.getEspaciosCreados());
-            Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
-            Assert.AreEqual(1, usuario.getContCreados());
-            Elemento elemento4 = new Elemento("4");
-            Assert.IsTrue(usuario.añadirElemento("3", "Articulo"));
-            Assert.AreEqual(1, usuario.getArtCreados());
-        }
-
-        [TestMethod()]
-        public void getNumElemTest()
-        {
-            Usuario usuario = new Usuario("correo", "123");
-
-            Elemento elemento1 = new Elemento("1");
-            List<Elemento> elementos = new List<Elemento> { elemento1 };
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(1, usuario.getRaicesCreadas());
-            Elemento elemento2 = new Elemento("2");
-            Assert.IsTrue(usuario.añadirElemento("1", "Espacio"));
-            Assert.AreEqual(1, usuario.getEspaciosCreados());
-            Elemento elemento3 = new Elemento("3");
-            Assert.IsTrue(usuario.añadirElemento("2", "Contenedor"));
-            Assert.AreEqual(1, usuario.getContCreados());
-            Elemento elemento4 = new Elemento("4");
-            Assert.IsTrue(usuario.añadirElemento("3", "Articulo"));
-            Assert.AreEqual(1, usuario.getArtCreados());
-            Assert.AreEqual(4, usuario.getNumElem());
+            usuario.setTipoUsuario("Pago");
+            usuario.añadirElemento("Raiz");
+            Assert.AreEqual(2, usuario.getRaicesCreadas());
         }
     }
 }

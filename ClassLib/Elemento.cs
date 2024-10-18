@@ -36,6 +36,8 @@ namespace ClassLib
             hijos =null;
         }
 
+        public void setHijos(List<Elemento> hijos) => this.hijos = hijos;
+
         /// <summary>
         /// Método que añade un elemento hijo al elemento actual
         /// </summary>

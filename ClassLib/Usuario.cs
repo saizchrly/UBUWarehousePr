@@ -44,7 +44,7 @@ namespace ClassLib
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
             elementosLista = new List<Elemento>();
-            añadirRaiz();
+            añadirElemento("Raiz");
 
             //?
             raicesCreadas = 1;
@@ -54,20 +54,6 @@ namespace ClassLib
             numElem = 1;
             Log.escribirLog(EmailUsuario, "Creacion de usuario");
         }
-
-        public int getRaicesCreadas() => raicesCreadas;
-
-        public int getEspaciosCreados() => espaciosCreados;
-
-        public int getContCreados() => contCreados;
-
-        public int getArtCreados() => artCreados;
-
-        public int getNumElem() => numElem;
-
-        public List<Elemento> getElementosLista() => elementosLista;
-
-        public void setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
 
         /// <summary>
         /// Setter de los privilegios del usuario
@@ -190,6 +176,20 @@ namespace ClassLib
             }
             else return false;
         }
+        public int getRaicesCreadas() => raicesCreadas;
+
+        public int getEspaciosCreados() => espaciosCreados;
+
+        public int getContCreados() => contCreados;
+
+        public int getArtCreados() => artCreados;
+
+        public int getNumElem() => numElem;
+
+        public List<Elemento> getElementosLista() => elementosLista;
+
+        public void setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
+
 
         
 
@@ -232,7 +232,7 @@ namespace ClassLib
                 int limite = 10000;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
-                if (elementosLista.Count > limite)
+                if (elementosLista.Count() < limite)
                 {
                     raicesCreadas++;
                     Elemento e = new Elemento(tipo, generarIdElemento(tipo));
@@ -310,7 +310,8 @@ namespace ClassLib
                     return true;
                 }
             }
-            
+            return false;
+
         }
 
 
@@ -330,16 +331,11 @@ namespace ClassLib
             if (nuevoPadre == null) throw new System.Exception("El nuevo elemento padre no existe");
 
             Elemento padreAntiguo = e.getPadre(); //Obtenemos padre del elemento a mover
-            if (!nuevoPadre.AnadirHijo(e.getTipo(), idMovido))
-            {
-                throw new System.Exception("No se ha podido mover el elemento, tipos incompatibles");
-            }
+            List<Elemento> listahijos = nuevoPadre.obtenerHijos();
+            listahijos.Add(e);
 
-            if (!padreAntiguo.Eliminar(e))
-            {
-                nuevoPadre.Eliminar(e);
-                throw new System.Exception("No se ha podido eliminar el elemento de su padre antiguo");
-            }
+            eliminarElemento(idMovido);
+
             return true;
         }        
     }
