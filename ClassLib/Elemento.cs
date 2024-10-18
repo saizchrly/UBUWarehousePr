@@ -13,6 +13,7 @@ namespace ClassLib
     public class Elemento
     {
         private string tipo;
+        private string nombre;
         private List<Elemento> hijos;
         private Elemento padre;
         private List<String> tiposPosibles = new List<string> { "Raiz", "Espacio", "Contenedor", "Articulo" };
@@ -21,11 +22,14 @@ namespace ClassLib
         /// Constructor para crear raíces
         /// </summary>
         /// <param name="id"> id del elemento raíz a crear
-        public Elemento(string id)
+        /// <param name="nombre"> nombre del elemento raíz a crear"
+        public Elemento(string id, string nombre ="")
         {
             tipo = "Raiz";
             hijos = new List<Elemento>();
             this.id = id;
+            this.nombre = nombre;
+
         }
         /// <summary>
         /// Constructor para el resto de elementos
@@ -33,7 +37,7 @@ namespace ClassLib
         /// <param name="tipo"></param> tipo del elemento a crear
         /// <param name="padre"></param> padre del elemento a crear
         /// <param name="id"></param> id del elemento a crear
-        public Elemento(string tipo, Elemento padre, string id)
+        public Elemento(string tipo, Elemento padre, string id, string nombre = "")
         {
             if (!tiposPosibles.Contains(tipo))
             {
@@ -47,6 +51,7 @@ namespace ClassLib
             this.padre = padre;
             padre.AnadirHijo(tipo, id);
             this.id = id;
+            this.nombre = nombre;
             if (tipo.Equals("Articulo")) hijos = null;
             else hijos = new List<Elemento>();
         }

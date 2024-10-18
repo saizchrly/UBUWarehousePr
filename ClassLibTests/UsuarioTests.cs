@@ -181,7 +181,6 @@ namespace ClassLib.Tests
             string contrasenaNuevaNoRequisitos = "1234";
             List<string> ListaContrasenas = new List<string> { contrasenaNueva2, contrasenaNueva3, contrasenaNueva4, contrasenaNueva5, contrasenaNueva6, contrasenaNueva7, contrasenaNueva8, contrasenaNueva9, contrasenaNueva10 };
             Usuario usuario = new Usuario(email, contrasenaInicial);
-
             Assert.IsTrue(usuario.cambiarContrasena(contrasenaNueva1));
 
             //No cumple requisitos
@@ -240,7 +239,6 @@ namespace ClassLib.Tests
             List<Elemento> elementos = new List<Elemento> { elemento1 };
             usuario.setElementosLista(elementos);
             Assert.AreEqual(1, usuario.getRaicesCreadas());
-
 
         }
 
@@ -314,6 +312,6 @@ namespace ClassLib.Tests
             Assert.IsTrue(usuario.añadirElemento("3", "Articulo", "4"));
             Assert.AreEqual(1, usuario.getArtCreados());
             Assert.AreEqual(4, usuario.getNumElem());
-        }
+=======
     }
 }
