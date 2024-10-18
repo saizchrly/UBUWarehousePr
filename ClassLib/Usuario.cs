@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Linq;
 using UBULibPr;
 
 namespace ClassLib
@@ -15,7 +16,8 @@ namespace ClassLib
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
-        private List<Elemento> elementosR;
+        private List<Elemento> elementosLista;
+        Elemento raiz;
         private string tipoUsuario;
         private int raicesCreadas;
         private int espaciosCreados;
@@ -35,18 +37,37 @@ namespace ClassLib
             EmailUsuario = email;
             contrasenaActual = Utilidades.Encriptar(contrasena);
             listaContrasenasAntiguas = new List<string>();
+            listaContrasenasAntiguas.Add(contrasenaActual);
             //se actualiiza en la BD
             this.idUsuario = idUsuario;
-            elementosR = new List<Elemento>();
             this.tipoUsuario = tipoUsuario;
-            raicesCreadas = 0;
+            this.privilegios = privilegios;
+            elementosLista = new List<Elemento>();
+            raiz = new Elemento("1");
+            elementosLista.Add(raiz);
+
+            //?
+            raicesCreadas = 1;
             espaciosCreados = 0;
             contCreados = 0;
             artCreados = 0;
-            this.privilegios = privilegios;
-            numElem = 0;
-            //añadir la lista de Elemento que contiene el usuario
+            numElem = 1;
+            Log.escribirLog(email, "Creacion de usuario");
         }
+
+        public int getRaicesCreadas() => raicesCreadas;
+
+        public int getEspaciosCreados() => espaciosCreados;
+
+        public int getContCreados() => contCreados;
+
+        public int getArtCreados() => artCreados;
+
+        public int getNumElem() => numElem;
+
+        public List<Elemento> getElementosLista() => elementosLista;
+
+        public List<Elemento> setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
 
         /// <summary>
         /// Setter de los privilegios del usuario
@@ -77,7 +98,6 @@ namespace ClassLib
         /// </summary>
         /// <returns></returns>
         public string getTipoUsuario() => tipoUsuario;
-
 
         /// <summary>
         /// Metodo para obtener el id de usuario
@@ -111,11 +131,30 @@ namespace ClassLib
         /// </summary>
         private void guardarContrasenaAntigua()
         {
-            if (listaContrasenasAntiguas.Count == 10)
+            while (listaContrasenasAntiguas.Count >= 10)
             {
                 listaContrasenasAntiguas.RemoveAt(0);
             }
             listaContrasenasAntiguas.Add(contrasenaActual);
+        }
+
+        /// <summary>
+
+        /// Metodo para cambiar el email del usuario
+        /// </summary>
+        /// <param name="emailNuevo">Email nuevo a introducir</param>
+        public bool cambiarEmail(string emailNuevo)
+        {
+            string emailAntiguo = EmailUsuario;
+            List<string> noSirve = new List<string> { null, "", " ", emailAntiguo };
+            if (!noSirve.Contains(emailNuevo))
+            {
+                setEmailUsuario(emailNuevo);
+                Log.escribirLog(emailAntiguo, "Cambio de email a: " + emailNuevo);
+                Log.escribirLog(emailNuevo, "Cambio de email desde: " + emailAntiguo);
+                return true;
+            }
+            else return false;
         }
 
         /// <summary>
@@ -129,52 +168,27 @@ namespace ClassLib
         }
 
         /// <summary>
-        /// Metodo para cambiar el email del usuario
-        /// </summary>
-        /// <param name="emailNuevo">Email nuevo a introducir</param>
-        public bool CambiarEmail(string emailNuevo)
-        {
-            string emailAntiguo = EmailUsuario;
-            if (emailNuevo != null && emailNuevo != EmailUsuario)
-            {
-                setEmailUsuario(emailNuevo);
-                Log.escribirLog(emailAntiguo, "Cambio de email a: " + emailNuevo);
-                Log.escribirLog(emailNuevo, "Cambio de email desde: " + emailAntiguo);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
         /// Metodo para cambiar la contrasena del usuario, comprobando que cumple con los requisitos minimos
         /// y que no es igual a ninguna de las 10 anteriores
         /// </summary>
         /// <param name="contrasenaNueva">Contrasena nueva a introducir</param>
-        public bool cambiarContrasena (string contrasenaNueva)
+        public bool cambiarContrasena(string contrasenaNueva)
         {
             // Comprobamos que la contrasena cumple con los requisitos minimos
             if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) == 5 && contrasenaNueva != contrasenaActual)
             {
                 // Comprobamos que la contrasena no sea igual a una de las 10 anteriores
-                if (!comprobarContrasenaAntigua(contrasenaNueva) )
+                if (!comprobarContrasenaAntigua(contrasenaNueva))
+
                 {
                     setContrasenaActual(contrasenaNueva);
                     guardarContrasenaAntigua();
                     Log.escribirLog(EmailUsuario, "Cambio de contraseña");
                     return true;
                 }
-                else
-                {
-                    return false;
-                }
+                else return false;
             }
-            else
-            {
-                return false;
-            }
+            else return false;
         }
 
         /// <summary>
@@ -188,11 +202,11 @@ namespace ClassLib
             int limite = 10000;
             if (tipoUsuario == "Pago") limite = 3;
             else if (tipoUsuario == "noPago") limite = 1;
-            if (elementosR.Count >= limite)
+            if (elementosLista.Count >= limite)
             {
-                string id = "raiz" + (elementosR.Count + 1);
+                string id = "raiz" + (elementosLista.Count + 1);
                 Elemento raiz = new Elemento(id);
-                elementosR.Add(raiz);
+                elementosLista.Add(raiz);
                 numElem++;
                 return true;
             }
@@ -237,8 +251,9 @@ namespace ClassLib
         /// <param name="idpadre"></param> padre del nuevo elemento
         /// <param name="tipo"></param> tipo del nuevo elemento
         /// <returns></returns> bool - true si se ha podido crear el elemento, false si no
+        public bool añadirElemento(string idpadre, string tipo, string id = null)
 
-        private bool añadirElemento(string idpadre, string tipo, string id = null)
+
         {
             Elemento padre = buscarElemento(idpadre);
             if (id == null) id = generarId(tipo);
@@ -270,7 +285,7 @@ namespace ClassLib
         /// <returns></returns> Elemento encontrado, null si no existe
         public Elemento buscarElemento(string id)
         {
-            foreach (Elemento e in elementosR)
+            foreach (Elemento e in elementosLista)
             {
                 while (e != null)
                 {
@@ -299,92 +314,6 @@ namespace ClassLib
             return null;
         }
 
-        /// <summary>
-        /// Metodo para introducir el nombre de usuario
-        /// </summary>
-        /// <param name="nombreUsuario">Nombre de usuario a introducir</param>
-        public void setEmailUsuario(string Email) => this.EmailUsuario = Email;
-
-        /// <summary>
-        /// Metodo para obtener el nombre de usuario
-        /// </summary>
-        /// <returns>Nombre de usuario</returns>
-        public string getEmailUsuario() => EmailUsuario;
-
-        /// <summary>
-        /// Metodo para introducir la contrasena actual, nunca se guardara en texto plano
-        /// </summary>
-        /// <param name="contrasenaActual">Contrasena actual a introducir</param>
-        private void setContrasenaActual(string contrasenaNueva)
-        {
-            contrasenaActual = Utilidades.Encriptar(contrasenaNueva);
-        }
-
-        /// <summary>
-        /// Metodo para guardar las ultimas 10 contraseñas, en caso de que haya 10 se eliminara la más antigua
-        /// </summary>
-        private void guardarContrasenaAntigua()
-        {
-            if (listaContrasenasAntiguas.Count == 10)
-            {
-                listaContrasenasAntiguas.RemoveAt(0);
-            }
-            listaContrasenasAntiguas.Add(contrasenaActual);
-        }
-
-        /// <summary>
-        /// Metodo para comprobar si la contrasena nueva es igual a alguna de las 10 anteriores
-        /// </summary>
-        /// <param name="contrasena">Contrasena a comprobar</param>
-        /// <returns>True si la contrasena es igual a alguna de las 10 anteriores, false en caso contrario</returns>
-        private bool comprobarContrasenaAntigua(string contrasena)
-        {
-            return listaContrasenasAntiguas.Contains(Utilidades.Encriptar(contrasena));
-        }
-
-        /// <summary>
-        /// Metodo para cambiar el email del usuario
-        /// </summary>
-        /// <param name="emailNuevo">Email nuevo a introducir</param>
-        public void CambiarEmail(string emailNuevo)
-        {
-            string emailAntiguo = EmailUsuario;
-            if (emailNuevo != null && emailNuevo != EmailUsuario)
-                setEmailUsuario(emailNuevo);
-            else throw new System.Exception("El email no puede ser nulo o igual al anterior");
-            Log.escribirLog(emailAntiguo, "Cambio de email a: " + emailNuevo);
-            Log.escribirLog(emailNuevo, "Cambio de email desde: " + emailAntiguo);
-        }
-
-        /// <summary>
-        /// Metodo para cambiar la contrasena del usuario, comprobando que cumple con los requisitos minimos
-        /// y que no es igual a ninguna de las 10 anteriores
-        /// </summary>
-        /// <param name="contrasenaNueva">Contrasena nueva a introducir</param>
-        public void cambiarContrasena(string contrasenaNueva)
-        {
-            // Comprobamos que la contrasena cumple con los requisitos minimos
-            if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) == 5 && contrasenaNueva != contrasenaActual)
-            {
-                // Comprobamos que la contrasena no sea igual a una de las 10 anteriores
-                if (!comprobarContrasenaAntigua(contrasenaNueva))
-                {
-                    setContrasenaActual(contrasenaNueva);
-                    guardarContrasenaAntigua();
-                    Log.escribirLog(EmailUsuario, "Cambio de contraseña");
-                }
-                else throw new System.Exception("La contrasena no puede ser igual a una de las 10 anteriores");
-              
-            }
-            return null;
-        }
-
-        /// <summary>
-        /// MEtodo que elimina los elementos de una lista
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
             Elemento e = buscarElemento(id);

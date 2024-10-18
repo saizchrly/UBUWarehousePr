@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibTests", "ClassLibTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHDatabase", "WHDatabase\WHDatabase.csproj", "{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WWW", "WWW\WWW.csproj", "{D77911A8-555F-451E-9425-FD3143EB4AFE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D77911A8-555F-451E-9425-FD3143EB4AFE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D77911A8-555F-451E-9425-FD3143EB4AFE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D77911A8-555F-451E-9425-FD3143EB4AFE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D77911A8-555F-451E-9425-FD3143EB4AFE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -67,6 +67,10 @@
       <Project>{36BB3F22-E0D4-4DD7-8AFA-61A29CCD9C9C}</Project>
       <Name>ClassLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UBULibPr\UBULibPr.csproj">
+      <Project>{9aef9b76-3937-4c4d-a5e0-0d6f24d7617c}</Project>
+      <Name>UBULibPr</Name>
+    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
