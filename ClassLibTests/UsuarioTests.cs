@@ -182,12 +182,17 @@ namespace ClassLib.Tests
         public void getRaicesCreadasTest()
         {
             Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual("noPago", usuario.getTipoUsuario());
             Assert.AreEqual(1, usuario.getRaicesCreadas());
             usuario.añadirElemento("Raiz");
             Assert.AreEqual(1, usuario.getRaicesCreadas());
             usuario.setTipoUsuario("Pago");
             usuario.añadirElemento("Raiz");
             Assert.AreEqual(2, usuario.getRaicesCreadas());
+            usuario.añadirElemento("Raiz");
+            Assert.AreEqual(3, usuario.getRaicesCreadas());
+            usuario.añadirElemento("Raiz");
+            Assert.AreEqual(3, usuario.getRaicesCreadas());
         }
     }
 }

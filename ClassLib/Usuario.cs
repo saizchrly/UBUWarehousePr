@@ -43,15 +43,14 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
-            elementosLista = new List<Elemento>();
-            añadirElemento("Raiz");
-
-            //?
-            raicesCreadas = 1;
+            raicesCreadas = 0;
             espaciosCreados = 0;
             contCreados = 0;
             artCreados = 0;
             numElem = 1;
+            elementosLista = new List<Elemento>();
+            añadirElemento("Raiz");
+
             Log.escribirLog(EmailUsuario, "Creacion de usuario");
         }
 
@@ -232,6 +231,7 @@ namespace ClassLib
                 int limite = 10000;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
+                int elementoslista = elementosLista.Count();
                 if (elementosLista.Count() < limite)
                 {
                     raicesCreadas++;
@@ -273,8 +273,6 @@ namespace ClassLib
         {
             Elemento elementoAñadir = crearUnElemento(tipoElementoAñadir);
             if (elementoAñadir == null) return false;
-            if (elementoBuscar == null) return false;
-            if (elementoAñadir.getPadre() != null) return false;
             if (elementoAñadir.getTipo().Equals("Raiz"))
             {
                 elementosLista.Add(elementoAñadir);
