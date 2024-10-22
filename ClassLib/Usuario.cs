@@ -47,7 +47,7 @@ namespace ClassLib
             espaciosCreados = 0;
             contCreados = 0;
             artCreados = 0;
-            numElem = 1;
+            numElem = 0;
             elementosLista = new List<Elemento>();
             añadirElemento("Raiz");
 
@@ -175,6 +175,17 @@ namespace ClassLib
             }
             else return false;
         }
+
+        /// <summary>
+        /// Valida la contraseña introducidada por el usuario
+        /// </summary>
+        /// <returns></returns>
+        public bool validarContrasena(string contrasena)
+        {
+            return Utilidades.Encriptar(contrasena).Equals(contrasenaActual);
+        }
+
+
         public int getRaicesCreadas() => raicesCreadas;
 
         public int getEspaciosCreados() => espaciosCreados;
@@ -234,6 +245,7 @@ namespace ClassLib
                 int elementoslista = elementosLista.Count();
                 if (elementosLista.Count() < limite)
                 {
+                    numElem++;
                     raicesCreadas++;
                     Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                     return e;
@@ -241,20 +253,23 @@ namespace ClassLib
                 return null;
             }
             if (tipo == "Espacio")
-            {
-               espaciosCreados++;
+            {   
+                numElem++;
+                espaciosCreados++;
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
                 
             }
             if (tipo == "Contenedor")
             {
+                numElem++;
                 contCreados++;
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
             if (tipo == "Articulo")
             {
+                numElem++;
                 artCreados++;
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
