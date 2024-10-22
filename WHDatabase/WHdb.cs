@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Runtime.Remoting.Messaging;
 using System.Text;
 using System.Text.RegularExpressions;
 using ClassLib;
@@ -48,7 +49,7 @@ namespace WHDatabase
             {
                 if (u.getIdUsuario().Equals(idUsuario))
                 {
-                    return u.buscarElemento(idElemento);
+                    return Elemento.buscarElemento(idElemento,u.getElementosLista());
                 }
             }
             return null;
@@ -86,7 +87,53 @@ namespace WHDatabase
 
         public bool ValidaUsuario(string email, string password)
         {
-            throw new NotImplementedException();
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                if (utemp.getEmailUsuario().Equals(email))
+                {
+                    if (utemp.validarContrasena(password))
+                    {
+                        return true;
+                    }
+                    return false;
+                }
+            }
+
+            return false;
+        }
+
+        public bool cambiarContrasena(string email, string password, string newpassword)
+        {
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                if (utemp.getEmailUsuario().Equals(email))
+                {
+                    if (utemp.validarContrasena(password))
+                    {
+                        utemp.cambiarContrasena(newpassword);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public bool cambiarEmail(string email,string password , string newemail)
+        {
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                if (utemp.getEmailUsuario().Equals(email))
+                {
+                    if (utemp.validarContrasena(password))
+                    {
+                        utemp.cambiarEmail(newemail);
+                        return true;
+                    }
+                    return false;
+                }
+            }
+            return false;
         }
     }
 }

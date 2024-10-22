@@ -35,7 +35,7 @@ namespace ClassLib.Tests
             Assert.AreEqual("noPago", usuarioNoPago.getTipoUsuario());
             Assert.IsFalse(usuarioNoPago.getPrivilegios());
         }
-                
+
         [TestMethod()]
         public void setPrivilegiosTest()
         {
@@ -177,6 +177,13 @@ namespace ClassLib.Tests
             Assert.IsTrue(usuario.cambiarContrasena(contrasenaInicial));
             Assert.IsFalse(usuario.cambiarContrasena(contrasenaNueva8));
         }
+        [TestMethod()]
+        public void validarContrasenaTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.IsTrue(usuario.validarContrasena("123"));
+            Assert.IsFalse(usuario.validarContrasena("1234"));
+        }
 
         [TestMethod()]
         public void getRaicesCreadasTest()
@@ -194,5 +201,68 @@ namespace ClassLib.Tests
             usuario.añadirElemento("Raiz");
             Assert.AreEqual(3, usuario.getRaicesCreadas());
         }
+
+        [TestMethod()]
+        public void getEspaciosCreadosTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual(0, usuario.getEspaciosCreados());
+        }
+
+        [TestMethod()]
+        public void getContCreadosTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual(0, usuario.getContCreados());
+        }
+
+        [TestMethod()]
+        public void getArtCreadosTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual(0, usuario.getArtCreados());
+        }
+
+        [TestMethod()]
+        public void getNumElemTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual(1, usuario.getNumElem());
+        }
+
+        [TestMethod()]
+        public void getElementosListaTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Assert.AreEqual(1, usuario.getElementosLista().Count);
+        }
+
+        [TestMethod()]
+        public void setElementosListaTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            Elemento elemento = new Elemento("Raiz", "1");
+            List<Elemento> elementos = new List<Elemento> { elemento };
+            usuario.setElementosLista(elementos);
+            Assert.AreEqual(1, usuario.getElementosLista().Count);
+        }
+        [TestMethod()]
+        public void añadirElementoTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void eliminarElementoTest()
+        {
+            Assert.Fail();
+        }
+
+        [TestMethod()]
+        public void moverElementoTest()
+        {
+            Assert.Fail();
+        }
+
     }
 }
