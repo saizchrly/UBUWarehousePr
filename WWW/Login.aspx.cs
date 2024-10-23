@@ -4,14 +4,13 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using System.Diagnostics.Eventing.Reader;
-using System.Data.SqlClient;
 using WHDatabase;
 using ClassLib;
+using System.Diagnostics.Eventing.Reader;
 
 namespace WWW
 {
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class Login : System.Web.UI.Page
     {
         WHdb data = null;
         Usuario usActual = null;
@@ -32,13 +31,13 @@ namespace WWW
             usActual = data.LeeUsuario(tbxUsuario.Text);
             if (usActual != null)
             {
-                inicioOk = usActual.validarContrasena(tbxPassword.Text);
+                    inicioOk = usActual.validarContrasena(tbxPassword.Text);
             }
-            if (inicioOk) Server.Transfer("Inicio.aspx", false);
+            if(inicioOk) Server.Transfer("NewPage.aspx", false);
             else
             {
                 lblError.Text = "Usuario y/o contraseña incorrecto.";
-                lblError.Visible = true;
+                lblError.Visible = false;
             }
         }
     }
