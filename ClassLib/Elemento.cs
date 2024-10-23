@@ -35,6 +35,7 @@ namespace ClassLib
             // si no tienen simplemente estaran vacias.
             // Tipo=0, id=1
             padre = new List<string>();
+            // hijo == Tipo=0, id=1
             hijos = new List<List<string>>();
         }
 

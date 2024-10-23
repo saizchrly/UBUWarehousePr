@@ -330,23 +330,23 @@ namespace ClassLib
         /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
-            Elemento e = Elemento.buscarElemento(id, elementos);
+            Elemento e = Elemento.buscarElemento(elementos, id);
             if (e == null) throw new System.Exception("El elemento no existe");
 
             if (e.getTipo().Equals("Raiz")) throw new System.Exception("No se puede eliminar la raiz");
 
-            Elemento padre = e.getPadre();
+            List<string> datosPadre = e.getPadre();
+            if (datosPadre.Count() == 0) return false;
+
+            Elemento padre = Elemento.buscarElemento(elementos, datosPadre[1], datosPadre[0]);
             if (padre != null)
             {
-                if (padre.Eliminar(e))
+                List<List<string>> hijosElementoAEliminar= e.getHijos();
+                foreach (List<string> hijo in  hijosElementoAEliminar)
                 {
-                    elementosLista.Remove(e);
-                    Log.escribirLog(EmailUsuario, "Eliminacion de elemento " + id);
-
-                    return true;
+                    padre.setHijos(hijo[0], hijo[1]);
                 }
             }
-            return false;
 
         }
 
