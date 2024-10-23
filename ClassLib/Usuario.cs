@@ -341,12 +341,29 @@ namespace ClassLib
             Elemento padre = Elemento.buscarElemento(elementos, datosPadre[1], datosPadre[0]);
             if (padre != null)
             {
+                //borramos los elementos del diccionario para actualizarlos mas tarde
+                elementos[padre.getTipo()].Remove(padre);
+                elementos[e.getTipo()].Remove(e);
+                //creamos los nuevos datos para actualizar el diccionario
+                List<string> datosHijo = new List<string>();
+                datosHijo.Add(e.getTipo());
+                datosHijo.Add(e.getId());
+
                 List<List<string>> hijosElementoAEliminar= e.getHijos();
+
                 foreach (List<string> hijo in  hijosElementoAEliminar)
                 {
-                    padre.setHijos(hijo[0], hijo[1]);
+                    padre.nuevoHijo(hijo[0], hijo[1]);
                 }
+
+                List<List<string>> hijosPadre = padre.getHijos();
+                hijosPadre.Remove(datosHijo);
+                padre.setHijos(hijosPadre);
+                //actalizamos el diccionario
+                elementos[padre.getTipo()].Add (padre);
+                return true;
             }
+            return false;
 
         }
 
@@ -357,22 +374,42 @@ namespace ClassLib
         /// <param name="idMovido"></param>
         /// <param name="idNuevoPadre"></param>
         /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
-        public bool moverElemento(string idMovido, string idNuevoPadre)
+        public bool moverElemento(string idEmenentoMover, string idNuevoPadre)
         {
-            Elemento e = Elemento.buscarElemento(idMovido, elementosLista); //Buscamos elemento a mover
-            if (e == null) throw new System.Exception("El elemento a mover no existe");
+            Elemento elementoMover = Elemento.buscarElemento(elementos, idEmenentoMover); //Buscamos elemento a mover
+            if (elementoMover == null) return false;
+            if (elementoMover.getTipo() == "Raiz") return false;
 
-            Elemento nuevoPadre = Elemento.buscarElemento(idNuevoPadre, elementosLista); //Buscamos nuevo padre
-            if (nuevoPadre == null) throw new System.Exception("El nuevo elemento padre no existe");
+            Elemento nuevoPadre = Elemento.buscarElemento(elementos, idNuevoPadre); //Buscamos nuevo padre
+            if (nuevoPadre == null) return false;
 
-            Elemento padreAntiguo = e.getPadre(); //Obtenemos padre del elemento a mover
-            List<Elemento> listahijos = nuevoPadre.obtenerHijos();
-            listahijos.Add(e);
+            Elemento padreAntiguo = Elemento.buscarElemento(elementos, elementoMover.getPadre()[1], elementoMover.getPadre()[0]);
+            
+            if (padreAntiguo != null)
+            {
+                //datos hijo
+                List<string> DatosHijo = new List<string>();
+                DatosHijo.Add(elementoMover.getTipo());
+                DatosHijo.Add(elementoMover.getId());
 
-            eliminarElemento(idMovido);
+                //actualizmos el padre antiguo
+                elementos[padreAntiguo.getTipo()].Remove(padreAntiguo);
+                List<List<string>>hijosAntiguo = padreAntiguo.getHijos();
+                hijosAntiguo.Remove(DatosHijo);
+                padreAntiguo.setHijos(hijosAntiguo);
+                elementos[padreAntiguo.getTipo()].Add(padreAntiguo);
 
-            return true;
+                //actualizamos el padre nuevo
+                elementos[nuevoPadre.getTipo()].Remove(nuevoPadre);
+                List<List<string>>hijosNuevo = nuevoPadre.getHijos();
+                hijosNuevo.Add(DatosHijo);
+                nuevoPadre.setHijos(hijosAntiguo);
+                elementos[nuevoPadre.getTipo()].Add(nuevoPadre);
+
+                return true;
+            }
+
+            return false;
         }        
     }
 }

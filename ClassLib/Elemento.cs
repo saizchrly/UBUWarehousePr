@@ -39,12 +39,14 @@ namespace ClassLib
             hijos = new List<List<string>>();
         }
 
+        public void setHijos(List<List<string>> hijos) this.hijos=hijos;
+
         /// <summary>
         /// Añadimos los hijos al elemento
         /// </summary>
         /// <param name="TipoHijo"></param>
         /// <param name="IdHijo"></param>
-        public void setHijos(string TipoHijo, string IdHijo)
+        public void nuevoHijo(string TipoHijo, string IdHijo)
         {
             List<string> hijo = new List<string>();
             hijo.Add(TipoHijo);
