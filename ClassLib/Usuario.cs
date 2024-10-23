@@ -16,15 +16,9 @@ namespace ClassLib
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
-        private List<Elemento> elementosLista;
-        private Elemento raiz;
-
         private string tipoUsuario;
-        private int raicesCreadas;
-        private int espaciosCreados;
-        private int contCreados;
-        private int artCreados;
-        public int numElem;
+        // string es el Tipo del elemento y El value es la lista de elementos de ese tipo
+        private Dictionary<string, List<Elemento>> elementos;
 
         /// <summary>
         /// Constructor de la clase Usuario
@@ -43,12 +37,7 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
-            raicesCreadas = 0;
-            espaciosCreados = 0;
-            contCreados = 0;
-            artCreados = 0;
-            numElem = 0;
-            elementosLista = new List<Elemento>();
+            elementos = new Dictionary<string, List<Elemento>>(); 
             añadirElemento("Raiz");
 
             Log.escribirLog(EmailUsuario, "Creacion de usuario");
@@ -186,22 +175,28 @@ namespace ClassLib
         }
 
 
-        public int getRaicesCreadas() => raicesCreadas;
+        public int raicesCreadas() => elementos["Raiz"].Count();
 
-        public int getEspaciosCreados() => espaciosCreados;
+        public int espaciosCreados() => elementos["Espacio"].Count();
 
-        public int getContCreados() => contCreados;
+        public int contCreados() => elementos["Contenedor"].Count();
 
-        public int getArtCreados() => artCreados;
+        public int artCreados() => elementos["Articulo"].Count();
 
-        public int getNumElem() => numElem;
-
-        public List<Elemento> getElementosLista() => elementosLista;
-
-        public void setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
-
-
+        public int numElemTotal()
+        {
+            int total = 0;
+            foreach (List<Elemento> lista in elementos.Values)
+            {
+                total += lista.Count();
+            }
+            return total;
+        }
         
+        public Dictionary<string, List<Elemento>> getElementos() => elementos;
+        
+        public void setElementos(Dictionary<string, List<Elemento>> elementos) => this.elementos = elementos;
+
 
         /// <summary>
         /// Método que genera el correspondiente id para un nuevo elemento
@@ -242,11 +237,9 @@ namespace ClassLib
                 int limite = 10000;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
-                int elementoslista = elementosLista.Count();
-                if (elementosLista.Count() < limite)
+                int numeroRaices = elementos["Raiz"].Count();
+                if (numeroRaices < limite)
                 {
-                    numElem++;
-                    raicesCreadas++;
                     Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                     return e;
                 }
