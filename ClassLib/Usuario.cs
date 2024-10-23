@@ -37,7 +37,11 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
-            elementos = new Dictionary<string, List<Elemento>>(); 
+            elementos = new Dictionary<string, List<Elemento>>();
+            elementos.Add("Raiz", new List<Elemento>());
+            elementos.Add("Espacio", new List<Elemento>());
+            elementos.Add("Contenedor", new List<Elemento>());
+            elementos.Add("Articulo", new List<Elemento>());
             añadirElemento("Raiz");
 
             Log.escribirLog(EmailUsuario, "Creacion de usuario");
@@ -200,7 +204,7 @@ namespace ClassLib
 
         /// <summary>
         /// Método que genera el correspondiente id para un nuevo elemento
-        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
+        /// El formato será idUsuario_Tipo(R,E,C,A) + Número de elementos de ese tipo creados por el usuario
         /// </summary>
         /// <param name="tipo"></param> tipo del elemento a crear
         /// <returns></returns>
@@ -212,16 +216,16 @@ namespace ClassLib
             switch (tipo)
             {
                 case "Raiz":
-                    id += $"R{raicesCreadas + 1}";
+                    id += $"R{raicesCreadas() + 1}";
                     break;
                 case "Espacio":
-                    id += $"E{espaciosCreados + 1}";
+                    id += $"E{espaciosCreados() + 1}";
                     break;
                 case "Contenedor":
-                    id += $"C{contCreados + 1}";
+                    id += $"C{contCreados() + 1}";
                     break;
                 case "Articulo":
-                    id += $"A{artCreados + 1}";
+                    id += $"A{artCreados() + 1}";
                     break;
                 default:
                     return null;
@@ -229,6 +233,11 @@ namespace ClassLib
             return id;
         }
 
+        /// <summary>
+        /// Método que crea un elemento del tipo especificado
+        /// </summary>
+        /// <param name="tipo"></param> Tipo del elemento a crear
+        /// <returns></returns>
         private Elemento crearUnElemento(string tipo)
         {
 
@@ -237,7 +246,7 @@ namespace ClassLib
                 int limite = 10000;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
-                int numeroRaices = elementos["Raiz"].Count();
+                int numeroRaices = raicesCreadas();
                 if (numeroRaices < limite)
                 {
                     Elemento e = new Elemento(tipo, generarIdElemento(tipo));
@@ -247,23 +256,19 @@ namespace ClassLib
             }
             if (tipo == "Espacio")
             {   
-                numElem++;
-                espaciosCreados++;
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
                 
             }
             if (tipo == "Contenedor")
             {
-                numElem++;
-                contCreados++;
+                
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
             if (tipo == "Articulo")
             {
-                numElem++;
-                artCreados++;
+
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
@@ -277,19 +282,44 @@ namespace ClassLib
         /// <param name="idpadre"></param> padre del nuevo elemento
         /// <param name="tipo"></param> tipo del nuevo elemento
         /// <returns>bool - true si se ha podido crear el elemento, false si no</returns> 
-        public bool añadirElemento(string tipoElementoAñadir, Elemento elementoBuscar = null)
+        public bool añadirElemento(string tipoElementoAñadir, Elemento elementoPadre = null)
         {
             Elemento elementoAñadir = crearUnElemento(tipoElementoAñadir);
             if (elementoAñadir == null) return false;
-            if (elementoAñadir.getTipo().Equals("Raiz"))
+            if (tipoElementoAñadir == "Raiz" && elementoPadre != null) return false;
+            if (elementos.ContainsKey(tipoElementoAñadir))
             {
-                elementosLista.Add(elementoAñadir);
-                return true;
+                if (tipoElementoAñadir == "Raiz")
+                {
+                    elementos[tipoElementoAñadir].Add(elementoAñadir);
+                    return true;
+                }
+                else if (elementoPadre != null)
+                {
+                    if (elementos[elementoPadre.getTipo()].Contains(elementoPadre))
+                    {
+                        elementos[tipoElementoAñadir].Add(elementoAñadir);
+                        List<Elemento> Padres = elementos[elementoPadre.getTipo()];
+                        foreach (Elemento e in Padres)
+                        {
+                            if (e.getId().Equals(elementoPadre.getId()))
+                            {
+                                // lo eliminamos y volvemos a poner, ya que el elemento ha sido mofificado, por lo que si solo lo ponemos añadiriamos uno nuevo.
+                                Padres.Remove(e);
+                                e.AnadirHijo(elementoAñadir);
+                                Padres.Add(e);
+                                elementos[elementoPadre.getTipo()] = Padres;
+                                return true;
+                            }
+                        }
+                        return false;
+                    }
+                    return false;
+                }
+                return false;
             }
-            if (elementoBuscar.AnadirHijo(elementoAñadir)) return true;
             return false;
         }
-
 
 
         /// <summary>
@@ -300,7 +330,7 @@ namespace ClassLib
         /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
-            Elemento e = Elemento.buscarElemento(id, elementosLista);
+            Elemento e = Elemento.buscarElemento(id, elementos);
             if (e == null) throw new System.Exception("El elemento no existe");
 
             if (e.getTipo().Equals("Raiz")) throw new System.Exception("No se puede eliminar la raiz");

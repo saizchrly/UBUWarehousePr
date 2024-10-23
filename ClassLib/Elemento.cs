@@ -13,8 +13,8 @@ namespace ClassLib
     public class Elemento
     {
         private string tipo;
-        private List<Elemento> hijos;
-        private Elemento padre;
+        private List<List<string>> hijos;
+        private List<string> padre;
         private List<String> tiposPosibles = new List<string> { "Raiz", "Espacio", "Contenedor", "Articulo" };
         private string id;
       
@@ -32,11 +32,52 @@ namespace ClassLib
             
             this.tipo = tipo;
             this.id = id;
-            padre = null;
-            hijos =null;
+            // si no tienen simplemente estaran vacias.
+            // Tipo=0, id=1
+            padre = new List<string>();
+            hijos = new List<List<string>>();
         }
 
-        public void setHijos(List<Elemento> hijos) => this.hijos = hijos;
+        /// <summary>
+        /// Añadimos los hijos al elemento
+        /// </summary>
+        /// <param name="TipoHijo"></param>
+        /// <param name="IdHijo"></param>
+        public void setHijos(string TipoHijo, string IdHijo)
+        {
+            List<string> hijo = new List<string>();
+            hijo.Add(TipoHijo);
+            hijo.Add(IdHijo);
+            hijos.Add(hijo);
+        }
+
+        /// <summary>
+        /// Obtenemos los hijos del elemento
+        /// </summary>
+        /// <returns></returns>
+        public List<List<string>> getHijos() => hijos;
+
+        /// <summary>
+        /// Metodo que modifica el valor padre.
+        /// </summary>
+        /// <param name="padre"></param>
+        public void setPadre(string tipoPadre, string IdPadre)
+        {
+            this.padre.Add(tipoPadre);
+            this.padre.Add(IdPadre);
+        }
+
+        /// <summary>
+        /// Obtenemos el padre del objeto
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getPadre() => padre;
+
+        /// <summary>
+        /// Getter para el id del elemento
+        /// </summary>
+        /// <returns></returns> id del elemento
+        public string getId() => id;
 
         /// <summary>
         /// Método que añade un elemento hijo al elemento actual
@@ -84,11 +125,6 @@ namespace ClassLib
         }
 
 
-        /// <summary>
-        /// Getter para el id del elemento
-        /// </summary>
-        /// <returns></returns> id del elemento
-        public string getId() => id;
 
         /// <summary>
         /// Getter para obtener los hijos del elemento actual
@@ -139,49 +175,39 @@ namespace ClassLib
             return camino;
         }
 
-        public Elemento getPadre() => padre;
-
         public string getTipo() => tipo;
 
-        /// <summary>
-        /// TODO:Método para buscar un elemento a partir de su id
-        /// </summary> Recorrer el árbol de elementos hasta encontrar el que tenga el id buscado
-        /// <param name="id"></param> id del elemento que queremos encontrar
-        /// <returns> Elemento encontrado, null si no existe</returns>
-        public static Elemento buscarElemento(string id, List<Elemento> listaElementos)
+        public static Elemento buscarElemento(Dictionary<string, List<Elemento>> elementos, string idElemento, string tipoElemento = null)
         {
-            foreach (Elemento e in listaElementos)
+            if (tipoElemento != null)
             {
-                Elemento resultado = buscarElementoRecursivo(e.obtenerHijos(), id);
-                if (resultado != null)
+                if (elementos.ContainsKey(tipoElemento))
                 {
-                    return resultado;
+                    foreach (Elemento elemento in elementos[tipoElemento])
+                    {
+                        if (elemento.id.Equals(idElemento))
+                        {
+                            return elemento;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                foreach (List<Elemento> lista in elementos.Values)
+                {
+                    foreach (Elemento elemento in lista)
+                    {
+                        if (elemento.id.Equals(idElemento))
+                        {
+                            return elemento;
+                        }
+                    }
                 }
             }
             return null;
         }
 
-        /// <summary>
-        /// Método auxiliar para buscar un elemento a partir de su id
-        /// </summary>
-        /// <param name="hijos"></param> hijos del elemento actual
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private static Elemento buscarElementoRecursivo(List<Elemento> hijos, string id)
-        {
-            foreach (Elemento e in hijos)
-            {
-                if (e == null) return null;
-                if (e.getId().Equals(id)) return e;
-                Elemento resultado = buscarElementoRecursivo(e.obtenerHijos(), id);
-                if (resultado != null)
-                {
-                    return resultado;
-                }
-            }
-            return null;
-        }
 
-        
     }
 }
