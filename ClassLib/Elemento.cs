@@ -31,6 +31,7 @@ namespace ClassLib
             }
             
             this.tipo = tipo;
+            // idUsuario_Tipo(R,E,C,A) + Número
             this.id = id;
             // si no tienen simplemente estaran vacias.
             // Tipo=0, id=1
@@ -39,7 +40,10 @@ namespace ClassLib
             hijos = new List<List<string>>();
         }
 
-        public void setHijos(List<List<string>> hijos) this.hijos=hijos;
+        public void setHijos(List<List<string>> hijos)
+        {
+            this.hijos = hijos;
+        }
 
         /// <summary>
         /// Añadimos los hijos al elemento
@@ -91,33 +95,31 @@ namespace ClassLib
         {
             if (elementoAñadir == null) return false;
             if (elementoAñadir.getTipo().Equals("Raiz")) return false;
-            if (elementoAñadir.getPadre() != null) return false;
+            List<string> datosElementoAñadir = new List<string> { elementoAñadir.getTipo(), elementoAñadir.getId() };
             switch (this.tipo)
             {
+                
                 case "Raiz":
                     List<string> tiposPosibles = new List<string> { "Espacio", "Contenedor", "Articulo" };
                     if (tiposPosibles.Contains(elementoAñadir.getTipo()))
                     {
-                        hijos.Add(elementoAñadir);
-                        elementoAñadir.padre = this;
+                        hijos.Add(datosElementoAñadir);
                         return true;
                     }
                     break;
                 case "Espacio":
                     List<string> tiposPosibles2 = new List<string> { "Contenedor", "Articulo" };
-                    if (elementoAñadir.getTipo().Equals("Contenedor"))
+                    if (tiposPosibles2.Contains(elementoAñadir.getTipo()))
                     {
-                        hijos.Add(elementoAñadir);
-                        elementoAñadir.padre = this;
+                        hijos.Add(datosElementoAñadir);
                         return true;
                     }
                     break;
                 case "Contenedor":
                     List<string> tiposPosibles3 = new List<string> { "Contenedor", "Articulo" };
-                    if (elementoAñadir.getTipo().Equals("Articulo"))
+                    if (tiposPosibles3.Contains(elementoAñadir.getTipo()))
                     {
-                        hijos.Add(elementoAñadir);
-                        elementoAñadir.padre = this;
+                        hijos.Add(datosElementoAñadir);
                         return true;
                     }
                     break;
@@ -125,57 +127,6 @@ namespace ClassLib
                     return false;
             }
             return false;
-        }
-
-
-
-        /// <summary>
-        /// Getter para obtener los hijos del elemento actual
-        /// </summary>
-        /// <returns></returns> lista de hijos del elemento actual
-        public List<Elemento> obtenerHijos()
-        {
-            return hijos;
-        }
-
-        /// <summary>
-        /// Método que elimina un elemento pasado por parámetro
-        /// </summary>
-        /// <param name="id"></param> id del elemento a borrar
-        /// <returns></returns>
-        public bool Eliminar(Elemento hijo)
-        {
-            if (this.hijos == null) return false;
-            foreach (Elemento i in hijos)
-            {
-                if (i.Equals(hijo))
-                {
-                    hijos.Remove(hijo);
-                    return true;
-                }
-            }
-            return false;
-        }
-
-        /// <summary>
-        /// Método que devuelve la localización de un elemento
-        /// </summary>
-        /// <returns></returns> lista de elementos desde la raíz hasta el elemento
-        public List<Elemento> ObtenerLocalizacion()
-        {
-            List<Elemento> camino = new List<Elemento>();
-            Stack<Elemento> stack = new Stack<Elemento>();
-            Elemento e = this;
-            while (!e.padre.Equals(null))
-            {
-                stack.Push(e);
-                e = e.padre;
-            }
-            while (stack.Count > 0)
-            {
-                camino.Add(stack.Pop());
-            }
-            return camino;
         }
 
         public string getTipo() => tipo;

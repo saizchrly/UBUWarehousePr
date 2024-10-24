@@ -186,83 +186,148 @@ namespace ClassLib.Tests
         }
 
         [TestMethod()]
-        public void getRaicesCreadasTest()
+        public void raicesCreadasTest()
         {
             Usuario usuario = new Usuario("correo", "123");
             Assert.AreEqual("noPago", usuario.getTipoUsuario());
-            Assert.AreEqual(1, usuario.getRaicesCreadas());
+            Assert.AreEqual(1, usuario.raicesCreadas());
             usuario.añadirElemento("Raiz");
-            Assert.AreEqual(1, usuario.getRaicesCreadas());
+            Assert.AreEqual(1, usuario.raicesCreadas());
             usuario.setTipoUsuario("Pago");
             usuario.añadirElemento("Raiz");
-            Assert.AreEqual(2, usuario.getRaicesCreadas());
+            Assert.AreEqual(2, usuario.raicesCreadas());
             usuario.añadirElemento("Raiz");
-            Assert.AreEqual(3, usuario.getRaicesCreadas());
+            Assert.AreEqual(3, usuario.raicesCreadas());
             usuario.añadirElemento("Raiz");
-            Assert.AreEqual(3, usuario.getRaicesCreadas());
+            Assert.AreEqual(3, usuario.raicesCreadas());
         }
 
         [TestMethod()]
-        public void getEspaciosCreadosTest()
+        public void espaciosCreadosTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Assert.AreEqual(0, usuario.getEspaciosCreados());
+            Assert.AreEqual(0, usuario.espaciosCreados());
         }
 
         [TestMethod()]
-        public void getContCreadosTest()
+        public void contCreadosTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Assert.AreEqual(0, usuario.getContCreados());
+            Assert.AreEqual(0, usuario.contCreados());
         }
 
         [TestMethod()]
-        public void getArtCreadosTest()
+        public void artCreadosTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Assert.AreEqual(0, usuario.getArtCreados());
+            Assert.AreEqual(0, usuario.artCreados());
         }
 
         [TestMethod()]
-        public void getNumElemTest()
+        public void numElemTotalTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Assert.AreEqual(1, usuario.getNumElem());
+            Assert.AreEqual(1, usuario.numElemTotal());
         }
 
         [TestMethod()]
-        public void getElementosListaTest()
+        public void getElementosTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Assert.AreEqual(1, usuario.getElementosLista().Count);
+            Dictionary<string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
+            elementos.Add("Raiz", new List<Elemento> { new Elemento("Raiz", "0_R1") });
+            elementos.Add("Espacio", new List<Elemento>());
+            elementos.Add("Contenedor", new List<Elemento>());
+            elementos.Add("Articulo", new List<Elemento>());
+
+            usuario.setElementos(elementos);
+            Dictionary<string, List<Elemento>> elementosUsuario = usuario.getElementos();
+
+            Assert.AreEqual(elementos.Count, elementosUsuario.Count);
+            foreach (var key in elementos.Keys)
+            {
+                CollectionAssert.AreEqual(elementos[key], elementosUsuario[key]);
+            }
         }
 
         [TestMethod()]
-        public void setElementosListaTest()
+        public void setElementosTest()
         {
             Usuario usuario = new Usuario("correo", "123");
-            Elemento elemento = new Elemento("Raiz", "1");
-            List<Elemento> elementos = new List<Elemento> { elemento };
-            usuario.setElementosLista(elementos);
-            Assert.AreEqual(1, usuario.getElementosLista().Count);
+            Dictionary<string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
+            elementos.Add("Raiz", new List<Elemento> { new Elemento("Raiz", "0_R1") });
+            elementos.Add("Espacio", new List<Elemento> { new Elemento ("Espacio", "0_E1")});
+            elementos.Add("Contenedor", new List<Elemento>());
+            elementos.Add("Articulo", new List<Elemento>());
+            usuario.setElementos(elementos);
+            Dictionary<string, List<Elemento>> elementosUsuario = usuario.getElementos();
+
+            Assert.AreEqual(elementos.Count, elementosUsuario.Count);
+            foreach (var key in elementos.Keys)
+            {
+                CollectionAssert.AreEqual(elementos[key], elementosUsuario[key]);
+            }
         }
+
         [TestMethod()]
         public void añadirElementoTest()
         {
-            Assert.Fail();
+            Usuario usuario = new Usuario("correo", "123", "Pago");
+            Dictionary <string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
+            Assert.AreEqual(1, usuario.raicesCreadas());
+            usuario.añadirElemento("Raiz");
+            Assert.AreEqual(2, usuario.raicesCreadas());
+            Assert.AreEqual(0, usuario.espaciosCreados());
+
+            Assert.IsFalse(usuario.añadirElemento("Espacio"));
+            Assert.AreEqual(0, usuario.espaciosCreados());//ya que no le indicamos el padre, solo la Raiz no tiene padre
+            elementos = usuario.getElementos();
+
+            Assert.IsTrue(usuario.añadirElemento("Espacio", elementos["Raiz"][0]));
+            Assert.AreEqual(1, usuario.espaciosCreados());
+            elementos = usuario.getElementos();
+
+            //no debería dejar
+            Assert.IsFalse(usuario.añadirElemento("Espacio", elementos["Espacio"][0]));
+            Assert.AreEqual(1, usuario.espaciosCreados());
+
         }
 
         [TestMethod()]
         public void eliminarElementoTest()
         {
-            Assert.Fail();
+            Usuario usuario = new Usuario("correo", "123", "Pago");
+            Assert.AreEqual(1, usuario.raicesCreadas());
+            usuario.añadirElemento("Espacio", usuario.getElementos()["Raiz"][0]);
+            Assert.AreEqual(1, usuario.espaciosCreados());
+
+            // no deja eliminar la raiz
+            Assert.IsFalse(usuario.eliminarElemento("0_R1"));
+            Assert.AreEqual(1, usuario.raicesCreadas());
+
+            Assert.IsTrue(usuario.eliminarElemento("0_E1"));
+            Assert.AreEqual(0, usuario.espaciosCreados());
+
         }
 
         [TestMethod()]
         public void moverElementoTest()
         {
-            Assert.Fail();
-        }
+            Usuario usuario = new Usuario("correo", "123", "Pago");
+            Assert.AreEqual(1, usuario.raicesCreadas());
+            usuario.añadirElemento("Raiz");
+            usuario.añadirElemento("Espacio", usuario.getElementos()["Raiz"][0]);
+            usuario.añadirElemento("Contenedor", usuario.getElementos()["Raiz"][0]);
+            Assert.AreEqual(2, usuario.raicesCreadas());
+            Assert.AreEqual(1, usuario.espaciosCreados());
 
+            //Las Raices y los espacios no se pueden mover
+            Assert.IsFalse(usuario.moverElemento("0_E1", "0_R2"));
+            Assert.IsFalse(usuario.moverElemento("0_R1", "0_R1"));
+            Assert.IsFalse(usuario.moverElemento("0_R1", "0_E1"));
+            Assert.IsFalse(usuario.moverElemento("0_R1", "0_R2"));
+
+            Assert.IsTrue(usuario.moverElemento("0_C1", "0_E1"));
+        }
     }
 }

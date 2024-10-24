@@ -196,9 +196,9 @@ namespace ClassLib
             }
             return total;
         }
-        
+
         public Dictionary<string, List<Elemento>> getElementos() => elementos;
-        
+
         public void setElementos(Dictionary<string, List<Elemento>> elementos) => this.elementos = elementos;
 
 
@@ -211,8 +211,6 @@ namespace ClassLib
         private string generarIdElemento(string tipo)
         {
             string id = $"{idUsuario}_";
-            if (idUsuario == 0) return null;
-
             switch (tipo)
             {
                 case "Raiz":
@@ -255,14 +253,14 @@ namespace ClassLib
                 return null;
             }
             if (tipo == "Espacio")
-            {   
+            {
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
-                
+
             }
             if (tipo == "Contenedor")
             {
-                
+
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
@@ -296,23 +294,11 @@ namespace ClassLib
                 }
                 else if (elementoPadre != null)
                 {
-                    if (elementos[elementoPadre.getTipo()].Contains(elementoPadre))
+                    if (modificarPadre(elementoAñadir, elementoPadre))
                     {
+                        elementoAñadir.setPadre(elementoPadre.getTipo(), elementoPadre.getId());
                         elementos[tipoElementoAñadir].Add(elementoAñadir);
-                        List<Elemento> Padres = elementos[elementoPadre.getTipo()];
-                        foreach (Elemento e in Padres)
-                        {
-                            if (e.getId().Equals(elementoPadre.getId()))
-                            {
-                                // lo eliminamos y volvemos a poner, ya que el elemento ha sido mofificado, por lo que si solo lo ponemos añadiriamos uno nuevo.
-                                Padres.Remove(e);
-                                e.AnadirHijo(elementoAñadir);
-                                Padres.Add(e);
-                                elementos[elementoPadre.getTipo()] = Padres;
-                                return true;
-                            }
-                        }
-                        return false;
+                        return true;
                     }
                     return false;
                 }
@@ -321,19 +307,37 @@ namespace ClassLib
             return false;
         }
 
+        private bool modificarPadre(Elemento elementoAñadir, Elemento elementoPadre)
+        {
+            if (elementos[elementoPadre.getTipo()].Contains(elementoPadre))
+            {
+                foreach (Elemento e in elementos[elementoPadre.getTipo()])
+                {
+                    if (e.getId().Equals(elementoPadre.getId()))
+                    {
+                        if (e.AnadirHijo(elementoAñadir))
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+                return false;
+            }
+            return false;
+        }
 
         /// <summary>
         /// Elimina un elemento del árbol de elementos del usuario
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
             Elemento e = Elemento.buscarElemento(elementos, id);
-            if (e == null) throw new System.Exception("El elemento no existe");
+            if (e == null) return false;
 
-            if (e.getTipo().Equals("Raiz")) throw new System.Exception("No se puede eliminar la raiz");
+            if (e.getTipo().Equals("Raiz")) return false;   
 
             List<string> datosPadre = e.getPadre();
             if (datosPadre.Count() == 0) return false;
@@ -349,9 +353,9 @@ namespace ClassLib
                 datosHijo.Add(e.getTipo());
                 datosHijo.Add(e.getId());
 
-                List<List<string>> hijosElementoAEliminar= e.getHijos();
+                List<List<string>> hijosElementoAEliminar = e.getHijos();
 
-                foreach (List<string> hijo in  hijosElementoAEliminar)
+                foreach (List<string> hijo in hijosElementoAEliminar)
                 {
                     padre.nuevoHijo(hijo[0], hijo[1]);
                 }
@@ -360,7 +364,7 @@ namespace ClassLib
                 hijosPadre.Remove(datosHijo);
                 padre.setHijos(hijosPadre);
                 //actalizamos el diccionario
-                elementos[padre.getTipo()].Add (padre);
+                elementos[padre.getTipo()].Add(padre);
                 return true;
             }
             return false;
@@ -377,14 +381,15 @@ namespace ClassLib
         public bool moverElemento(string idEmenentoMover, string idNuevoPadre)
         {
             Elemento elementoMover = Elemento.buscarElemento(elementos, idEmenentoMover); //Buscamos elemento a mover
+            List<string> ElementosNoMoviles = new List<string> { "Raiz", "Espacio" };
             if (elementoMover == null) return false;
-            if (elementoMover.getTipo() == "Raiz") return false;
+            if (ElementosNoMoviles.Contains(elementoMover.getTipo())) return false;
 
             Elemento nuevoPadre = Elemento.buscarElemento(elementos, idNuevoPadre); //Buscamos nuevo padre
             if (nuevoPadre == null) return false;
 
             Elemento padreAntiguo = Elemento.buscarElemento(elementos, elementoMover.getPadre()[1], elementoMover.getPadre()[0]);
-            
+
             if (padreAntiguo != null)
             {
                 //datos hijo
@@ -394,14 +399,14 @@ namespace ClassLib
 
                 //actualizmos el padre antiguo
                 elementos[padreAntiguo.getTipo()].Remove(padreAntiguo);
-                List<List<string>>hijosAntiguo = padreAntiguo.getHijos();
+                List<List<string>> hijosAntiguo = padreAntiguo.getHijos();
                 hijosAntiguo.Remove(DatosHijo);
                 padreAntiguo.setHijos(hijosAntiguo);
                 elementos[padreAntiguo.getTipo()].Add(padreAntiguo);
 
                 //actualizamos el padre nuevo
                 elementos[nuevoPadre.getTipo()].Remove(nuevoPadre);
-                List<List<string>>hijosNuevo = nuevoPadre.getHijos();
+                List<List<string>> hijosNuevo = nuevoPadre.getHijos();
                 hijosNuevo.Add(DatosHijo);
                 nuevoPadre.setHijos(hijosAntiguo);
                 elementos[nuevoPadre.getTipo()].Add(nuevoPadre);
@@ -410,6 +415,6 @@ namespace ClassLib
             }
 
             return false;
-        }        
+        }
     }
 }
