@@ -98,5 +98,29 @@ namespace UBULibPr.Tests
 
             File.Delete(rutaArchivo);
         }
+
+
+        [TestMethod]
+        public void CompruebaIBANtest()
+        {
+
+            string iban = "ES0123456789";
+            Assert.AreEqual(0, Utilidades.CompruebaIBAN(iban));
+
+            string iban2 = "ES0123456789ABCDEUSORDQ";
+            Assert.AreEqual(0, Utilidades.CompruebaIBAN(iban2));
+
+            string iban3 = "US0123456789012345678901";
+            Assert.AreEqual(1, Utilidades.CompruebaIBAN(iban3));
+
+
+            string iban4 = "ES1234567890123456789012";
+            Assert.AreEqual(1, Utilidades.CompruebaIBAN(iban4));
+
+            string iban5 = "ES0012345678901234567890";
+            Assert.AreEqual(1, Utilidades.CompruebaIBAN(iban5));
+        }
+       
     }
 }
+

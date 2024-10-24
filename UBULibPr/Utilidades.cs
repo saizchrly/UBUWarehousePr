@@ -37,7 +37,7 @@ namespace UBULibPr
             return puntuacion;
         }
 
-        public int CompruebaIBAN(string iban)
+        public static int CompruebaIBAN(string iban)
         {
             string caracteres = "ES0123456789";
             List<string> codBancos = new List<string> { "0241","2080","8620","1535","0011","0200","0136","3183","1541","0061","1550","0078","0188","0182","0225","0198","0091","0240","0003","9000","1569","0169","0081","0184","0220","0232","0186","0121","0235","1509","0049","8843","1574",
