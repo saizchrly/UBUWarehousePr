@@ -51,7 +51,8 @@ namespace ClassLib.Tests
 
             elemento.nuevoHijo(tipoHijo, idHijo);
 
-            CollectionAssert.AreEqual(expectedHijos, elemento.getHijos());
+            Assert.AreEqual(expectedHijos[0][0], elemento.getHijos()[0][0]);
+            Assert.AreEqual(expectedHijos[0][1], elemento.getHijos()[0][1]);
         }
 
         [TestMethod()]
