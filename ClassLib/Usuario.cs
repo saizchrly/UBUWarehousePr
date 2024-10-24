@@ -16,15 +16,9 @@ namespace ClassLib
         private string contrasenaActual;
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
-        private List<Elemento> elementosLista;
-        private Elemento raiz;
-
         private string tipoUsuario;
-        private int raicesCreadas;
-        private int espaciosCreados;
-        private int contCreados;
-        private int artCreados;
-        public int numElem;
+        // string es el Tipo del elemento y El value es la lista de elementos de ese tipo
+        private Dictionary<string, List<Elemento>> elementos;
 
         /// <summary>
         /// Constructor de la clase Usuario
@@ -43,12 +37,11 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
-            raicesCreadas = 0;
-            espaciosCreados = 0;
-            contCreados = 0;
-            artCreados = 0;
-            numElem = 0;
-            elementosLista = new List<Elemento>();
+            elementos = new Dictionary<string, List<Elemento>>();
+            elementos.Add("Raiz", new List<Elemento>());
+            elementos.Add("Espacio", new List<Elemento>());
+            elementos.Add("Contenedor", new List<Elemento>());
+            elementos.Add("Articulo", new List<Elemento>());
             añadirElemento("Raiz");
 
             Log.escribirLog(EmailUsuario, "Creacion de usuario");
@@ -186,47 +179,51 @@ namespace ClassLib
         }
 
 
-        public int getRaicesCreadas() => raicesCreadas;
+        public int raicesCreadas() => elementos["Raiz"].Count();
 
-        public int getEspaciosCreados() => espaciosCreados;
+        public int espaciosCreados() => elementos["Espacio"].Count();
 
-        public int getContCreados() => contCreados;
+        public int contCreados() => elementos["Contenedor"].Count();
 
-        public int getArtCreados() => artCreados;
+        public int artCreados() => elementos["Articulo"].Count();
 
-        public int getNumElem() => numElem;
+        public int numElemTotal()
+        {
+            int total = 0;
+            foreach (List<Elemento> lista in elementos.Values)
+            {
+                total += lista.Count();
+            }
+            return total;
+        }
 
-        public List<Elemento> getElementosLista() => elementosLista;
+        public Dictionary<string, List<Elemento>> getElementos() => elementos;
 
-        public void setElementosLista(List<Elemento> elementos) => elementosLista = elementos;
+        public void setElementos(Dictionary<string, List<Elemento>> elementos) => this.elementos = elementos;
 
-
-        
 
         /// <summary>
         /// Método que genera el correspondiente id para un nuevo elemento
-        /// El formato será idUsuario_TipoNúmero de elementos de ese tipo creados por el usuario
+        /// El formato será idUsuario_Tipo(R,E,C,A) + Número de elementos de ese tipo creados por el usuario
         /// </summary>
         /// <param name="tipo"></param> tipo del elemento a crear
         /// <returns></returns>
         private string generarIdElemento(string tipo)
         {
             string id = $"{idUsuario}_";
-            if (idUsuario == 0) return null;
-
             switch (tipo)
             {
                 case "Raiz":
-                    id += $"R{raicesCreadas + 1}";
+                    id += $"R{raicesCreadas() + 1}";
                     break;
                 case "Espacio":
-                    id += $"E{espaciosCreados + 1}";
+                    id += $"E{espaciosCreados() + 1}";
                     break;
                 case "Contenedor":
-                    id += $"C{contCreados + 1}";
+                    id += $"C{contCreados() + 1}";
                     break;
                 case "Articulo":
-                    id += $"A{artCreados + 1}";
+                    id += $"A{artCreados() + 1}";
                     break;
                 default:
                     return null;
@@ -234,6 +231,11 @@ namespace ClassLib
             return id;
         }
 
+        /// <summary>
+        /// Método que crea un elemento del tipo especificado
+        /// </summary>
+        /// <param name="tipo"></param> Tipo del elemento a crear
+        /// <returns></returns>
         private Elemento crearUnElemento(string tipo)
         {
 
@@ -242,35 +244,29 @@ namespace ClassLib
                 int limite = 10000;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
-                int elementoslista = elementosLista.Count();
-                if (elementosLista.Count() < limite)
+                int numeroRaices = raicesCreadas();
+                if (numeroRaices < limite)
                 {
-                    numElem++;
-                    raicesCreadas++;
                     Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                     return e;
                 }
                 return null;
             }
             if (tipo == "Espacio")
-            {   
-                numElem++;
-                espaciosCreados++;
+            {
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
-                
+
             }
             if (tipo == "Contenedor")
             {
-                numElem++;
-                contCreados++;
+
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
             if (tipo == "Articulo")
             {
-                numElem++;
-                artCreados++;
+
                 Elemento e = new Elemento(tipo, generarIdElemento(tipo));
                 return e;
             }
@@ -284,44 +280,92 @@ namespace ClassLib
         /// <param name="idpadre"></param> padre del nuevo elemento
         /// <param name="tipo"></param> tipo del nuevo elemento
         /// <returns>bool - true si se ha podido crear el elemento, false si no</returns> 
-        public bool añadirElemento(string tipoElementoAñadir, Elemento elementoBuscar = null)
+        public bool añadirElemento(string tipoElementoAñadir, Elemento elementoPadre = null)
         {
             Elemento elementoAñadir = crearUnElemento(tipoElementoAñadir);
             if (elementoAñadir == null) return false;
-            if (elementoAñadir.getTipo().Equals("Raiz"))
+            if (tipoElementoAñadir == "Raiz" && elementoPadre != null) return false;
+            if (elementos.ContainsKey(tipoElementoAñadir))
             {
-                elementosLista.Add(elementoAñadir);
-                return true;
+                if (tipoElementoAñadir == "Raiz")
+                {
+                    elementos[tipoElementoAñadir].Add(elementoAñadir);
+                    return true;
+                }
+                else if (elementoPadre != null)
+                {
+                    if (modificarPadre(elementoAñadir, elementoPadre))
+                    {
+                        elementoAñadir.setPadre(elementoPadre.getTipo(), elementoPadre.getId());
+                        elementos[tipoElementoAñadir].Add(elementoAñadir);
+                        return true;
+                    }
+                    return false;
+                }
+                return false;
             }
-            if (elementoBuscar.AnadirHijo(elementoAñadir)) return true;
             return false;
         }
 
-
+        private bool modificarPadre(Elemento elementoAñadir, Elemento elementoPadre)
+        {
+            if (elementos[elementoPadre.getTipo()].Contains(elementoPadre))
+            {
+                foreach (Elemento e in elementos[elementoPadre.getTipo()])
+                {
+                    if (e.getId().Equals(elementoPadre.getId()))
+                    {
+                        if (e.AnadirHijo(elementoAñadir))
+                        {
+                            return true;
+                        }
+                        return false;
+                    }
+                }
+                return false;
+            }
+            return false;
+        }
 
         /// <summary>
         /// Elimina un elemento del árbol de elementos del usuario
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
         public bool eliminarElemento(string id)
         {
-            Elemento e = Elemento.buscarElemento(id, elementosLista);
-            if (e == null) throw new System.Exception("El elemento no existe");
+            Elemento e = Elemento.buscarElemento(elementos, id);
+            if (e == null) return false;
 
-            if (e.getTipo().Equals("Raiz")) throw new System.Exception("No se puede eliminar la raiz");
+            if (e.getTipo().Equals("Raiz")) return false;   
 
-            Elemento padre = e.getPadre();
+            List<string> datosPadre = e.getPadre();
+            if (datosPadre.Count() == 0) return false;
+
+            Elemento padre = Elemento.buscarElemento(elementos, datosPadre[1], datosPadre[0]);
             if (padre != null)
             {
-                if (padre.Eliminar(e))
-                {
-                    elementosLista.Remove(e);
-                    Log.escribirLog(EmailUsuario, "Eliminacion de elemento " + id);
+                //borramos los elementos del diccionario para actualizarlos mas tarde
+                elementos[padre.getTipo()].Remove(padre);
+                elementos[e.getTipo()].Remove(e);
+                //creamos los nuevos datos para actualizar el diccionario
+                List<string> datosHijo = new List<string>();
+                datosHijo.Add(e.getTipo());
+                datosHijo.Add(e.getId());
 
-                    return true;
+                List<List<string>> hijosElementoAEliminar = e.getHijos();
+
+                foreach (List<string> hijo in hijosElementoAEliminar)
+                {
+                    padre.nuevoHijo(hijo[0], hijo[1]);
                 }
+
+                List<List<string>> hijosPadre = padre.getHijos();
+                hijosPadre.Remove(datosHijo);
+                padre.setHijos(hijosPadre);
+                //actalizamos el diccionario
+                elementos[padre.getTipo()].Add(padre);
+                return true;
             }
             return false;
 
@@ -334,22 +378,43 @@ namespace ClassLib
         /// <param name="idMovido"></param>
         /// <param name="idNuevoPadre"></param>
         /// <returns></returns>
-        /// <exception cref="System.Exception"></exception>
-        public bool moverElemento(string idMovido, string idNuevoPadre)
+        public bool moverElemento(string idEmenentoMover, string idNuevoPadre)
         {
-            Elemento e = Elemento.buscarElemento(idMovido, elementosLista); //Buscamos elemento a mover
-            if (e == null) throw new System.Exception("El elemento a mover no existe");
+            Elemento elementoMover = Elemento.buscarElemento(elementos, idEmenentoMover); //Buscamos elemento a mover
+            List<string> ElementosNoMoviles = new List<string> { "Raiz", "Espacio" };
+            if (elementoMover == null) return false;
+            if (ElementosNoMoviles.Contains(elementoMover.getTipo())) return false;
 
-            Elemento nuevoPadre = Elemento.buscarElemento(idNuevoPadre, elementosLista); //Buscamos nuevo padre
-            if (nuevoPadre == null) throw new System.Exception("El nuevo elemento padre no existe");
+            Elemento nuevoPadre = Elemento.buscarElemento(elementos, idNuevoPadre); //Buscamos nuevo padre
+            if (nuevoPadre == null) return false;
 
-            Elemento padreAntiguo = e.getPadre(); //Obtenemos padre del elemento a mover
-            List<Elemento> listahijos = nuevoPadre.obtenerHijos();
-            listahijos.Add(e);
+            Elemento padreAntiguo = Elemento.buscarElemento(elementos, elementoMover.getPadre()[1], elementoMover.getPadre()[0]);
 
-            eliminarElemento(idMovido);
+            if (padreAntiguo != null)
+            {
+                //datos hijo
+                List<string> DatosHijo = new List<string>();
+                DatosHijo.Add(elementoMover.getTipo());
+                DatosHijo.Add(elementoMover.getId());
 
-            return true;
-        }        
+                //actualizmos el padre antiguo
+                elementos[padreAntiguo.getTipo()].Remove(padreAntiguo);
+                List<List<string>> hijosAntiguo = padreAntiguo.getHijos();
+                hijosAntiguo.Remove(DatosHijo);
+                padreAntiguo.setHijos(hijosAntiguo);
+                elementos[padreAntiguo.getTipo()].Add(padreAntiguo);
+
+                //actualizamos el padre nuevo
+                elementos[nuevoPadre.getTipo()].Remove(nuevoPadre);
+                List<List<string>> hijosNuevo = nuevoPadre.getHijos();
+                hijosNuevo.Add(DatosHijo);
+                nuevoPadre.setHijos(hijosAntiguo);
+                elementos[nuevoPadre.getTipo()].Add(nuevoPadre);
+
+                return true;
+            }
+
+            return false;
+        }
     }
 }
