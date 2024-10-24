@@ -56,7 +56,7 @@ namespace WHDatabase
         }
 
 
-        public Usuario? LeeUsuario(string email)
+        public Usuario LeeUsuario(string email)
         {
             foreach (Usuario utemp in tblUsuarios.Values)
             {

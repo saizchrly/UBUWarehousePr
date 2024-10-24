@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm1.aspx.cs" Inherits="WWW.WebForm1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Login.aspx.cs" Inherits="WWW.WebForm1" %>
 
 <!DOCTYPE html>
 
@@ -35,6 +35,13 @@
         .auto-style8 {
             height: 28px;
         }
+        .auto-style9 {
+            width: 274px;
+            height: 29px;
+        }
+        .auto-style10 {
+            height: 29px;
+        }
     </style>
 </head>
 <body>
@@ -46,8 +53,9 @@
                 <td class="auto-style4"></td>
                 <td class="auto-style5"></td>
                 <td class="auto-style6">
+                    &nbsp;
                     <asp:Label ID="lblTitulo" runat="server" Font-Bold="True" Font-Italic="True" Text="Inicio de sesión"></asp:Label>
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style5"></td>
                 <td class="auto-style5"></td>
             </tr>
@@ -59,15 +67,15 @@
                 <td class="auto-style5"></td>
             </tr>
             <tr>
-                <td class="auto-style1">&nbsp;</td>
-                <td>&nbsp;</td>
-                <td>
+                <td class="auto-style9"></td>
+                <td class="auto-style10"></td>
+                <td class="auto-style10">
                     <asp:Label ID="lblUsuario" runat="server" Text="Usuario"></asp:Label>
                 </td>
-                <td>
+                <td class="auto-style10">
                     <asp:TextBox ID="tbxUsuario" runat="server"></asp:TextBox>
                 </td>
-                <td>&nbsp;</td>
+                <td class="auto-style10"></td>
             </tr>
             <tr>
                 <td class="auto-style2"></td>
@@ -98,20 +106,21 @@
                 <td class="auto-style1">&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:Label ID="lblError" runat="server" Text="Label" Visible="False"></asp:Label>
+                    <asp:Button ID="btnRegistrarse" runat="server" OnClick="Button1_Click" Text="Registrarse" />
                 </td>
-                <td>&nbsp;</td>
+                <td>
+                    <asp:Button ID="btnAceptar" runat="server" OnClick="Button1_Click" Text="Aceptar" />
+                </td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
                 <td>&nbsp;</td>
                 <td>
-                    <asp:Button ID="btnRegistrarse" runat="server" OnClick="btnAceptar_Click" Text="Registrarse" Width="85px" />
+                    <asp:Label ID="lblError" runat="server" Text="Label" Visible="False"></asp:Label>
                 </td>
                 <td>
-                    <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
-                </td>
+                    &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
         </table>
