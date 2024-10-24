@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.Remoting.Messaging;
@@ -17,9 +18,17 @@ namespace WHDatabase
         {
             Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin");
         }
-        public bool GuardaComponente(Elemento e)
+        public bool GuardaComponente(string tipoElemento, int idUsuario)
         {
-            throw new NotImplementedException();
+            foreach(Usuario u in tblUsuarios.Values)
+            {
+                if (u.getIdUsuario().Equals(idUsuario))
+                {
+                    return u.añadirElemento(tipoElemento);
+                }
+            }
+            return false;
+
         }
 
         public bool GuardaUsuario(Usuario u)
@@ -49,7 +58,7 @@ namespace WHDatabase
             {
                 if (u.getIdUsuario().Equals(idUsuario))
                 {
-                    return Elemento.buscarElemento(idElemento,u.getElementosLista());
+                    return Elemento.buscarElemento(u.getElementos(),idElemento);
                 }
             }
             return null;
@@ -67,7 +76,12 @@ namespace WHDatabase
 
         public int NumComponente()
         {
-            throw new NotImplementedException();
+            int total = 0;
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                total += utemp.numElemTotal();
+            }
+            return total;
         }
 
         public int NumUsuarios()
@@ -80,7 +94,7 @@ namespace WHDatabase
             int cont = 0;
             foreach (Usuario utemp in tblUsuarios.Values)
             {
-                cont += utemp.numElem;
+                cont ++;
             }
             return cont;
         }

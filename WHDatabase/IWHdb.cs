@@ -49,7 +49,7 @@ namespace WHDatabase
         /// </summary>
         /// <param name="e">Objeto de la clase Componente que se quiere almacenar.</param>
         /// <returns>Verdadero o falso en función de si ha conseguido insertar/ actualizar la información.</returns>
-        bool GuardaComponente(Elemento e);
+        bool GuardaComponente(string tipoElemento, int idUsuario);
 
         /// <summary>
         /// Lee los datos del elemento referenciado por su ID.
