@@ -50,8 +50,6 @@ namespace ClassLib
             numElem = 0;
             elementosLista = new List<Elemento>();
             añadirElemento("Raiz");
-
-            Log.escribirLog(EmailUsuario, "Creacion de usuario");
         }
 
         /// <summary>
