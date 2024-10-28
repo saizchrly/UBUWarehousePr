@@ -17,6 +17,7 @@ namespace WHDatabase
         public WHdb()
         {
             Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin");
+            GuardaUsuario(u);
         }
         public bool GuardaComponente(string tipoElemento, int idUsuario)
         {

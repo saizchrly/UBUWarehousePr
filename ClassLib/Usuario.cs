@@ -43,8 +43,6 @@ namespace ClassLib
             elementos.Add("Contenedor", new List<Elemento>());
             elementos.Add("Articulo", new List<Elemento>());
             añadirElemento("Raiz");
-
-            Log.escribirLog(EmailUsuario, "Creacion de usuario");
         }
 
         /// <summary>
