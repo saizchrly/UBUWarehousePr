@@ -98,7 +98,7 @@
                     <asp:Label ID="lblPassword" runat="server" Text="Contraseña"></asp:Label>
                 </td>
                 <td class="auto-style8">
-                    <asp:TextBox ID="tbxPassword" runat="server"></asp:TextBox>
+                    <asp:TextBox ID="tbxPassword" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
                 <td class="auto-style8"></td>
             </tr>
