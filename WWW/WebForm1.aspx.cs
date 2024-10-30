@@ -17,13 +17,13 @@ namespace WWW
         Usuario usActual = null;
         protected void Page_Load(object sender, EventArgs e)
         {
-            data = (WHdb)Application["Data"];
-            if (data == null)
-            {
-                data = new WHdb();
-                Application["Data"] = data;
-            }
-            usActual = null;
+                data = (WHdb)Application["Data"];
+                if (data == null)
+                {
+                    data = new WHdb();
+                    Application["Data"] = data;
+                }
+                if(!IsPostBack) usActual = null;
         }
 
         protected void btnAceptar_Click(object sender, EventArgs e)
@@ -32,7 +32,11 @@ namespace WWW
             usActual = data.LeeUsuario(tbxUsuario.Text);
             if (usActual != null)
             {
-                inicioOk = usActual.validarContrasena(tbxPassword.Text);
+                if (usActual.validarContrasena(tbxPassword.Text))
+                {
+                    Session["User"] = usActual;
+                    inicioOk = true;
+                }
             }
             if (inicioOk) Server.Transfer("Inicio.aspx", false);
             else
@@ -41,6 +45,5 @@ namespace WWW
                 lblError.Visible = true;
             }
         }
-
     }
 }

@@ -125,7 +125,7 @@
                     <asp:Button ID="btnRegistrarse" runat="server" OnClick="btnAceptar_Click" Text="Registrarse" Width="85px" />
                 </td>
                 <td>
-                    <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" />
+                    <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" Width="81px" />
                 </td>
                 <td>&nbsp;</td>
             </tr>
