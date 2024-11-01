@@ -19,6 +19,7 @@ namespace WHDatabase
             Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin");
             GuardaUsuario(u);
         }
+
         public bool GuardaComponente(string tipoElemento, int idUsuario)
         {
             foreach(Usuario u in tblUsuarios.Values)
@@ -149,6 +150,19 @@ namespace WHDatabase
                 }
             }
             return false;
+        }
+
+        public bool registrarUsuario(string email, string password, string rol )
+        {
+            foreach (Usuario utemp in tblUsuarios.Values)
+            {
+                if (utemp.getEmailUsuario().Equals(email))
+                {
+                    return false;
+                }
+            }
+            Usuario u = new Usuario(email, password, rol);
+            return GuardaUsuario(u);
         }
     }
 }
