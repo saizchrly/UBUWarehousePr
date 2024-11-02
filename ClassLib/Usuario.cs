@@ -37,6 +37,7 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
+            Log.escribirLog(email, "Creacion de usuario");
             elementos = new Dictionary<string, List<Elemento>>();
             elementos.Add("Raiz", new List<Elemento>());
             elementos.Add("Espacio", new List<Elemento>());
