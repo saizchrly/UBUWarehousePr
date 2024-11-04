@@ -15,7 +15,7 @@
         .auto-style6 {
             height: 26px;
             text-align: center;
-            width: 113px;
+            width: 144px;
         }
         .auto-style5 {
             height: 26px;
@@ -57,46 +57,20 @@
             width: 128px;
             height: 27px;
         }
-        .auto-style43 {
-            width: 113px;
-        }
-        .auto-style44 {
-            height: 21px;
-            width: 113px;
-        }
-        .auto-style45 {
-            height: 27px;
-            width: 113px;
-        }
-        .auto-style46 {
-            height: 26px;
-            width: 19px;
-        }
-        .auto-style47 {
-            width: 19px;
-        }
-        .auto-style48 {
-            height: 21px;
-            width: 19px;
-        }
-        .auto-style49 {
-            height: 27px;
-            width: 19px;
-        }
         .auto-style50 {
             height: 26px;
-            width: 1px;
+            width: 24px;
         }
         .auto-style51 {
-            width: 1px;
+            width: 24px;
         }
         .auto-style52 {
             height: 21px;
-            width: 1px;
+            width: 24px;
         }
         .auto-style53 {
             height: 27px;
-            width: 1px;
+            width: 24px;
         }
         .auto-style54 {
             width: 274px;
@@ -108,18 +82,67 @@
         }
         .auto-style56 {
             height: 24px;
-            width: 1px;
-        }
-        .auto-style57 {
-            height: 24px;
-            width: 113px;
-        }
-        .auto-style58 {
-            height: 24px;
-            width: 19px;
+            width: 24px;
         }
         .auto-style59 {
             height: 24px;
+        }
+        .auto-style60 {
+            width: 127px;
+            height: 26px;
+        }
+        .auto-style61 {
+            width: 127px;
+            height: 24px;
+        }
+        .auto-style62 {
+            width: 127px;
+        }
+        .auto-style63 {
+            width: 127px;
+            height: 21px;
+        }
+        .auto-style64 {
+            width: 127px;
+            height: 27px;
+        }
+        .auto-style65 {
+            width: 144px;
+            height: 24px;
+        }
+        .auto-style66 {
+            width: 144px;
+        }
+        .auto-style67 {
+            width: 144px;
+            height: 21px;
+        }
+        .auto-style68 {
+            width: 144px;
+            height: 27px;
+        }
+        .auto-style69 {
+            width: 274px;
+            height: 40px;
+        }
+        .auto-style70 {
+            width: 128px;
+            height: 40px;
+        }
+        .auto-style71 {
+            width: 24px;
+            height: 40px;
+        }
+        .auto-style72 {
+            width: 144px;
+            height: 40px;
+        }
+        .auto-style73 {
+            width: 127px;
+            height: 40px;
+        }
+        .auto-style74 {
+            height: 40px;
         }
     </style>
 </head>
@@ -127,13 +150,15 @@
     <form id="form1" runat="server">
         <table class="auto-style13">
             <tr>
-                <td class="auto-style4"></td>
+                <td class="auto-style4">
+                    <asp:Label ID="lblTitulo" runat="server" Text="UBUWarehouse"></asp:Label>
+                </td>
                 <td class="auto-style4">&nbsp;</td>
                 <td class="auto-style34">&nbsp;</td>
                 <td class="auto-style50"></td>
                 <td class="auto-style6">
                     &nbsp;</td>
-                <td class="auto-style46">
+                <td class="auto-style60">
                     <asp:Label ID="lblUsuario" runat="server"></asp:Label>
                 </td>
                 <td class="auto-style5">&nbsp;</td>
@@ -143,12 +168,12 @@
                 <td class="auto-style54"></td>
                 <td class="auto-style55"></td>
                 <td class="auto-style56"></td>
-                <td class="auto-style57">
+                <td class="auto-style65">
                     <asp:LinkButton ID="lbCerrarSesion" runat="server" OnClick="lbCerrarSesion_Click">Cerrar Sesión</asp:LinkButton>
                 </td>
-                <td class="auto-style58"></td>
+                <td class="auto-style61"></td>
                 <td class="auto-style59">
-                    <asp:LinkButton ID="lbCambiarPassword" runat="server">Cambiar Contraseña</asp:LinkButton>
+                    <asp:LinkButton ID="lbCambiarPassword" runat="server" OnClick="lbCambiarPassword_Click">Cambiar Contraseña</asp:LinkButton>
                 </td>
             </tr>
             <tr>
@@ -156,9 +181,9 @@
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style35">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style43">
+                <td class="auto-style66">
                     &nbsp;</td>
-                <td class="auto-style47">
+                <td class="auto-style62">
                     &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
@@ -167,8 +192,8 @@
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52"></td>
-                <td class="auto-style44"></td>
-                <td class="auto-style48"></td>
+                <td class="auto-style67"></td>
+                <td class="auto-style63"></td>
                 <td class="auto-style3"></td>
             </tr>
             <tr>
@@ -176,8 +201,8 @@
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style44">&nbsp;</td>
-                <td class="auto-style48">&nbsp;</td>
+                <td class="auto-style67">&nbsp;</td>
+                <td class="auto-style63">&nbsp;</td>
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
@@ -185,8 +210,8 @@
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style44">&nbsp;</td>
-                <td class="auto-style48">&nbsp;</td>
+                <td class="auto-style67">&nbsp;</td>
+                <td class="auto-style63">&nbsp;</td>
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
@@ -194,8 +219,8 @@
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style44">&nbsp;</td>
-                <td class="auto-style48">&nbsp;</td>
+                <td class="auto-style67">&nbsp;</td>
+                <td class="auto-style63">&nbsp;</td>
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
@@ -203,19 +228,31 @@
                 <td class="auto-style7">&nbsp;</td>
                 <td class="auto-style37">&nbsp;</td>
                 <td class="auto-style53"></td>
-                <td class="auto-style45">
+                <td class="auto-style68">
                 </td>
-                <td class="auto-style49">
+                <td class="auto-style64">
                 </td>
                 <td class="auto-style8"></td>
             </tr>
             <tr>
+                <td class="auto-style69">
+                    <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+                </td>
+                <td class="auto-style69"></td>
+                <td class="auto-style70"></td>
+                <td class="auto-style71"></td>
+                <td class="auto-style72"></td>
+                <td class="auto-style73"></td>
+                <td class="auto-style74"></td>
+            </tr>
+            <tr>
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style35">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style43">&nbsp;</td>
-                <td class="auto-style47">&nbsp;</td>
+                <td class="auto-style66">
+                    &nbsp;</td>
+                <td class="auto-style62">&nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
@@ -223,19 +260,9 @@
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style35">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style43">
+                <td class="auto-style66">
                     &nbsp;</td>
-                <td class="auto-style47">&nbsp;</td>
-                <td>&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style35">&nbsp;</td>
-                <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style43">
-                    &nbsp;</td>
-                <td class="auto-style47">
+                <td class="auto-style62">
                     &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>

@@ -1,9 +1,11 @@
-﻿using System;
+﻿using ClassLib;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WHDatabase;
 
 namespace WWW
 {
@@ -32,7 +34,7 @@ namespace WWW
 
         protected void lbCerrarSesion_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForms1.aspx");
+            Response.Redirect("WebForm1.aspx");
         }
     }
 }
