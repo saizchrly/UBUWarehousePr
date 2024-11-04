@@ -36,5 +36,22 @@ namespace WWW
         {
             Response.Redirect("WebForm1.aspx");
         }
+
+        protected void btnAceptar_Click(object sender, EventArgs e)
+        {
+            if (!u.validarContrasena(tbActual.Text))
+            {
+                lblError.Text = "La contraseña introducida no es correcta.";
+                lblError.Visible = true;
+            }
+            else
+            {
+                if (!tbNueva.Equals(tbConfirmar))
+                {
+                    lblError.Text = "La contraseña no ha sido confirmada correctamente.";
+                    lblError.Visible = true;
+                }
+            }
+        }
     }
 }
