@@ -236,8 +236,7 @@
             </tr>
             <tr>
                 <td class="auto-style69">
-                    <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style69"></td>
                 <td class="auto-style70"></td>
                 <td class="auto-style71"></td>

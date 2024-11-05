@@ -1,10 +1,12 @@
 ﻿using ClassLib;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using UBULibPr;
 using WHDatabase;
 
 namespace WWW
@@ -44,13 +46,20 @@ namespace WWW
                 lblError.Text = "La contraseña introducida no es correcta.";
                 lblError.Visible = true;
             }
+            else if (tbActual.Text.Equals(tbNueva.Text))
+            {
+                lblError.Text = "La nueva contraseña no puede ser igual a la antigua";
+                lblError.Visible = true;
+            }
+            else if (Utilidades.CompruebaContrasena(tbNueva.Text) < 3)
+            {
+                lblError.Text = "La nueva contraseña no es lo suficientemente segura";
+                lblError.Visible = true;
+            }
             else
             {
-                if (!tbNueva.Equals(tbConfirmar))
-                {
-                    lblError.Text = "La contraseña no ha sido confirmada correctamente.";
-                    lblError.Visible = true;
-                }
+                u.cambiarContrasena(tbNueva.Text);
+                Response.Redirect("WebForm1.aspx");
             }
         }
     }
