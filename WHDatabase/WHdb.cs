@@ -26,7 +26,8 @@ namespace WHDatabase
             {
                 if (u.getIdUsuario().Equals(idUsuario))
                 {
-                    return u.añadirElemento(tipoElemento);
+                    u.añadirElemento(tipoElemento);
+                    return true;
                 }
             }
             return false;
@@ -152,7 +153,7 @@ namespace WHDatabase
             return false;
         }
 
-        public bool registrarUsuario(string email, string password, string rol )
+        public bool registrarUsuario(string email, string password, string rol = "NoPago" )
         {
             foreach (Usuario utemp in tblUsuarios.Values)
             {

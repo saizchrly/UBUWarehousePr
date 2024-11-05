@@ -291,17 +291,24 @@ namespace ClassLib
                     elementos[tipoElementoAñadir].Add(elementoAñadir);
                     return true;
                 }
-                else if (elementoPadre != null)
+                else
                 {
-                    if (modificarPadre(elementoAñadir, elementoPadre))
+                    if (elementoPadre != null)
                     {
-                        elementoAñadir.setPadre(elementoPadre.getTipo(), elementoPadre.getId());
+                        if (modificarPadre(elementoAñadir, elementoPadre))
+                        {
+                            elementoAñadir.setPadre(elementoPadre.getTipo(), elementoPadre.getId());
+                            elementos[tipoElementoAñadir].Add(elementoAñadir);
+                            return true;
+                        }
+                    }
+                    else
+                    {
                         elementos[tipoElementoAñadir].Add(elementoAñadir);
                         return true;
                     }
                     return false;
                 }
-                return false;
             }
             return false;
         }

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WWW", "WWW\WWW.csproj", "{D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WWWTest", "WWWTest\WWWTest.csproj", "{D915DA5C-0179-4085-9A96-6ACB38D1DD4E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WHDatabaseTests1", "WHDatabaseTests1\WHDatabaseTests1.csproj", "{E5217798-3C21-49B4-BC0F-24E6CF9A0EEE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{D915DA5C-0179-4085-9A96-6ACB38D1DD4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D915DA5C-0179-4085-9A96-6ACB38D1DD4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D915DA5C-0179-4085-9A96-6ACB38D1DD4E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5217798-3C21-49B4-BC0F-24E6CF9A0EEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5217798-3C21-49B4-BC0F-24E6CF9A0EEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5217798-3C21-49B4-BC0F-24E6CF9A0EEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5217798-3C21-49B4-BC0F-24E6CF9A0EEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
