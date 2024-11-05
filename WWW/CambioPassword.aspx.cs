@@ -9,7 +9,7 @@ using WHDatabase;
 
 namespace WWW
 {
-    public partial class Inicio : System.Web.UI.Page
+    public partial class CambioPassword : System.Web.UI.Page
     {
         private WHdb data;
         private Usuario u;
@@ -27,14 +27,31 @@ namespace WWW
             }
         }
 
+        protected void lbInicio_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("Inicio.aspx");
+        }
+
         protected void lbCerrarSesion_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm1.aspx");
         }
 
-        protected void lbCambiarPassword_Click(object sender, EventArgs e)
+        protected void btnAceptar_Click(object sender, EventArgs e)
         {
-            Response.Redirect("CambioPassword.aspx");
+            if (!u.validarContrasena(tbActual.Text))
+            {
+                lblError.Text = "La contraseña introducida no es correcta.";
+                lblError.Visible = true;
+            }
+            else
+            {
+                if (!tbNueva.Equals(tbConfirmar))
+                {
+                    lblError.Text = "La contraseña no ha sido confirmada correctamente.";
+                    lblError.Visible = true;
+                }
+            }
         }
     }
 }

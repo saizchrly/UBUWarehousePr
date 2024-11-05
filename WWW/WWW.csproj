@@ -110,11 +110,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CambioPassword.aspx" />
     <Content Include="Inicio.aspx" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CambioPassword.aspx.cs">
+      <DependentUpon>CambioPassword.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CambioPassword.aspx.designer.cs">
+      <DependentUpon>CambioPassword.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
