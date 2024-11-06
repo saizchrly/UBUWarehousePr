@@ -151,7 +151,7 @@ namespace ClassLib
         public bool cambiarContrasena(string contrasenaNueva)
         {
             // Comprobamos que la contrasena cumple con los requisitos minimos
-            if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) == 5 && contrasenaNueva != contrasenaActual)
+            if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) > 2 && contrasenaNueva != contrasenaActual)
             {
                 // Comprobamos que la contrasena no sea igual a una de las 10 anteriores
                 if (!comprobarContrasenaAntigua(contrasenaNueva))
@@ -159,7 +159,6 @@ namespace ClassLib
                 {
                     setContrasenaActual(contrasenaNueva);
                     guardarContrasenaAntigua();
-                    Log.escribirLog(EmailUsuario, "Cambio de contraseña");
                     return true;
                 }
                 else return false;

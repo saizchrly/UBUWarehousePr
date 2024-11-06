@@ -96,6 +96,24 @@ namespace WWW
         protected global::System.Web.UI.WebControls.TextBox tbNueva;
 
         /// <summary>
+        /// Control lblConfirmar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmar;
+
+        /// <summary>
+        /// Control tbConfirmar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox tbConfirmar;
+
+        /// <summary>
         /// Control btnAceptar.
         /// </summary>
         /// <remarks>

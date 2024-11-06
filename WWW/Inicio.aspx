@@ -198,7 +198,9 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Label ID="lblnElementos" runat="server"></asp:Label>
+                </td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
                 <td class="auto-style67">&nbsp;</td>
@@ -216,8 +218,11 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
+                <td class="auto-style2">
+                    <asp:Button ID="btnRaiz" runat="server" OnClick="btnRaiz_Click" Text="Añadir raíz" />
+                </td>
+                <td class="auto-style36">
+                    &nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
                 <td class="auto-style67">&nbsp;</td>
                 <td class="auto-style63">&nbsp;</td>
@@ -225,7 +230,8 @@
             </tr>
             <tr>
                 <td class="auto-style7"></td>
-                <td class="auto-style7">&nbsp;</td>
+                <td class="auto-style7">
+                    &nbsp;</td>
                 <td class="auto-style37">&nbsp;</td>
                 <td class="auto-style53"></td>
                 <td class="auto-style68">
@@ -237,7 +243,9 @@
             <tr>
                 <td class="auto-style69">
                     &nbsp;</td>
-                <td class="auto-style69"></td>
+                <td class="auto-style69">
+                    <asp:Label ID="lblMensaje" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
                 <td class="auto-style70"></td>
                 <td class="auto-style71"></td>
                 <td class="auto-style72"></td>

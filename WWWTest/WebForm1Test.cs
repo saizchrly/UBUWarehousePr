@@ -14,7 +14,7 @@ using NUnit.Framework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Assert = NUnit.Framework.Assert;
 [TestFixture]
-public class WWWTest
+public class WebForm1Test
 {
     private IWebDriver driver;
     public IDictionary<string, object> vars { get; private set; }

@@ -145,6 +145,29 @@
         .auto-style74 {
             height: 32px;
         }
+        .auto-style75 {
+            width: 276px;
+            height: 26px;
+        }
+        .auto-style76 {
+            width: 276px;
+            height: 24px;
+        }
+        .auto-style77 {
+            width: 276px;
+        }
+        .auto-style78 {
+            width: 276px;
+            height: 21px;
+        }
+        .auto-style79 {
+            width: 276px;
+            height: 27px;
+        }
+        .auto-style80 {
+            width: 276px;
+            height: 32px;
+        }
     </style>
 </head>
 <body>
@@ -153,7 +176,7 @@
         </div>
         <table class="auto-style13">
             <tr>
-                <td class="auto-style4">
+                <td class="auto-style75">
                     <asp:Label ID="lblTitulo" runat="server" Text="UBUWarehouse"></asp:Label>
                 </td>
                 <td class="auto-style4">&nbsp;</td>
@@ -167,7 +190,7 @@
                 <td class="auto-style5">&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style54"></td>
+                <td class="auto-style76"></td>
                 <td class="auto-style54"></td>
                 <td class="auto-style55"></td>
                 <td class="auto-style56"></td>
@@ -180,7 +203,7 @@
                 </td>
             </tr>
             <tr>
-                <td class="auto-style1">&nbsp;</td>
+                <td class="auto-style77">&nbsp;</td>
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style35">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
@@ -191,16 +214,7 @@
                 <td>&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2"></td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
-                <td class="auto-style52"></td>
-                <td class="auto-style67"></td>
-                <td class="auto-style63"></td>
-                <td class="auto-style3"></td>
-            </tr>
-            <tr>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style78"></td>
                 <td class="auto-style2">
                     <asp:Label ID="lblActual" runat="server" Text="Introduzca la contraseña actual:"></asp:Label>
                 </td>
@@ -208,12 +222,12 @@
                     <asp:TextBox ID="tbActual" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style67">&nbsp;</td>
-                <td class="auto-style63">&nbsp;</td>
-                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style67"></td>
+                <td class="auto-style63"></td>
+                <td class="auto-style3"></td>
             </tr>
             <tr>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style78">&nbsp;</td>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style36">&nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
@@ -222,10 +236,10 @@
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style2">&nbsp;</td>
+                <td class="auto-style78">&nbsp;</td>
                 <td class="auto-style2">
                     <asp:Label ID="lblNueva" runat="server" Text="Introduzca la nueva contraseña"></asp:Label>
-                </td>
+                    :</td>
                 <td class="auto-style36">
                     <asp:TextBox ID="tbNueva" runat="server" TextMode="Password"></asp:TextBox>
                 </td>
@@ -235,11 +249,24 @@
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
-                <td class="auto-style7"></td>
+                <td class="auto-style78">&nbsp;</td>
+                <td class="auto-style2">
+                    &nbsp;</td>
+                <td class="auto-style36">
+                    &nbsp;</td>
+                <td class="auto-style52">&nbsp;</td>
+                <td class="auto-style67">&nbsp;</td>
+                <td class="auto-style63">&nbsp;</td>
+                <td class="auto-style3">&nbsp;</td>
+            </tr>
+            <tr>
+                <td class="auto-style79"></td>
                 <td class="auto-style7">
-                    &nbsp;</td>
+                    <asp:Label ID="lblConfirmar" runat="server" Text="Confirme la nueva contraseña:"></asp:Label>
+                </td>
                 <td class="auto-style37">
-                    &nbsp;</td>
+                    <asp:TextBox ID="tbConfirmar" runat="server" TextMode="Password"></asp:TextBox>
+                </td>
                 <td class="auto-style53"></td>
                 <td class="auto-style68">
                 </td>
@@ -248,22 +275,23 @@
                 <td class="auto-style8"></td>
             </tr>
             <tr>
-                <td class="auto-style70">
+                <td class="auto-style80">
                     </td>
                 <td class="auto-style70"></td>
                 <td class="auto-style71">
-                    <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style72"></td>
                 <td class="auto-style69"></td>
                 <td class="auto-style73"></td>
                 <td class="auto-style74"></td>
             </tr>
             <tr>
-                <td class="auto-style7"></td>
+                <td class="auto-style79"></td>
                 <td class="auto-style7">
                     &nbsp;</td>
-                <td class="auto-style37"></td>
+                <td class="auto-style37">
+                    <asp:Button ID="btnAceptar" runat="server" Text="Aceptar" OnClick="btnAceptar_Click"/>
+                </td>
                 <td class="auto-style53"></td>
                 <td class="auto-style68">
                     </td>
@@ -271,7 +299,7 @@
                 <td class="auto-style8"></td>
             </tr>
             <tr>
-                <td class="auto-style1">&nbsp;</td>
+                <td class="auto-style77">&nbsp;</td>
                 <td class="auto-style1">
                     <asp:Label ID="lblError" runat="server" Font-Bold="True" Font-Underline="True" Text="Label" Visible="False"></asp:Label>
                 </td>

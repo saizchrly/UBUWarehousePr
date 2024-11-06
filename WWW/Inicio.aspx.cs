@@ -24,6 +24,7 @@ namespace WWW
                     Response.Redirect("WebForm1.aspx");
                 }
                 lblUsuario.Text = u.getEmailUsuario();
+                lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
             }
         }
 
@@ -35,6 +36,27 @@ namespace WWW
         protected void lbCambiarPassword_Click(object sender, EventArgs e)
         {
             Response.Redirect("CambioPassword.aspx");
+        }
+
+        protected void btnRaiz_Click(object sender, EventArgs e)
+        {
+            if (u != null)
+            {
+                if (u.añadirElemento("Raiz"))
+                {
+                    lblMensaje.Text = "Elemento raíz añadido correctamente.";
+                    lblMensaje.Visible = true;
+                    lblMensaje.ForeColor = System.Drawing.Color.DarkGreen;
+                    lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
+                }
+                else
+                {
+                    lblMensaje.Text = "Límite de elementos raíz superado.";
+                    lblMensaje.Visible = true;
+                    lblMensaje.ForeColor = System.Drawing.Color.DarkRed;
+                    lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
+                }
+            }
         }
     }
 }
