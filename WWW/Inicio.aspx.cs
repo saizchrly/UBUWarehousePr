@@ -23,8 +23,15 @@ namespace WWW
                 {
                     Response.Redirect("WebForm1.aspx");
                 }
+            }
+            u = (Usuario)Session["User"];
+            if (u != null)
+            {
                 lblUsuario.Text = u.getEmailUsuario();
                 lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
+                lblNombre.Text = "Nombre: " + u.getNombre();
+                lblPais.Text = "Pais: " + u.getPais();
+                lblTelefono.Text = "Telefono: " + u.getTelefono();
             }
         }
 
@@ -47,16 +54,67 @@ namespace WWW
                     lblMensaje.Text = "Elemento raíz añadido correctamente.";
                     lblMensaje.Visible = true;
                     lblMensaje.ForeColor = System.Drawing.Color.DarkGreen;
-                    lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
+                    Session["User"] = u;
+                    string script = "setTimeout(function() { window.location = Inicio.aspx'; }, 3000);";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true);
                 }
                 else
                 {
                     lblMensaje.Text = "Límite de elementos raíz superado.";
                     lblMensaje.Visible = true;
                     lblMensaje.ForeColor = System.Drawing.Color.DarkRed;
-                    lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
+                    string script = "setTimeout(function() { window.location = Inicio.aspx'; }, 3000);";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true);
                 }
             }
+        }
+
+        protected void btnNombre_Click(object sender, EventArgs e)
+        {
+            tbNombre.Visible = true;
+            btnCNombre.Visible = true;
+        }
+
+        protected void btnCNombre_Click(object sender, EventArgs e)
+        {
+            if (u != null)
+            {
+                if (tbNombre.Text.Length != 0)
+                {
+                    u.setNombre(tbNombre.Text);
+                    Session["User"] = u;
+                    Response.Redirect(Request.RawUrl);
+                }
+                else
+                {
+                    lblError.Text = "El nombre no puede quedar vacío";
+                    lblError.Visible = true;
+                    lblError.ForeColor = System.Drawing.Color.DarkRed;
+                    string script = "setTimeout(function() { window.location = Inicio.aspx'; }, 3000);";
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true);
+                }
+            }
+        }
+
+        protected void btnPais_Click(object sender, EventArgs e)
+        {
+            tbPais.Visible = true;
+            btnCPais.Visible = true;
+        }
+
+        protected void btnCPais_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnTelefono_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnCTelefono_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

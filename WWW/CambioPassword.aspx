@@ -29,7 +29,7 @@
         .auto-style6 {
             height: 26px;
             text-align: center;
-            width: 144px;
+            width: 106px;
         }
         .auto-style60 {
             width: 127px;
@@ -51,7 +51,7 @@
             width: 24px;
         }
         .auto-style65 {
-            width: 144px;
+            width: 106px;
             height: 24px;
         }
         .auto-style61 {
@@ -71,7 +71,7 @@
             width: 24px;
         }
         .auto-style66 {
-            width: 144px;
+            width: 106px;
         }
         .auto-style62 {
             width: 127px;
@@ -89,7 +89,7 @@
             width: 24px;
         }
         .auto-style67 {
-            width: 144px;
+            width: 106px;
             height: 21px;
         }
         .auto-style63 {
@@ -112,7 +112,7 @@
             width: 24px;
         }
         .auto-style68 {
-            width: 144px;
+            width: 106px;
             height: 27px;
         }
         .auto-style64 {
@@ -123,7 +123,7 @@
             height: 27px;
         }
         .auto-style69 {
-            width: 144px;
+            width: 106px;
             height: 32px;
         }
         .auto-style70 {
@@ -195,9 +195,10 @@
                 <td class="auto-style55"></td>
                 <td class="auto-style56"></td>
                 <td class="auto-style65">
+                    &nbsp;</td>
+                <td class="auto-style61">
                     <asp:LinkButton ID="lbCerrarSesion" runat="server" OnClick="lbCerrarSesion_Click">Cerrar Sesión</asp:LinkButton>
                 </td>
-                <td class="auto-style61"></td>
                 <td class="auto-style59">
                     <asp:LinkButton ID="lbInicio" runat="server" OnClick="lbInicio_Click">Menú Principal</asp:LinkButton>
                 </td>

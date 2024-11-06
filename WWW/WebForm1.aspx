@@ -122,8 +122,7 @@
                 <td class="auto-style1">&nbsp;</td>
                 <td class="auto-style10">&nbsp;</td>
                 <td>
-                    <asp:Button ID="btnRegistrarse" runat="server" OnClick="btnAceptar_Click" Text="Registrarse" Width="85px" />
-                </td>
+                    &nbsp;</td>
                 <td>
                     <asp:Button ID="btnAceptar" runat="server" OnClick="btnAceptar_Click" Text="Aceptar" Width="81px" />
                 </td>

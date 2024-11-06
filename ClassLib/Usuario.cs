@@ -17,6 +17,9 @@ namespace ClassLib
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
         private string tipoUsuario;
+        private string nombre;
+        private string pais;
+        private string telefono;
         // string es el Tipo del elemento y El value es la lista de elementos de ese tipo
         private Dictionary<string, List<Elemento>> elementos;
 
@@ -37,6 +40,9 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
+            nombre = "Admin Prueba";
+            pais = "España";
+            telefono = "607384274";
             elementos = new Dictionary<string, List<Elemento>>();
             elementos.Add("Raiz", new List<Elemento>());
             elementos.Add("Espacio", new List<Elemento>());
@@ -101,6 +107,28 @@ namespace ClassLib
         {
             contrasenaActual = Utilidades.Encriptar(contrasenaNueva);
         }
+
+        public string getNombre() => nombre;
+
+        public string getPais() => pais;
+
+        public string getTelefono() => telefono;
+
+        public void setNombre(string nombre)
+        {
+            this.nombre = nombre;
+        }
+
+        public void setPais(string pais)
+        {
+            this.pais = pais;
+        }
+
+        public void setTelefono(string telefono)
+        {
+            this.telefono = telefono;
+        }
+
 
         /// <summary>
         /// Metodo para guardar las ultimas 10 contraseñas, en caso de que haya 10 se eliminara la más antigua
@@ -286,8 +314,14 @@ namespace ClassLib
             {
                 if (tipoElementoAñadir == "Raiz")
                 {
-                    elementos[tipoElementoAñadir].Add(elementoAñadir);
-                    return true;
+                    if (privilegios)
+                    {
+                        if (raicesCreadas.size() > 5) return false;
+                    }
+                }
+                else if (raicesCreadas > 3) return false;
+                        elementos[tipoElementoAñadir].Add(elementoAñadir);
+                        return true;
                 }
                 else
                 {

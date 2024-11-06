@@ -18,13 +18,16 @@ namespace WWW
         private Usuario u;
         protected void Page_Load(object sender, EventArgs e)
         {
-            data = (WHdb)Application["Data"];
-            u = (Usuario)Session["User"];
-            if (data == null || u == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("WebForm1.aspx");
+                data = (WHdb)Application["Data"];
+                u = (Usuario)Session["User"];
+                if (data == null || u == null)
+                {
+                    Response.Redirect("WebForm1.aspx");
+                }
+                lblUsuario.Text = u.getEmailUsuario();
             }
-            lblUsuario.Text = u.getEmailUsuario();
         }
 
         protected void lbInicio_Click(object sender, EventArgs e)
