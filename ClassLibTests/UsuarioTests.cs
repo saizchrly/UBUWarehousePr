@@ -365,5 +365,53 @@ namespace ClassLib.Tests
 
 
         }
+
+        [TestMethod()]
+        public void getNombreTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setNombre("Juan");
+            Assert.AreEqual("Juan", usuario.getNombre());
+        }
+
+        [TestMethod()]
+        public void getPaisTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setPais("España");
+            Assert.AreEqual("España", usuario.getPais());
+        }
+
+        [TestMethod()]
+        public void getTelefonoTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setTelefono("123456789");
+            Assert.AreEqual("123456789", usuario.getTelefono());
+        }
+
+        [TestMethod()]
+        public void setNombreTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setNombre("Juan");
+            Assert.AreEqual("Juan", usuario.getNombre());
+        }
+
+        [TestMethod()]
+        public void setPaisTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setPais("España");
+            Assert.AreEqual("España", usuario.getPais());
+        }
+
+        [TestMethod()]
+        public void setTelefonoTest()
+        {
+            Usuario usuario = new Usuario("correo", "123");
+            usuario.setTelefono("123456789");
+            Assert.AreEqual("123456789", usuario.getTelefono());
+        }
     }
 }
