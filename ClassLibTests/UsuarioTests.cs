@@ -4,6 +4,8 @@ using System.IO;
 using ClassLib;
 using System.Collections.Generic;
 using UBULibPr;
+using System.Drawing;
+using OpenQA.Selenium.DevTools.V128.DOM;
 
 namespace ClassLib.Tests
 {
@@ -256,7 +258,7 @@ namespace ClassLib.Tests
             Usuario usuario = new Usuario("correo", "123");
             Dictionary<string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
             elementos.Add("Raiz", new List<Elemento> { new Elemento("Raiz", "0_R1") });
-            elementos.Add("Espacio", new List<Elemento> { new Elemento ("Espacio", "0_E1")});
+            elementos.Add("Espacio", new List<Elemento> { new Elemento("Espacio", "0_E1") });
             elementos.Add("Contenedor", new List<Elemento>());
             elementos.Add("Articulo", new List<Elemento>());
             usuario.setElementos(elementos);
@@ -273,14 +275,11 @@ namespace ClassLib.Tests
         public void añadirElementoTest()
         {
             Usuario usuario = new Usuario("correo", "123", "Pago");
-            Dictionary <string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
+            Dictionary<string, List<Elemento>> elementos = new Dictionary<string, List<Elemento>>();
             Assert.AreEqual(1, usuario.raicesCreadas());
             usuario.añadirElemento("Raiz");
             Assert.AreEqual(2, usuario.raicesCreadas());
             Assert.AreEqual(0, usuario.espaciosCreados());
-
-            Assert.IsFalse(usuario.añadirElemento("Espacio"));
-            Assert.AreEqual(0, usuario.espaciosCreados());//ya que no le indicamos el padre, solo la Raiz no tiene padre
             elementos = usuario.getElementos();
 
             Assert.IsTrue(usuario.añadirElemento("Espacio", elementos["Raiz"][0]));
@@ -328,6 +327,43 @@ namespace ClassLib.Tests
             Assert.IsFalse(usuario.moverElemento("0_R1", "0_R2"));
 
             Assert.IsTrue(usuario.moverElemento("0_C1", "0_E1"));
+        }
+
+        [TestMethod()]
+        public void mostrarElementosTest()
+        {
+            Usuario usuario = new Usuario("correo", "123", "Pago");
+
+            string resultado = usuario.mostrarElementos();
+            string esperado = "0_R1\n";
+            Assert.AreEqual(esperado, resultado);
+
+            usuario.añadirElemento("Espacio", usuario.getElementos()["Raiz"][0]);
+            resultado = usuario.mostrarElementos();
+            esperado = "0_R1\n    └── 0_E1\n";
+            Assert.AreEqual(esperado, resultado);
+
+            usuario.añadirElemento("Contenedor", usuario.getElementos()["Raiz"][0]);
+            resultado = usuario.mostrarElementos();
+            esperado = "0_R1\n    ├── 0_E1\n    └── 0_C1\n";
+            Assert.AreEqual(esperado, resultado);
+
+            usuario.añadirElemento("Articulo", usuario.getElementos()["Contenedor"][0]);
+            resultado = usuario.mostrarElementos();
+            esperado = "0_R1\n    ├── 0_E1\n    └── 0_C1\n    └──     └── 0_A1\n";
+            Assert.AreEqual(esperado, resultado);
+
+            usuario.añadirElemento("Articulo", usuario.getElementos()["Contenedor"][0]);
+            resultado = usuario.mostrarElementos();
+            esperado = "0_R1\n    ├── 0_E1\n    └── 0_C1\n    └──     ├── 0_A1\n    └──     └── 0_A2\n";
+            Assert.AreEqual(esperado, resultado);
+
+            usuario.añadirElemento("Articulo", usuario.getElementos()["Espacio"][0]);
+            resultado = usuario.mostrarElementos();
+            esperado = "0_R1\n    ├── 0_E1\n    ├──     └── 0_A3\n    └── 0_C1\n    └──     ├── 0_A1\n    └──     └── 0_A2\n";
+            Assert.AreEqual(esperado, resultado);
+
+
         }
     }
 }

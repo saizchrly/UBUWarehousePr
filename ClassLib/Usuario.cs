@@ -342,7 +342,7 @@ namespace ClassLib
             Elemento e = Elemento.buscarElemento(elementos, id);
             if (e == null) return false;
 
-            if (e.getTipo().Equals("Raiz")) return false;   
+            if (e.getTipo().Equals("Raiz")) return false;
 
             List<string> datosPadre = e.getPadre();
             if (datosPadre.Count() == 0) return false;
@@ -421,7 +421,87 @@ namespace ClassLib
 
             return false;
         }
-    }
 
-        
+        public string mostrarElementos()
+        {
+            Dictionary<string, List<string>> Imprimir = new Dictionary<string, List<string>>();
+
+            // Recorremos los elementos por tipo
+            foreach (string key in elementos.Keys)
+            {
+                foreach (Elemento e in elementos[key])
+                {
+                    // Obtiene el ID del padre o el ID propio si no tiene padre
+                    List<string> padreList = e.getPadre();
+                    string PadreId = (padreList != null && padreList.Count == 2) ? padreList[1] : e.getId();
+
+                    // Lista de hijos para el elemento actual
+                    List<string> HijosID = new List<string>();
+                    List<List<string>> HijosPadre = e.getHijos();
+
+                    // Si tiene hijos, los agregamos a HijosID
+                    if (HijosPadre != null)
+                    {
+                        foreach (List<string> hijo in HijosPadre)
+                        {
+                            if (hijo != null && hijo.Count > 1)
+                            {
+                                HijosID.Add(hijo[1]);
+                            }
+                        }
+                    }
+
+                    // Si el padre ya existe en el diccionario, agregamos los hijos al padre
+                    if (!Imprimir.ContainsKey(e.getId()))
+                    {
+                        Imprimir.Add(e.getId(), HijosID);
+                    }
+                    else
+                    {
+                        // Si el padre ya existe, solo agregamos los hijos si no están ya presentes
+                        foreach (var hijo in HijosID)
+                        {
+                            if (!Imprimir[e.getId()].Contains(hijo))
+                            {
+                                Imprimir[e.getId()].Add(hijo);
+                            }
+                        }
+                    }
+                }
+            }
+
+            // HashSet para asegurar que no se repitan nodos impresos
+            HashSet<string> impresos = new HashSet<string>();
+
+            // Seleccionamos el primer nodo raíz (usualmente el nodo principal de nivel superior)
+            string nodoRaiz = Imprimir.Keys.First();
+
+            // Llamamos a la función para construir el árbol
+            return ConstruirArbol(nodoRaiz, Imprimir, impresos, "");
+        }
+
+        public string ConstruirArbol(string nodo, Dictionary<string, List<string>> arbol, HashSet<string> impresos, string indentacion)
+        {
+            // Si el nodo ya fue impreso, no lo procesamos
+            if (impresos.Contains(nodo)) return "";
+
+            // Acumulamos el resultado en un string
+            string resultado = indentacion + nodo + "\n";
+            impresos.Add(nodo); // Añadimos el nodo al conjunto de impresos
+
+            // Verificamos si el nodo tiene hijos
+            if (arbol.ContainsKey(nodo))
+            {
+                List<string> hijos = arbol[nodo];
+                for (int i = 0; i < hijos.Count; i++)
+                {
+                    // Generamos la indentación para los hijos y procesamos recursivamente
+                    string nuevaIndentacion = indentacion + (i == hijos.Count - 1 ? "    └── " : "    ├── ");
+                    resultado += ConstruirArbol(hijos[i], arbol, impresos, nuevaIndentacion);
+                }
+            }
+
+            return resultado;
+        }
+    }
 }
