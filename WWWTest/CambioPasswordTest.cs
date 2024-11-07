@@ -28,49 +28,90 @@ public class CambioPasswordTest {
   }
   [Test]
   public void cambioPassword() {
-    driver.Navigate().GoToUrl("http://localhost:57825/WebForm1.aspx");
-    driver.FindElement(By.CssSelector(".auto-style3:nth-child(4)")).Click();
+    driver.Navigate().GoToUrl("http://localhost:57825/InicioSesion.aspx");
     driver.FindElement(By.Id("tbxUsuario")).Click();
     driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1@ubu.es");
     driver.FindElement(By.Id("tbxPassword")).Click();
     driver.FindElement(By.Id("tbxPassword")).SendKeys("prueba1");
-    driver.FindElement(By.Id("tbxPassword")).SendKeys(Keys.Enter);
+    driver.FindElement(By.Id("btnAceptar")).Click();
     driver.FindElement(By.Id("lbCambiarPassword")).Click();
-    driver.FindElement(By.CssSelector("tr:nth-child(4) > .auto-style36")).Click();
-    driver.FindElement(By.Id("tbActual")).Click();
     driver.FindElement(By.Id("tbActual")).SendKeys("prueba2");
     driver.FindElement(By.Id("tbNueva")).Click();
     driver.FindElement(By.Id("tbNueva")).SendKeys("paco");
-    driver.FindElement(By.CssSelector("tr:nth-child(8) > .auto-style37")).Click();
     driver.FindElement(By.Id("tbConfirmar")).Click();
     driver.FindElement(By.Id("tbConfirmar")).SendKeys("paco");
-    {
-      var element = driver.FindElement(By.CssSelector("tr:nth-child(10) > .auto-style37"));
-      Actions builder = new Actions(driver);
-      builder.MoveToElement(element).ClickAndHold().Perform();
-    }
-    {
-      var element = driver.FindElement(By.Id("btnAceptar"));
-      Actions builder = new Actions(driver);
-      builder.MoveToElement(element).Release().Perform();
-    }
-    driver.FindElement(By.CssSelector("tr:nth-child(10) > .auto-style37")).Click();
     driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La contraseña introducida no es correcta.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba2");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La contraseña introducida no es correcta.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("paco");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("paco");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector(".auto-style13")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La nueva contraseña no es lo suficientemente segura.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("paco");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("paci");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La contraseña no ha sido confirmada correctamente.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La contraseña introducida no es correcta.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La nueva contraseña no es lo suficientemente segura.          "));
+    driver.FindElement(By.CssSelector(".auto-style13")).Click();
     {
-      var element = driver.FindElement(By.CssSelector(".auto-style61"));
+      var element = driver.FindElement(By.CssSelector(".auto-style13"));
       Actions builder = new Actions(driver);
-      builder.MoveToElement(element).ClickAndHold().Perform();
+      builder.DoubleClick(element).Perform();
     }
-    {
-      var element = driver.FindElement(By.CssSelector(".auto-style61"));
-      Actions builder = new Actions(driver);
-      builder.MoveToElement(element).Perform();
-    }
-    {
-      var element = driver.FindElement(By.CssSelector(".auto-style61"));
-      Actions builder = new Actions(driver);
-      builder.MoveToElement(element).Release().Perform();
-    }
-    driver.FindElement(By.CssSelector(".auto-style61")).Click();
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("Francisco68");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La contraseña no ha sido confirmada correctamente.          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.CssSelector("tr:nth-child(6)")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("prueba1");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("UBUWarehouse       prueba1@ubu.es  \\\\n  Cerrar Sesión Menú Principal\\\\n              Introduzca la contraseña actual:  \\\\n                Introduzca la nueva contraseña :        \\\\n              Confirme la nueva contraseña:\\\\n      La nueva contraseña no puede ser igual a la antigua          "));
+    driver.FindElement(By.Id("tbActual")).Click();
+    driver.FindElement(By.Id("tbActual")).SendKeys("prueba1");
+    driver.FindElement(By.Id("tbNueva")).Click();
+    driver.FindElement(By.Id("tbNueva")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("tbConfirmar")).Click();
+    driver.FindElement(By.Id("tbConfirmar")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    driver.FindElement(By.Id("tbxUsuario")).Click();
+    driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1@ubu.es");
+    driver.FindElement(By.Id("tbxPassword")).Click();
+    driver.FindElement(By.Id("tbxPassword")).SendKeys("Francisco657");
+    driver.FindElement(By.Id("btnAceptar")).Click();
+    driver.FindElement(By.Id("tbxPassword")).Click();
+    driver.FindElement(By.Id("tbxPassword")).SendKeys("Francisco67");
+    driver.FindElement(By.Id("btnAceptar")).Click();
   }
 }

@@ -33,31 +33,32 @@ public class InicioSesionTest
     [Test]
     public void LoginTest()
     {
-        driver.Navigate().GoToUrl("http://localhost:57825/WebForm1.aspx");
+        driver.Navigate().GoToUrl("http://localhost:57825/InicioSesion.aspx");
+        driver.FindElement(By.Id("tbxUsuario")).Click();
+        driver.FindElement(By.CssSelector("table")).Click();
+        driver.FindElement(By.Id("btnAceptar")).Click();
+        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n       "));
+        driver.FindElement(By.Id("tbxUsuario")).Click();
+        driver.FindElement(By.Id("tbxPassword")).SendKeys("prueba1");
+        driver.FindElement(By.CssSelector("tr:nth-child(3)")).Click();
+        driver.FindElement(By.Id("tbxUsuario")).SendKeys("usuariofalso");
+        driver.FindElement(By.Id("btnAceptar")).Click();
+        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n       "));
+        driver.FindElement(By.CssSelector("tr:nth-child(3)")).Click();
+        driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1");
+        driver.FindElement(By.CssSelector("tr:nth-child(6) > td:nth-child(3)")).Click();
+        driver.FindElement(By.Id("tbxPassword")).Click();
+        driver.FindElement(By.Id("tbxPassword")).SendKeys("incorrecta");
+        driver.FindElement(By.Id("btnAceptar")).Click();
+        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n       "));
         driver.FindElement(By.Id("tbxUsuario")).Click();
         driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1@ubu.es");
-        driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1");
+        driver.FindElement(By.Id("tbxPassword")).Click();
+        driver.FindElement(By.Id("tbxPassword")).SendKeys("incorrecta");
+        driver.FindElement(By.Id("btnAceptar")).Click();
+        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n       "));
         driver.FindElement(By.Id("tbxPassword")).Click();
         driver.FindElement(By.Id("tbxPassword")).SendKeys("prueba1");
         driver.FindElement(By.Id("btnAceptar")).Click();
-        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n     "));
-        driver.FindElement(By.CssSelector("tr:nth-child(3)")).Click();
-        driver.FindElement(By.Id("tbxUsuario")).SendKeys("gdyagsfugasf");
-        driver.FindElement(By.Id("tbxPassword")).Click();
-        driver.FindElement(By.Id("tbxPassword")).SendKeys("prueba1");
-        driver.FindElement(By.Id("btnAceptar")).Click();
-        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n     "));
-        driver.FindElement(By.CssSelector("tr:nth-child(3)")).Click();
-        driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1@ubu.essdsd");
-        driver.FindElement(By.Id("tbxPassword")).Click();
-        driver.FindElement(By.Id("tbxPassword")).SendKeys("dasfasasasas");
-        driver.FindElement(By.Id("btnAceptar")).Click();
-        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión\\\\n    Usuario  \\\\nContraseña\\\\n              Usuario y/o contraseña incorrecto.    \\\\n     "));
-        driver.FindElement(By.CssSelector("tr:nth-child(3)")).Click();
-        driver.FindElement(By.Id("tbxUsuario")).SendKeys("prueba1@ubu.es");
-        driver.FindElement(By.Id("tbxPassword")).Click();
-        driver.FindElement(By.Id("tbxPassword")).SendKeys("prueba1");
-        driver.FindElement(By.Id("btnAceptar")).Click();
-        Assert.That(driver.FindElement(By.CssSelector("html")).Text, Is.EqualTo("Inicio de sesión correcto"));
     }
 }
