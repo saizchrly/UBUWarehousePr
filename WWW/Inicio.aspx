@@ -102,35 +102,8 @@
             width: 203px;
             height: 27px;
         }
-        .auto-style88 {
-            width: 42px;
-            height: 26px;
-        }
-        .auto-style89 {
-            width: 42px;
-            height: 24px;
-        }
-        .auto-style90 {
-            width: 42px;
-        }
-        .auto-style91 {
-            width: 42px;
-            height: 21px;
-        }
-        .auto-style92 {
-            width: 42px;
-            height: 16px;
-        }
-        .auto-style93 {
-            width: 42px;
-            height: 27px;
-        }
         .auto-style94 {
             width: 274px;
-            height: 23px;
-        }
-        .auto-style95 {
-            width: 42px;
             height: 23px;
         }
         .auto-style96 {
@@ -167,6 +140,60 @@
             width: 352px;
             height: 23px;
         }
+        .auto-style105 {
+            width: 157px;
+            height: 26px;
+        }
+        .auto-style106 {
+            width: 157px;
+            height: 24px;
+        }
+        .auto-style107 {
+            width: 157px;
+        }
+        .auto-style108 {
+            width: 157px;
+            height: 21px;
+        }
+        .auto-style109 {
+            width: 157px;
+            height: 16px;
+        }
+        .auto-style110 {
+            width: 157px;
+            height: 27px;
+        }
+        .auto-style111 {
+            width: 157px;
+            height: 23px;
+        }
+        .auto-style112 {
+            width: 198px;
+            height: 26px;
+        }
+        .auto-style113 {
+            width: 198px;
+            height: 24px;
+        }
+        .auto-style114 {
+            width: 198px;
+        }
+        .auto-style115 {
+            width: 198px;
+            height: 21px;
+        }
+        .auto-style116 {
+            width: 198px;
+            height: 16px;
+        }
+        .auto-style117 {
+            width: 198px;
+            height: 27px;
+        }
+        .auto-style118 {
+            width: 198px;
+            height: 23px;
+        }
     </style>
 </head>
 <body style="height: 0px">
@@ -176,8 +203,8 @@
                 <td class="auto-style4">
                     <asp:Label ID="lblTitulo" runat="server" Text="UBUWarehouse"></asp:Label>
                 </td>
-                <td class="auto-style4">&nbsp;</td>
-                <td class="auto-style88">&nbsp;</td>
+                <td class="auto-style105">&nbsp;</td>
+                <td class="auto-style112">&nbsp;</td>
                 <td class="auto-style50"></td>
                 <td class="auto-style6">
                     &nbsp;</td>
@@ -188,8 +215,8 @@
             </tr>
             <tr>
                 <td class="auto-style54"></td>
-                <td class="auto-style54"></td>
-                <td class="auto-style89"></td>
+                <td class="auto-style106"></td>
+                <td class="auto-style113"></td>
                 <td class="auto-style56">&nbsp;</td>
                 <td class="auto-style99">
                     &nbsp;</td>
@@ -202,8 +229,8 @@
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style90">&nbsp;</td>
+                <td class="auto-style107">&nbsp;</td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
                 <td class="auto-style100">
                     &nbsp;</td>
@@ -213,10 +240,10 @@
             </tr>
             <tr>
                 <td class="auto-style2"></td>
-                <td class="auto-style2">
+                <td class="auto-style108">
                     <asp:Label ID="lblnElementos" runat="server"></asp:Label>
                 </td>
-                <td class="auto-style91">&nbsp;</td>
+                <td class="auto-style115">&nbsp;</td>
                 <td class="auto-style52"></td>
                 <td class="auto-style101">
                     <asp:Label ID="lblInfo" runat="server" Font-Bold="True" Font-Underline="True" Text="Información del usuario"></asp:Label>
@@ -226,9 +253,9 @@
             </tr>
             <tr>
                 <td class="auto-style75"></td>
-                <td class="auto-style75">
+                <td class="auto-style109">
                     &nbsp;</td>
-                <td class="auto-style92"></td>
+                <td class="auto-style116"></td>
                 <td class="auto-style77"></td>
                 <td class="auto-style102"></td>
                 <td class="auto-style85">&nbsp;</td>
@@ -236,10 +263,12 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">
+                <td class="auto-style108">
                     <asp:Button ID="btnRaiz" runat="server" Height="29px" OnClick="btnRaiz_Click" Text="Añadir raíz" />
                 </td>
-                <td class="auto-style91">&nbsp;</td>
+                <td class="auto-style115">
+                    <asp:Button ID="btnBorrar" runat="server" Height="29px" OnClick="btnBorrar_Click" Text="Eliminar raíz" />
+                </td>
                 <td class="auto-style52">&nbsp;</td>
                 <td class="auto-style101">
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
@@ -251,9 +280,9 @@
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">
+                <td class="auto-style108">
                     &nbsp;</td>
-                <td class="auto-style91">
+                <td class="auto-style115">
                     &nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
                 <td class="auto-style101">&nbsp;</td>
@@ -266,10 +295,9 @@
             </tr>
             <tr>
                 <td class="auto-style7"></td>
-                <td class="auto-style7">
-                    <asp:Label ID="lblMensaje" runat="server" Text="Label" Visible="False"></asp:Label>
-                </td>
-                <td class="auto-style93">&nbsp;</td>
+                <td class="auto-style110">
+                    &nbsp;</td>
+                <td class="auto-style117">&nbsp;</td>
                 <td class="auto-style53"></td>
                 <td class="auto-style103">
                     <asp:Label ID="lblPais" runat="server" Text="País"></asp:Label>
@@ -282,22 +310,24 @@
             <tr>
                 <td class="auto-style94">
                     </td>
-                <td class="auto-style94">
+                <td class="auto-style111">
                 </td>
-                <td class="auto-style95"></td>
+                <td class="auto-style118"></td>
                 <td class="auto-style96"></td>
                 <td class="auto-style104">&nbsp;</td>
                 <td class="auto-style97">
                     <asp:TextBox ID="tbPais" runat="server" Visible="False"></asp:TextBox>
                 </td>
                 <td class="auto-style98">
-                    <asp:Button ID="btnCPais" runat="server" OnClick="btnCPais_Click" Text="Aceptar" Visible="False" />
+                    <asp:Button ID="btnCPais" runat="server" Height="29px" OnClick="btnCPais_Click" Text="Aceptar" Visible="False" />
                 </td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style90">&nbsp;</td>
+                <td class="auto-style107">
+                    <asp:Label ID="lblMensaje" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
                 <td class="auto-style100">
                     <asp:Label ID="lblTelefono" runat="server" Text="Teléfono"></asp:Label>
@@ -312,8 +342,8 @@
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style90">&nbsp;</td>
+                <td class="auto-style107">&nbsp;</td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
                 <td class="auto-style100">
                     <asp:Label ID="lblError" runat="server" Text="Label" Visible="False"></asp:Label>

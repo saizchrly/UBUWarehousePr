@@ -266,7 +266,7 @@ namespace ClassLib
 
             if (tipo == "Raiz")
             {
-                int limite = 10000;
+                int limite = 10;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
                 int numeroRaices = raicesCreadas();
@@ -314,14 +314,8 @@ namespace ClassLib
             {
                 if (tipoElementoAñadir == "Raiz")
                 {
-                    if (privilegios)
-                    {
-                        if (raicesCreadas.size() > 5) return false;
-                    }
-                }
-                else if (raicesCreadas > 3) return false;
-                        elementos[tipoElementoAñadir].Add(elementoAñadir);
-                        return true;
+                    elementos[tipoElementoAñadir].Add(elementoAñadir);
+                    return true;
                 }
                 else
                 {

@@ -16,7 +16,7 @@ namespace WHDatabase
         int proximoIDUsuario = 1;
         public WHdb()
         {
-            Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Admin");
+            Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Pago");
             GuardaUsuario(u);
         }
 
