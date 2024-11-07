@@ -38,7 +38,6 @@ namespace WWW
                 lblNombre.Text = "Nombre: " + u.getNombre();
                 lblPais.Text = "Pais: " + u.getPais();
                 lblTelefono.Text = "Telefono: " + u.getTelefono();
-                lblMostrarElem.Text = u.mostrarElementos();
             }
         }
         /// <summary>
@@ -59,8 +58,12 @@ namespace WWW
         {
             Response.Redirect("CambioPassword.aspx");
         }
-
-        /*protected void btnRaiz_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Botón que permite al usuario añadir elementos raíz hasta llegar al límite
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        protected void btnRaiz_Click(object sender, EventArgs e)
         {
             if (u != null)
             {
@@ -71,6 +74,7 @@ namespace WWW
                     lblMensaje.ForeColor = System.Drawing.Color.DarkGreen;
                     lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
                     Session["User"] = u;
+                    data = (WHdb)Application["Data"];;
                     string script = "setTimeout(function() { window.location = Inicio.aspx'; }, 3000);";
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true);
                 }
@@ -84,7 +88,7 @@ namespace WWW
                 }
             }
         }
-        */
+        
 
         /// <summary>
         /// Botón que permitirá al usuario editar su nombre.
@@ -195,8 +199,6 @@ namespace WWW
 
             }
         }
-
-        /*
         protected void btnBorrar_Click(object sender, EventArgs e)
         {
             if (u != null)
@@ -221,6 +223,5 @@ namespace WWW
                 }
             }
         }
-        */
     }
 }
