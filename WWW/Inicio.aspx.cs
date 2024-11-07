@@ -33,7 +33,7 @@ namespace WWW
                 lblNombre.Text = "Nombre: " + u.getNombre();
                 lblPais.Text = "Pais: " + u.getPais();
                 lblTelefono.Text = "Telefono: " + u.getTelefono();
-                if (u.raicesCreadas() < 1) btnBorrar.Visible = false;
+                lblMostrarElem.Text = u.mostrarElementos();
             }
         }
 
@@ -47,7 +47,7 @@ namespace WWW
             Response.Redirect("CambioPassword.aspx");
         }
 
-        protected void btnRaiz_Click(object sender, EventArgs e)
+        /*protected void btnRaiz_Click(object sender, EventArgs e)
         {
             if (u != null)
             {
@@ -71,6 +71,7 @@ namespace WWW
                 }
             }
         }
+        */
 
         protected void btnNombre_Click(object sender, EventArgs e)
         {

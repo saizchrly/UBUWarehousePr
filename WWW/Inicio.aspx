@@ -68,17 +68,6 @@
         .auto-style59 {
             height: 24px;
         }
-        .auto-style75 {
-            width: 274px;
-            height: 16px;
-        }
-        .auto-style77 {
-            height: 16px;
-            width: 117px;
-        }
-        .auto-style80 {
-            height: 16px;
-        }
         .auto-style81 {
             width: 203px;
             height: 26px;
@@ -93,10 +82,6 @@
         .auto-style84 {
             width: 203px;
             height: 21px;
-        }
-        .auto-style85 {
-            width: 203px;
-            height: 16px;
         }
         .auto-style86 {
             width: 203px;
@@ -128,10 +113,6 @@
             width: 352px;
             height: 21px;
         }
-        .auto-style102 {
-            width: 352px;
-            height: 16px;
-        }
         .auto-style103 {
             width: 352px;
             height: 27px;
@@ -154,10 +135,6 @@
         .auto-style108 {
             width: 157px;
             height: 21px;
-        }
-        .auto-style109 {
-            width: 157px;
-            height: 16px;
         }
         .auto-style110 {
             width: 157px;
@@ -182,10 +159,6 @@
             width: 198px;
             height: 21px;
         }
-        .auto-style116 {
-            width: 198px;
-            height: 16px;
-        }
         .auto-style117 {
             width: 198px;
             height: 27px;
@@ -193,6 +166,33 @@
         .auto-style118 {
             width: 198px;
             height: 23px;
+        }
+        .auto-style119 {
+            width: 274px;
+            height: 122px;
+        }
+        .auto-style120 {
+            width: 157px;
+            height: 122px;
+        }
+        .auto-style121 {
+            width: 198px;
+            height: 122px;
+        }
+        .auto-style122 {
+            height: 122px;
+            width: 117px;
+        }
+        .auto-style123 {
+            width: 352px;
+            height: 122px;
+        }
+        .auto-style124 {
+            width: 203px;
+            height: 122px;
+        }
+        .auto-style125 {
+            height: 122px;
         }
     </style>
 </head>
@@ -246,29 +246,29 @@
                 <td class="auto-style115">&nbsp;</td>
                 <td class="auto-style52"></td>
                 <td class="auto-style101">
-                    <asp:Label ID="lblInfo" runat="server" Font-Bold="True" Font-Underline="True" Text="Información del usuario"></asp:Label>
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style84">&nbsp;</td>
                 <td class="auto-style3"></td>
             </tr>
             <tr>
-                <td class="auto-style75"></td>
-                <td class="auto-style109">
-                    &nbsp;</td>
-                <td class="auto-style116"></td>
-                <td class="auto-style77"></td>
-                <td class="auto-style102"></td>
-                <td class="auto-style85">&nbsp;</td>
-                <td class="auto-style80"></td>
+                <td class="auto-style119"></td>
+                <td class="auto-style120">
+                    <asp:Label ID="lblMostrarElem" runat="server" Text="Label"></asp:Label>
+                </td>
+                <td class="auto-style121"></td>
+                <td class="auto-style122"></td>
+                <td class="auto-style123">
+                    <asp:Label ID="lblInfo" runat="server" Font-Bold="True" Font-Underline="True" Text="Información del usuario"></asp:Label>
+                </td>
+                <td class="auto-style124"></td>
+                <td class="auto-style125"></td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
                 <td class="auto-style108">
-                    <asp:Button ID="btnRaiz" runat="server" Height="29px" OnClick="btnRaiz_Click" Text="Añadir raíz" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style115">
-                    <asp:Button ID="btnBorrar" runat="server" Height="29px" OnClick="btnBorrar_Click" Text="Eliminar raíz" />
-                </td>
+                    &nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
                 <td class="auto-style101">
                     <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
