@@ -98,10 +98,10 @@ namespace WWW
                     }
                     else
                     {
-                        lblError.Text = "Se ha producido un error en la actualización de la contraseña";
+                        lblError.Text = "La contraseña ya haya sido utilizada antes";
                         lblError.ForeColor = System.Drawing.Color.Red; 
-                        lblError.Visible = true; 
-                    }
+                        lblError.Visible = true; //Otros posibles errores, seguramente que la contraseña ya había sido utilizada antes
+                    } 
                 }
             }
             else
