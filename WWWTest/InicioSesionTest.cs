@@ -13,7 +13,7 @@ using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
 [TestFixture]
-public class WebForm1Test
+public class InicioSesionTest
 {
     private WebDriver driver;
     public IDictionary<string, object> vars { get; private set; }
@@ -31,7 +31,7 @@ public class WebForm1Test
         driver.Quit();
     }
     [Test]
-    public void InicioTest()
+    public void LoginTest()
     {
         driver.Navigate().GoToUrl("http://localhost:57825/WebForm1.aspx");
         driver.FindElement(By.Id("tbxUsuario")).Click();
