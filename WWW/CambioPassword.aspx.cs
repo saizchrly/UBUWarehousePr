@@ -21,16 +21,14 @@ namespace WWW
         private Usuario u;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!IsPostBack)
+            data = (WHdb)Application["Data"];
+            u = (Usuario)Session["User"];
+            if (data == null || u == null)
             {
-                data = (WHdb)Application["Data"];
-                u = (Usuario)Session["User"];
-                if (data == null || u == null)
-                {
-                    Response.Redirect("WebForm1.aspx");
-                }
-                lblUsuario.Text = u.getEmailUsuario(); //Información superior igual que la del menú principal
+                Response.Redirect("InicioSesion.aspx");
             }
+            lblUsuario.Text = u.getEmailUsuario(); //Información superior igual que la del menú principal
+
         }
 
         /// <summary>
@@ -50,7 +48,7 @@ namespace WWW
         /// <param name="e"></param>
         protected void lbCerrarSesion_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm1.aspx");
+            Response.Redirect("InicioSesion.aspx");
         }
 
         /// <summary>
@@ -95,7 +93,7 @@ namespace WWW
                         lblError.Text = "Contraseña actualizada con éxito. Redirigiendo a la página de inicio de sesión...";
                         lblError.ForeColor = System.Drawing.Color.DarkGreen;
                         lblError.Visible = true; //Si se cumplen los requisitos, se comunica al usuario y se vuelve al login
-                        string script = "setTimeout(function() { window.location = 'WebForm1.aspx'; }, 3000);";
+                        string script = "setTimeout(function() { window.location = 'InicioSesion.aspx'; }, 3000);";
                         ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true); //
                     }
                     else

@@ -27,7 +27,7 @@ namespace WWW
                 u = (Usuario)Session["User"];
                 if (data == null || u == null)
                 {
-                    Response.Redirect("WebForm1.aspx"); //Si la sesión no ha sido iniciada, volver al login
+                    Response.Redirect("InicioSesion.aspx"); //Si la sesión no ha sido iniciada, volver al login
                 }
             }
             u = (Usuario)Session["User"];
@@ -48,7 +48,7 @@ namespace WWW
         /// <param name="e"></param>
         protected void lbCerrarSesion_Click(object sender, EventArgs e)
         {
-            Response.Redirect("WebForm1.aspx");
+            Response.Redirect("InicioSesion.aspx");
         }
         /// <summary>
         /// Botón que permitirá al usuario acceder a la página de cambiar contraseña

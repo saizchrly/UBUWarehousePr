@@ -13,7 +13,7 @@ namespace WWW
 {   /// <summary>
     /// Página de inicio de sesión al sistema. El usuario deberá introducir su email y contraseña.
     /// </summary>
-    public partial class WebForm1 : System.Web.UI.Page
+    public partial class InicioSesion : System.Web.UI.Page
     {
         WHdb data = null;
         Usuario usActual = null;
