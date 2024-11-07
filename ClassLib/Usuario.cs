@@ -108,22 +108,46 @@ namespace ClassLib
             contrasenaActual = Utilidades.Encriptar(contrasenaNueva);
         }
 
+        /// <summary>
+        /// Obtiene el nombre del usuario
+        /// </summary>
+        /// <returns></returns>
         public string getNombre() => nombre;
 
+        /// <summary>
+        /// Obtiene el pais del usuario
+        /// </summary>
+        /// <returns></returns>
         public string getPais() => pais;
 
+        /// <summary>
+        /// Obtiene el telefono del usuario
+        /// </summary>
+        /// <returns></returns>
         public string getTelefono() => telefono;
 
+        /// <summary>
+        /// set del nombre del usuario
+        /// </summary>
+        /// <param name="nombre"></param>
         public void setNombre(string nombre)
         {
             this.nombre = nombre;
         }
 
+        /// <summary>
+        /// ser del pais del usuario
+        /// </summary>
+        /// <param name="pais"></param>
         public void setPais(string pais)
         {
             this.pais = pais;
         }
 
+        /// <summary>
+        /// set del telefono del usuario
+        /// </summary>
+        /// <param name="telefono"></param>
         public void setTelefono(string telefono)
         {
             this.telefono = telefono;
