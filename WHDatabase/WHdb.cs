@@ -31,6 +31,10 @@ namespace WHDatabase
         public WHdb()
         {
             Usuario u = new Usuario("prueba1@ubu.es", "prueba1", "Pago");
+            u.añadirElemento("Espacio", u.getElementos()["Raiz"][0]);
+            u.añadirElemento("Contenedor", u.getElementos()["Raiz"][0]);
+            u.añadirElemento("Contenedor", u.getElementos()["Espacio"][0]);
+            u.añadirElemento("Articulo", u.getElementos()["Contenedor"][0]);
             GuardaUsuario(u);
         }
 
