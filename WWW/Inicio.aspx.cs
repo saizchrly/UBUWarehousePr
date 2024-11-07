@@ -12,6 +12,11 @@ namespace WWW
 {
     public partial class Inicio : System.Web.UI.Page
     {
+        /// <summary>
+        /// Menú principal del usuario.
+        /// Una vez se haya iniciado su sesión, podrá ver y editar su información personal.
+        /// También podrá ver una lista de los elementos que posee.
+        /// </summary>
         private WHdb data;
         private Usuario u;
         protected void Page_Load(object sender, EventArgs e)
@@ -36,12 +41,20 @@ namespace WWW
                 lblMostrarElem.Text = u.mostrarElementos();
             }
         }
-
+        /// <summary>
+        /// Botón que permitirá al usuario cerrar sesión y volver a la página de login
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void lbCerrarSesion_Click(object sender, EventArgs e)
         {
             Response.Redirect("WebForm1.aspx");
         }
-
+        /// <summary>
+        /// Botón que permitirá al usuario acceder a la página de cambiar contraseña
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void lbCambiarPassword_Click(object sender, EventArgs e)
         {
             Response.Redirect("CambioPassword.aspx");
@@ -73,12 +86,25 @@ namespace WWW
         }
         */
 
+        /// <summary>
+        /// Botón que permitirá al usuario editar su nombre.
+        /// Al pulsar aparecerá una textbox y un botón de confirmación.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnNombre_Click(object sender, EventArgs e)
         {
             tbNombre.Visible = true;
             btnCNombre.Visible = true;
         }
 
+        /// <summary>
+        /// Botón de confirmación de edición del nombre.
+        /// Al pulsar, el nombre del usuario pasará a ser lo que haya introducido en una textbox, 
+        /// siempre y cuando no esté vacía.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnCNombre_Click(object sender, EventArgs e)
         {
             if (u != null)
@@ -100,12 +126,24 @@ namespace WWW
             }
         }
 
+        /// <summary>
+        /// Botón de edición del país del usuario.
+        /// Funciona exactamente igual que el del nombre.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnPais_Click(object sender, EventArgs e)
         {
             tbPais.Visible = true;
             btnCPais.Visible = true;
         }
 
+        /// <summary>
+        /// Botón de confirmación de edición del país del usuario
+        /// El campo se podrá dejar vacío.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnCPais_Click(object sender, EventArgs e)
         {
             if (u != null)
@@ -116,12 +154,25 @@ namespace WWW
             }
         }
 
+        /// <summary>
+        /// Botón de edición del teléfono del usuario.
+        /// Mismo funcionamiento que los anteriores.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnTelefono_Click(object sender, EventArgs e)
         {
             tbTelefono.Visible = true;
             btnCTelefono.Visible = true;
         }
 
+        /// <summary>
+        /// Botón de confirmación del teléfono del usuario.
+        /// En este caso, solo se permitirán introducir números
+        /// y el símbolo + para el prefijo.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnCTelefono_Click(object sender, EventArgs e)
         {
             if (u != null)
@@ -145,9 +196,9 @@ namespace WWW
             }
         }
 
+        /*
         protected void btnBorrar_Click(object sender, EventArgs e)
         {
-            /*
             if (u != null)
             {
                 if (u.raicesCreadas() > 0)
@@ -169,7 +220,7 @@ namespace WWW
                     ScriptManager.RegisterStartupScript(this, this.GetType(), "redirect", script, true);
                 }
             }
-            */
         }
+        */
     }
 }

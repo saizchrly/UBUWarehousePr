@@ -10,7 +10,9 @@ using WHDatabase;
 using ClassLib;
 
 namespace WWW
-{
+{   /// <summary>
+    /// Página de inicio de sesión al sistema. El usuario deberá introducir su email y contraseña.
+    /// </summary>
     public partial class WebForm1 : System.Web.UI.Page
     {
         WHdb data = null;
@@ -26,6 +28,12 @@ namespace WWW
                 if(!IsPostBack) usActual = null;
         }
 
+        /// <summary>
+        /// Al pulsar aceptar, se comprobará que los campos email
+        /// y contraseña corresponden con los de un usuario del sistema
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         protected void btnAceptar_Click(object sender, EventArgs e)
         {
             bool inicioOk = false;
