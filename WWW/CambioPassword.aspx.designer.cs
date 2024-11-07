@@ -15,13 +15,13 @@ namespace WWW
     {
 
         /// <summary>
-        /// Control form2.
+        /// Control form1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form2;
+        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
 
         /// <summary>
         /// Control lblTitulo.
@@ -60,13 +60,13 @@ namespace WWW
         protected global::System.Web.UI.WebControls.LinkButton lbInicio;
 
         /// <summary>
-        /// Control lblPasswordActual.
+        /// Control lblActual.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblPasswordActual;
+        protected global::System.Web.UI.WebControls.Label lblActual;
 
         /// <summary>
         /// Control tbActual.
@@ -78,13 +78,13 @@ namespace WWW
         protected global::System.Web.UI.WebControls.TextBox tbActual;
 
         /// <summary>
-        /// Control lblNuevaPassword.
+        /// Control lblNueva.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblNuevaPassword;
+        protected global::System.Web.UI.WebControls.Label lblNueva;
 
         /// <summary>
         /// Control tbNueva.
@@ -94,6 +94,15 @@ namespace WWW
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox tbNueva;
+
+        /// <summary>
+        /// Control lblConfirmar.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblConfirmar;
 
         /// <summary>
         /// Control tbConfirmar.
@@ -114,21 +123,12 @@ namespace WWW
         protected global::System.Web.UI.WebControls.Button btnAceptar;
 
         /// <summary>
-        /// Control Label1.
+        /// Control lblError.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblError;
-
-        /// <summary>
-        /// Control form1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
     }
 }

@@ -153,6 +153,10 @@
       <Project>{36BB3F22-E0D4-4DD7-8AFA-61A29CCD9C9C}</Project>
       <Name>ClassLib</Name>
     </ProjectReference>
+    <ProjectReference Include="..\UBULibPr\UBULibPr.csproj">
+      <Project>{9AEF9B76-3937-4C4D-A5E0-0D6F24D7617C}</Project>
+      <Name>UBULibPr</Name>
+    </ProjectReference>
     <ProjectReference Include="..\WHDatabase\WHDatabase.csproj">
       <Project>{B1852D5C-6ED6-4710-9D18-195BBEECA1D0}</Project>
       <Name>WHDatabase</Name>

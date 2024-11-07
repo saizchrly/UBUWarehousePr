@@ -6,17 +6,16 @@ using System.Linq;
 using System.Threading;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using OpenQA.Selenium.Interactions;
 using NUnit.Framework;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Assert = NUnit.Framework.Assert;
 [TestFixture]
-public class WWWTest
+public class WebForm1Test
 {
-    private IWebDriver driver;
+    private WebDriver driver;
     public IDictionary<string, object> vars { get; private set; }
     private IJavaScriptExecutor js;
     [SetUp]
@@ -32,7 +31,7 @@ public class WWWTest
         driver.Quit();
     }
     [Test]
-    public void pRUEBAFINAL()
+    public void InicioTest()
     {
         driver.Navigate().GoToUrl("http://localhost:57825/WebForm1.aspx");
         driver.FindElement(By.Id("tbxUsuario")).Click();

@@ -15,7 +15,7 @@
         .auto-style6 {
             height: 26px;
             text-align: center;
-            width: 144px;
+            width: 352px;
         }
         .auto-style5 {
             height: 26px;
@@ -42,107 +42,157 @@
             margin-left: 1px;
             margin-bottom: 0px;
         }
-        .auto-style34 {
-            width: 128px;
-            height: 26px;
-        }
-        .auto-style35 {
-            width: 128px;
-        }
-        .auto-style36 {
-            width: 128px;
-            height: 21px;
-        }
-        .auto-style37 {
-            width: 128px;
-            height: 27px;
-        }
         .auto-style50 {
             height: 26px;
-            width: 24px;
+            width: 117px;
         }
         .auto-style51 {
-            width: 24px;
+            width: 117px;
         }
         .auto-style52 {
             height: 21px;
-            width: 24px;
+            width: 117px;
         }
         .auto-style53 {
             height: 27px;
-            width: 24px;
+            width: 117px;
         }
         .auto-style54 {
             width: 274px;
             height: 24px;
         }
-        .auto-style55 {
-            width: 128px;
-            height: 24px;
-        }
         .auto-style56 {
             height: 24px;
-            width: 24px;
+            width: 117px;
         }
         .auto-style59 {
             height: 24px;
         }
-        .auto-style60 {
-            width: 127px;
+        .auto-style75 {
+            width: 274px;
+            height: 16px;
+        }
+        .auto-style77 {
+            height: 16px;
+            width: 117px;
+        }
+        .auto-style80 {
+            height: 16px;
+        }
+        .auto-style81 {
+            width: 203px;
             height: 26px;
         }
-        .auto-style61 {
-            width: 127px;
+        .auto-style82 {
+            width: 203px;
             height: 24px;
         }
-        .auto-style62 {
-            width: 127px;
+        .auto-style83 {
+            width: 203px;
         }
-        .auto-style63 {
-            width: 127px;
+        .auto-style84 {
+            width: 203px;
             height: 21px;
         }
-        .auto-style64 {
-            width: 127px;
+        .auto-style85 {
+            width: 203px;
+            height: 16px;
+        }
+        .auto-style86 {
+            width: 203px;
             height: 27px;
         }
-        .auto-style65 {
-            width: 144px;
-            height: 24px;
-        }
-        .auto-style66 {
-            width: 144px;
-        }
-        .auto-style67 {
-            width: 144px;
-            height: 21px;
-        }
-        .auto-style68 {
-            width: 144px;
-            height: 27px;
-        }
-        .auto-style69 {
+        .auto-style94 {
             width: 274px;
-            height: 40px;
+            height: 23px;
         }
-        .auto-style70 {
-            width: 128px;
-            height: 40px;
+        .auto-style96 {
+            height: 23px;
+            width: 117px;
         }
-        .auto-style71 {
-            width: 24px;
-            height: 40px;
+        .auto-style97 {
+            width: 203px;
+            height: 23px;
         }
-        .auto-style72 {
-            width: 144px;
-            height: 40px;
+        .auto-style98 {
+            height: 23px;
         }
-        .auto-style73 {
-            width: 127px;
-            height: 40px;
+        .auto-style99 {
+            width: 352px;
+            height: 24px;
         }
-        .auto-style74 {
-            height: 40px;
+        .auto-style100 {
+            width: 352px;
+        }
+        .auto-style101 {
+            width: 352px;
+            height: 21px;
+        }
+        .auto-style102 {
+            width: 352px;
+            height: 16px;
+        }
+        .auto-style103 {
+            width: 352px;
+            height: 27px;
+        }
+        .auto-style104 {
+            width: 352px;
+            height: 23px;
+        }
+        .auto-style105 {
+            width: 157px;
+            height: 26px;
+        }
+        .auto-style106 {
+            width: 157px;
+            height: 24px;
+        }
+        .auto-style107 {
+            width: 157px;
+        }
+        .auto-style108 {
+            width: 157px;
+            height: 21px;
+        }
+        .auto-style109 {
+            width: 157px;
+            height: 16px;
+        }
+        .auto-style110 {
+            width: 157px;
+            height: 27px;
+        }
+        .auto-style111 {
+            width: 157px;
+            height: 23px;
+        }
+        .auto-style112 {
+            width: 198px;
+            height: 26px;
+        }
+        .auto-style113 {
+            width: 198px;
+            height: 24px;
+        }
+        .auto-style114 {
+            width: 198px;
+        }
+        .auto-style115 {
+            width: 198px;
+            height: 21px;
+        }
+        .auto-style116 {
+            width: 198px;
+            height: 16px;
+        }
+        .auto-style117 {
+            width: 198px;
+            height: 27px;
+        }
+        .auto-style118 {
+            width: 198px;
+            height: 23px;
         }
     </style>
 </head>
@@ -153,116 +203,152 @@
                 <td class="auto-style4">
                     <asp:Label ID="lblTitulo" runat="server" Text="UBUWarehouse"></asp:Label>
                 </td>
-                <td class="auto-style4">&nbsp;</td>
-                <td class="auto-style34">&nbsp;</td>
+                <td class="auto-style105">&nbsp;</td>
+                <td class="auto-style112">&nbsp;</td>
                 <td class="auto-style50"></td>
                 <td class="auto-style6">
                     &nbsp;</td>
-                <td class="auto-style60">
+                <td class="auto-style81">
                     <asp:Label ID="lblUsuario" runat="server"></asp:Label>
                 </td>
                 <td class="auto-style5">&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style54"></td>
-                <td class="auto-style54"></td>
-                <td class="auto-style55"></td>
-                <td class="auto-style56"></td>
-                <td class="auto-style65">
+                <td class="auto-style106"></td>
+                <td class="auto-style113"></td>
+                <td class="auto-style56">&nbsp;</td>
+                <td class="auto-style99">
+                    &nbsp;</td>
+                <td class="auto-style82">
                     <asp:LinkButton ID="lbCerrarSesion" runat="server" OnClick="lbCerrarSesion_Click">Cerrar Sesión</asp:LinkButton>
                 </td>
-                <td class="auto-style61"></td>
                 <td class="auto-style59">
                     <asp:LinkButton ID="lbCambiarPassword" runat="server" OnClick="lbCambiarPassword_Click">Cambiar Contraseña</asp:LinkButton>
                 </td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style35">&nbsp;</td>
+                <td class="auto-style107">&nbsp;</td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style66">
+                <td class="auto-style100">
                     &nbsp;</td>
-                <td class="auto-style62">
+                <td class="auto-style83">
                     &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2"></td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
+                <td class="auto-style108">
+                    <asp:Label ID="lblnElementos" runat="server"></asp:Label>
+                </td>
+                <td class="auto-style115">&nbsp;</td>
                 <td class="auto-style52"></td>
-                <td class="auto-style67"></td>
-                <td class="auto-style63"></td>
+                <td class="auto-style101">
+                    <asp:Label ID="lblInfo" runat="server" Font-Bold="True" Font-Underline="True" Text="Información del usuario"></asp:Label>
+                </td>
+                <td class="auto-style84">&nbsp;</td>
                 <td class="auto-style3"></td>
             </tr>
             <tr>
+                <td class="auto-style75"></td>
+                <td class="auto-style109">
+                    &nbsp;</td>
+                <td class="auto-style116"></td>
+                <td class="auto-style77"></td>
+                <td class="auto-style102"></td>
+                <td class="auto-style85">&nbsp;</td>
+                <td class="auto-style80"></td>
+            </tr>
+            <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
+                <td class="auto-style108">
+                    <asp:Button ID="btnRaiz" runat="server" Height="29px" OnClick="btnRaiz_Click" Text="Añadir raíz" />
+                </td>
+                <td class="auto-style115">
+                    <asp:Button ID="btnBorrar" runat="server" Height="29px" OnClick="btnBorrar_Click" Text="Eliminar raíz" />
+                </td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style67">&nbsp;</td>
-                <td class="auto-style63">&nbsp;</td>
+                <td class="auto-style101">
+                    <asp:Label ID="lblNombre" runat="server" Text="Nombre"></asp:Label>
+                </td>
+                <td class="auto-style84">
+                    <asp:Button ID="btnNombre" runat="server" Height="29px" OnClick="btnNombre_Click" Text="Editar" />
+                </td>
                 <td class="auto-style3">&nbsp;</td>
             </tr>
             <tr>
                 <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
+                <td class="auto-style108">
+                    &nbsp;</td>
+                <td class="auto-style115">
+                    &nbsp;</td>
                 <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style67">&nbsp;</td>
-                <td class="auto-style63">&nbsp;</td>
-                <td class="auto-style3">&nbsp;</td>
-            </tr>
-            <tr>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style2">&nbsp;</td>
-                <td class="auto-style36">&nbsp;</td>
-                <td class="auto-style52">&nbsp;</td>
-                <td class="auto-style67">&nbsp;</td>
-                <td class="auto-style63">&nbsp;</td>
-                <td class="auto-style3">&nbsp;</td>
+                <td class="auto-style101">&nbsp;</td>
+                <td class="auto-style84">
+                    <asp:TextBox ID="tbNombre" runat="server" Visible="False"></asp:TextBox>
+                </td>
+                <td class="auto-style3">
+                    <asp:Button ID="btnCNombre" runat="server" OnClick="btnCNombre_Click" Text="Aceptar" Visible="False" />
+                </td>
             </tr>
             <tr>
                 <td class="auto-style7"></td>
-                <td class="auto-style7">&nbsp;</td>
-                <td class="auto-style37">&nbsp;</td>
+                <td class="auto-style110">
+                    &nbsp;</td>
+                <td class="auto-style117">&nbsp;</td>
                 <td class="auto-style53"></td>
-                <td class="auto-style68">
+                <td class="auto-style103">
+                    <asp:Label ID="lblPais" runat="server" Text="País"></asp:Label>
                 </td>
-                <td class="auto-style64">
+                <td class="auto-style86">
+                    <asp:Button ID="btnPais" runat="server" OnClick="btnPais_Click" Text="Editar" />
                 </td>
                 <td class="auto-style8"></td>
             </tr>
             <tr>
-                <td class="auto-style69">
-                    <asp:ListBox ID="ListBox1" runat="server"></asp:ListBox>
+                <td class="auto-style94">
+                    </td>
+                <td class="auto-style111">
                 </td>
-                <td class="auto-style69"></td>
-                <td class="auto-style70"></td>
-                <td class="auto-style71"></td>
-                <td class="auto-style72"></td>
-                <td class="auto-style73"></td>
-                <td class="auto-style74"></td>
+                <td class="auto-style118"></td>
+                <td class="auto-style96"></td>
+                <td class="auto-style104">&nbsp;</td>
+                <td class="auto-style97">
+                    <asp:TextBox ID="tbPais" runat="server" Visible="False"></asp:TextBox>
+                </td>
+                <td class="auto-style98">
+                    <asp:Button ID="btnCPais" runat="server" Height="29px" OnClick="btnCPais_Click" Text="Aceptar" Visible="False" />
+                </td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style35">&nbsp;</td>
+                <td class="auto-style107">
+                    <asp:Label ID="lblMensaje" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style66">
-                    &nbsp;</td>
-                <td class="auto-style62">&nbsp;</td>
-                <td>&nbsp;</td>
+                <td class="auto-style100">
+                    <asp:Label ID="lblTelefono" runat="server" Text="Teléfono"></asp:Label>
+                </td>
+                <td class="auto-style83">
+                    <asp:Button ID="btnTelefono" runat="server" OnClick="btnTelefono_Click" Text="Editar" />
+                    <asp:TextBox ID="tbTelefono" runat="server" Visible="False"></asp:TextBox>
+                </td>
+                <td>
+                    <asp:Button ID="btnCTelefono" runat="server" OnClick="btnCTelefono_Click" Text="Aceptar" Visible="False" />
+                </td>
             </tr>
             <tr>
                 <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style1">&nbsp;</td>
-                <td class="auto-style35">&nbsp;</td>
+                <td class="auto-style107">&nbsp;</td>
+                <td class="auto-style114">&nbsp;</td>
                 <td class="auto-style51">&nbsp;</td>
-                <td class="auto-style66">
-                    &nbsp;</td>
-                <td class="auto-style62">
+                <td class="auto-style100">
+                    <asp:Label ID="lblError" runat="server" Text="Label" Visible="False"></asp:Label>
+                </td>
+                <td class="auto-style83">
                     &nbsp;</td>
                 <td>&nbsp;</td>
             </tr>

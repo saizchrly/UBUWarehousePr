@@ -17,6 +17,9 @@ namespace ClassLib
         private List<string> listaContrasenasAntiguas;
         private int idUsuario = 0;
         private string tipoUsuario;
+        private string nombre;
+        private string pais;
+        private string telefono;
         // string es el Tipo del elemento y El value es la lista de elementos de ese tipo
         private Dictionary<string, List<Elemento>> elementos;
 
@@ -37,6 +40,9 @@ namespace ClassLib
             this.idUsuario = idUsuario;
             this.tipoUsuario = tipoUsuario;
             this.privilegios = privilegios;
+            nombre = "Admin Prueba";
+            pais = "España";
+            telefono = "607384274";
             elementos = new Dictionary<string, List<Elemento>>();
             elementos.Add("Raiz", new List<Elemento>());
             elementos.Add("Espacio", new List<Elemento>());
@@ -102,6 +108,28 @@ namespace ClassLib
             contrasenaActual = Utilidades.Encriptar(contrasenaNueva);
         }
 
+        public string getNombre() => nombre;
+
+        public string getPais() => pais;
+
+        public string getTelefono() => telefono;
+
+        public void setNombre(string nombre)
+        {
+            this.nombre = nombre;
+        }
+
+        public void setPais(string pais)
+        {
+            this.pais = pais;
+        }
+
+        public void setTelefono(string telefono)
+        {
+            this.telefono = telefono;
+        }
+
+
         /// <summary>
         /// Metodo para guardar las ultimas 10 contraseñas, en caso de que haya 10 se eliminara la más antigua
         /// </summary>
@@ -151,7 +179,7 @@ namespace ClassLib
         public bool cambiarContrasena(string contrasenaNueva)
         {
             // Comprobamos que la contrasena cumple con los requisitos minimos
-            if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) == 5 && contrasenaNueva != contrasenaActual)
+            if (contrasenaNueva != null && Utilidades.CompruebaContrasena(contrasenaNueva) > 2 && contrasenaNueva != contrasenaActual)
             {
                 // Comprobamos que la contrasena no sea igual a una de las 10 anteriores
                 if (!comprobarContrasenaAntigua(contrasenaNueva))
@@ -159,7 +187,6 @@ namespace ClassLib
                 {
                     setContrasenaActual(contrasenaNueva);
                     guardarContrasenaAntigua();
-                    Log.escribirLog(EmailUsuario, "Cambio de contraseña");
                     return true;
                 }
                 else return false;
@@ -239,7 +266,7 @@ namespace ClassLib
 
             if (tipo == "Raiz")
             {
-                int limite = 10000;
+                int limite = 10;
                 if (tipoUsuario == "Pago") limite = 3;
                 else if (tipoUsuario == "noPago") limite = 1;
                 int numeroRaices = raicesCreadas();
