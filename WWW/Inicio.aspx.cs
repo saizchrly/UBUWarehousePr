@@ -27,13 +27,13 @@ namespace WWW
                 u = (Usuario)Session["User"];
                 if (data == null || u == null)
                 {
-                    Response.Redirect("WebForm1.aspx");
+                    Response.Redirect("WebForm1.aspx"); //Si la sesión no ha sido iniciada, volver al login
                 }
             }
             u = (Usuario)Session["User"];
             if (u != null)
             {
-                lblUsuario.Text = u.getEmailUsuario();
+                lblUsuario.Text = u.getEmailUsuario(); //Mostrar información del usuario
                 lblnElementos.Text = "Posee un total de " + u.numElemTotal() + " elementos.";
                 lblNombre.Text = "Nombre: " + u.getNombre();
                 lblPais.Text = "Pais: " + u.getPais();
